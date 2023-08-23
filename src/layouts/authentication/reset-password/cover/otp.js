@@ -1,6 +1,24 @@
+/**
+=========================================================
+* Material Dashboard 2 React - v2.2.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
+* Copyright 2023 Creative Tim (https://www.creative-tim.com)
+
+Coded by www.creative-tim.com
+
+ =========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+*/
+
+// @mui material components
+import React from "react";
 import Card from "@mui/material/Card";
-import { useForm } from "react-hook-form";
 import { Grid } from "@mui/material";
+import { useForm } from "react-hook-form";
+import { MuiOtpInput } from "mui-one-time-password-input";
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
@@ -14,16 +32,23 @@ import CoverLayout from "layouts/authentication/components/CoverLayout";
 import bgImage from "assets/images/bg-reset-cover.jpeg";
 import BasicLayout from "layouts/authentication/components/BasicLayout";
 
-function ForgotPassword() {
+function OTP() {
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm();
+  const [otp, setOtp] = React.useState("");
+  const handleChange = (newValue) => {
+    setOtp(newValue);
+  };
   const onSubmit = (data) => {
     console.log(data);
   };
+  const watchOtp = watch("otp", () => {
+    // Update the UI in response to changes to the value of the otp field.
+  });
   return (
     // <CoverLayout coverHeight="50vh" image={bgImage}>
     <BasicLayout image={bgImage}>
@@ -43,21 +68,24 @@ function ForgotPassword() {
             Reset Password
           </MDTypography>
           <MDTypography display="block" variant="button" color="white" my={1}>
-            You will receive an e-mail in maximum 60 seconds
+            Enter the Otp you received here
           </MDTypography>
         </MDBox>
         <MDBox pt={4} pb={3} px={3}>
           {/* <MDBox component="form" role="form"> */}
           <form onSubmit={handleSubmit(onSubmit)}>
             <MDBox mb={4}>
-              <MDInput
-                {...register("email", { required: true })}
-                type="email"
-                label="Email"
-                variant="standard"
-                fullWidth
+              <MuiOtpInput
+                {...register("otp", {
+                  required: true,
+                  minLength: 4,
+                  maxLength: 4,
+                })}
+                value={otp}
+                onChange={handleChange}
+                placeholder="Enter 6-digit OTP"
               />
-              {errors.email && <p className="error-message">{"Email is required"}</p>}
+              {/* {errors && <p className="error-message">{"OTP is required"}</p>} */}
             </MDBox>
             <MDBox mt={6} mb={1}>
               <MDBox mt={6} mb={1}>
@@ -83,4 +111,4 @@ function ForgotPassword() {
   );
 }
 
-export default ForgotPassword;
+export default OTP;

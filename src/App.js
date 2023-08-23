@@ -52,6 +52,11 @@ import { useMaterialUIController, setMiniSidenav, setOpenConfigurator } from "co
 // Images
 import brandWhite from "assets/images/logo-ct.png";
 import brandDark from "assets/images/logo-ct-dark.png";
+import Signin from "layouts/authentication/sign-in";
+import Signup from "layouts/authentication/sign-up";
+import ForgotPassword from "layouts/authentication/reset-password/cover";
+import OTP from "layouts/authentication/reset-password/cover/otp";
+import ResetPassword from "layouts/authentication/reset-password/cover/password";
 
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
@@ -155,7 +160,7 @@ export default function App() {
             <Sidenav
               color={sidenavColor}
               brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-              brandName="Material Dashboard 2"
+              brandName="Qiwa Portal"
               routes={routes}
               onMouseEnter={handleOnMouseEnter}
               onMouseLeave={handleOnMouseLeave}
@@ -179,7 +184,7 @@ export default function App() {
           <Sidenav
             color={sidenavColor}
             brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-            brandName="Material Dashboard 2"
+            brandName="Qiwa Portal"
             routes={routes}
             onMouseEnter={handleOnMouseEnter}
             onMouseLeave={handleOnMouseLeave}
@@ -191,7 +196,16 @@ export default function App() {
       {layout === "vr" && <Configurator />}
       <Routes>
         {getRoutes(routes)}
-        <Route path="*" element={<Navigate to="/dashboard" />} />
+
+        <Route path="/sign-in" element={<Signin />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/change-password" element={<Signup />} />
+        <Route path="/otp" element={<OTP />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+
+        <Route path="*" element={<Navigate to="/sign-in" />} />
+
+        {/* <Route path="*" element={<Navigate to="/dashboard" />} /> */}
       </Routes>
     </ThemeProvider>
   );

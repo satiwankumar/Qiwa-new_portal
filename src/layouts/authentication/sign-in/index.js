@@ -1,22 +1,7 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-import { useState } from "react";
-
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 // react-router-dom components
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 // @mui material components
 import Card from "@mui/material/Card";
@@ -43,8 +28,23 @@ import bgImage from "assets/images/bg-sign-in-basic.jpeg";
 
 function Basic() {
   const [rememberMe, setRememberMe] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
 
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
+  const handleRedirect = () => <Navigate to="/dashboard" />;
+
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  console.log("errors", errors, email, password);
+  const onSubmit = (data) => {
+    console.log(data);
+  };
 
   return (
     <BasicLayout image={bgImage}>
@@ -63,31 +63,33 @@ function Basic() {
           <MDTypography variant="h4" fontWeight="medium" color="white" mt={1}>
             Sign in
           </MDTypography>
-          <Grid container spacing={3} justifyContent="center" sx={{ mt: 1, mb: 2 }}>
-            <Grid item xs={2}>
-              <MDTypography component={MuiLink} href="#" variant="body1" color="white">
-                <FacebookIcon color="inherit" />
-              </MDTypography>
-            </Grid>
-            <Grid item xs={2}>
-              <MDTypography component={MuiLink} href="#" variant="body1" color="white">
-                <GitHubIcon color="inherit" />
-              </MDTypography>
-            </Grid>
-            <Grid item xs={2}>
-              <MDTypography component={MuiLink} href="#" variant="body1" color="white">
-                <GoogleIcon color="inherit" />
-              </MDTypography>
-            </Grid>
-          </Grid>
         </MDBox>
-        <MDBox pt={4} pb={3} px={3}>
-          <MDBox component="form" role="form">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <MDBox pt={4} pb={3} px={3}>
             <MDBox mb={2}>
-              <MDInput type="email" label="Email" fullWidth />
+              <MDInput
+                {...register("email", { required: true })}
+                type="email"
+                label="Email*"
+                name="email"
+                onChange={(e) => setEmail(e.target.value)}
+                fullWidth
+              />
             </MDBox>
+            {errors.email && <p className="error-message">{"Email is required"}</p>}
+
             <MDBox mb={2}>
-              <MDInput type="password" label="Password" fullWidth />
+              <MDInput
+                type="password"
+                name="password"
+                label="Password*"
+                onChange={(e) => setPassword(e.target.value)}
+                fullWidth
+                {...register("password", {
+                  required: true,
+                })}
+              />
+              {errors.password && <p className="error-message">{"Password is required"}</p>}
             </MDBox>
             <MDBox display="flex" alignItems="center" ml={-1}>
               <Switch checked={rememberMe} onChange={handleSetRememberMe} />
@@ -102,27 +104,28 @@ function Basic() {
               </MDTypography>
             </MDBox>
             <MDBox mt={4} mb={1}>
-              <MDButton variant="gradient" color="info" fullWidth>
+              <MDButton variant="gradient" color="info" type="submit" fullWidth>
                 sign in
               </MDButton>
             </MDBox>
+
             <MDBox mt={3} mb={1} textAlign="center">
               <MDTypography variant="button" color="text">
-                Don&apos;t have an account?{" "}
+                Forgot your password?{" "}
                 <MDTypography
                   component={Link}
-                  to="/authentication/sign-up"
+                  to="/forgot-password"
                   variant="button"
                   color="info"
                   fontWeight="medium"
                   textGradient
                 >
-                  Sign up
+                  Forgot password
                 </MDTypography>
               </MDTypography>
             </MDBox>
           </MDBox>
-        </MDBox>
+        </form>
       </Card>
     </BasicLayout>
   );

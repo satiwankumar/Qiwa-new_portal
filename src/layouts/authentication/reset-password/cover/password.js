@@ -1,6 +1,21 @@
+/**
+=========================================================
+* Material Dashboard 2 React - v2.2.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
+* Copyright 2023 Creative Tim (https://www.creative-tim.com)
+
+Coded by www.creative-tim.com
+
+ =========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+*/
+
+// @mui material components
 import Card from "@mui/material/Card";
-import { useForm } from "react-hook-form";
-import { Grid } from "@mui/material";
+
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
@@ -14,16 +29,7 @@ import CoverLayout from "layouts/authentication/components/CoverLayout";
 import bgImage from "assets/images/bg-reset-cover.jpeg";
 import BasicLayout from "layouts/authentication/components/BasicLayout";
 
-function ForgotPassword() {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
-  };
+function ResetPassword() {
   return (
     // <CoverLayout coverHeight="50vh" image={bgImage}>
     <BasicLayout image={bgImage}>
@@ -43,44 +49,40 @@ function ForgotPassword() {
             Reset Password
           </MDTypography>
           <MDTypography display="block" variant="button" color="white" my={1}>
-            You will receive an e-mail in maximum 60 seconds
+            Enter the password here
           </MDTypography>
         </MDBox>
         <MDBox pt={4} pb={3} px={3}>
-          {/* <MDBox component="form" role="form"> */}
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <MDBox mb={4}>
+          <MDBox component="form" role="form">
+            <MDBox mb={2}>
               <MDInput
-                {...register("email", { required: true })}
-                type="email"
-                label="Email"
+                type="password"
+                label="New Password"
+                required={true}
                 variant="standard"
                 fullWidth
               />
-              {errors.email && <p className="error-message">{"Email is required"}</p>}
             </MDBox>
-            <MDBox mt={6} mb={1}>
-              <MDBox mt={6} mb={1}>
-                <Grid container spacing={2}>
-                  <Grid item xs={6}>
-                    <MDButton variant="gradient" color="error" fullWidth>
-                      Cancel
-                    </MDButton>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <MDButton variant="gradient" color="info" type="submit" fullWidth>
-                      Reset
-                    </MDButton>
-                  </Grid>
-                </Grid>
-              </MDBox>
+            <MDBox mb={2}>
+              <MDInput
+                type="password"
+                label="Confirm Password"
+                required={true}
+                variant="standard"
+                fullWidth
+              />
             </MDBox>
-          </form>
+
+            <MDBox mt={4} mb={1}>
+              <MDButton variant="gradient" type="submit" color="info" fullWidth>
+                Submit
+              </MDButton>
+            </MDBox>
+          </MDBox>
         </MDBox>
-        {/* </MDBox> */}
       </Card>
     </BasicLayout>
   );
 }
 
-export default ForgotPassword;
+export default ResetPassword;
