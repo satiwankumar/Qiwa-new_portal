@@ -54,9 +54,11 @@ import SignUp from "layouts/authentication/sign-up";
 // @mui icons
 import Icon from "@mui/material/Icon";
 import Requests from "layouts/requests";
+import EmployeeContract from "layouts/EmployeeContract";
 import Partners from "layouts/partners";
 import PartnerApproval from "layouts/PartnerApproval";
 import ChangePassword from "layouts/authentication/sign-up";
+import LeaveRequest from "layouts/LeaveRequest";
 
 const routes = [
   {
@@ -128,6 +130,25 @@ const routes = [
     route: "/partner-approval",
     component: <PartnerApproval />,
   },
+
+  {
+    type: "collapse",
+    name: " Employee Contract",
+    key: "employeeContract",
+    icon: <Icon fontSize="small">person</Icon>,
+    route: "/employee-contract",
+    component: <EmployeeContract />,
+  },
+
+  {
+    type: "collapse",
+    name: " Leave Request",
+    key: "leaveRequest",
+    icon: <Icon fontSize="small">person</Icon>,
+    route: "/leave-requests",
+    component: <LeaveRequest />,
+  },
+
   {
     type: "collapse",
     name: "Change password",

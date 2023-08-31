@@ -62,6 +62,8 @@ import AddDepartment from "layouts/department/AddDepartment";
 import AddEmployees from "layouts/employees/AddEmployees";
 import AddPartnerForm from "layouts/partners/AddPartner";
 import ViewRequestPage from "layouts/requests/ViewRequestDetail";
+import EmployeeContractForm from "layouts/EmployeeContract/AddEmployeesContact";
+import AddLeaveRequest from "layouts/LeaveRequest/addLeaveRequest";
 
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
@@ -214,13 +216,17 @@ export default function App() {
         <Route path="/add-department" element={<AddDepartment />} />
         <Route path="/edit-department/:id" element={<AddDepartment />} />
 
-        <Route path="/add-employees" element={<AddEmployees />} />
         <Route path="/edit-employee/:id" element={<AddEmployees />} />
 
         <Route path="/add-partner" element={<AddPartnerForm />} />
         <Route path="/edit-partner/:id" element={<AddPartnerForm />} />
 
         <Route path="/view-requests" element={<ViewRequestPage />} />
+        <Route path="/add-employees" element={<AddEmployees />} />
+        <Route path="/add-employee-contract" element={<EmployeeContractForm />} />
+        <Route path="/edit-employee-contract/:id" element={<EmployeeContractForm />} />
+        <Route path="/add-leave-request" element={<AddLeaveRequest />} />
+        <Route path="/edit-leave-request/1" element={<AddLeaveRequest />} />
 
         <Route path="*" element={<Navigate to="/sign-in" />} />
 
