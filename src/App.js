@@ -57,6 +57,11 @@ import Signup from "layouts/authentication/sign-up";
 import ForgotPassword from "layouts/authentication/reset-password/cover";
 import OTP from "layouts/authentication/reset-password/cover/otp";
 import ResetPassword from "layouts/authentication/reset-password/cover/password";
+import AddOrganization from "layouts/organizations/AddOrganization";
+import AddDepartment from "layouts/department/AddDepartment";
+import AddEmployees from "layouts/employees/AddEmployees";
+import AddPartnerForm from "layouts/partners/AddPartner";
+import ViewRequestPage from "layouts/requests/ViewRequestDetail";
 
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
@@ -200,8 +205,22 @@ export default function App() {
         <Route path="/sign-in" element={<Signin />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/change-password" element={<Signup />} />
+        <Route path="/force-password" element={<Signup />} />
+
         <Route path="/otp" element={<OTP />} />
         <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path={"/add-organization"} element={<AddOrganization />} />
+        <Route path={"/edit-organization/:id"} element={<AddOrganization />} />
+        <Route path="/add-department" element={<AddDepartment />} />
+        <Route path="/edit-department/:id" element={<AddDepartment />} />
+
+        <Route path="/add-employees" element={<AddEmployees />} />
+        <Route path="/edit-employee/:id" element={<AddEmployees />} />
+
+        <Route path="/add-partner" element={<AddPartnerForm />} />
+        <Route path="/edit-partner/:id" element={<AddPartnerForm />} />
+
+        <Route path="/view-requests" element={<ViewRequestPage />} />
 
         <Route path="*" element={<Navigate to="/sign-in" />} />
 

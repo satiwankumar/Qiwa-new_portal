@@ -28,10 +28,13 @@ import Footer from "examples/Footer";
 import DataTable from "examples/Tables/DataTable";
 
 // Data
-import authorsTableData from "layouts/tables/data/authorsTableData";
-import projectsTableData from "layouts/tables/data/projectsTableData";
+import authorsTableData from "./data/authorsTableData";
+import projectsTableData from "./data/projectsTableData";
+import IconButton from "@mui/material/IconButton";
+import AddIcon from "@mui/icons-material/Add"; //
+import { Link } from "react-router-dom";
 
-function Tables() {
+function Organizations() {
   const { columns, rows } = authorsTableData();
   const { columns: pColumns, rows: pRows } = projectsTableData();
 
@@ -51,10 +54,21 @@ function Tables() {
                 bgColor="info"
                 borderRadius="lg"
                 coloredShadow="info"
+                display="flex"
+                alignItems="center"
+                justifyContent="space-between" // Add this line
               >
                 <MDTypography variant="h6" color="white">
-                  Users
+                  Partners OnBoarding
                 </MDTypography>
+                {/* Add button icon */}
+                <IconButton
+                  component={Link}
+                  to="/add-partner" // Replace with your actual route
+                  color="inherit"
+                >
+                  <AddIcon />
+                </IconButton>
               </MDBox>
               <MDBox pt={3}>
                 <DataTable
@@ -74,4 +88,4 @@ function Tables() {
   );
 }
 
-export default Tables;
+export default Organizations;

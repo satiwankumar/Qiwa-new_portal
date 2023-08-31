@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+
+import { Link, useLocation } from "react-router-dom";
 // @mui material components
 import Card from "@mui/material/Card";
 import Checkbox from "@mui/material/Checkbox";
@@ -17,6 +19,17 @@ import CoverLayout from "layouts/authentication/components/CoverLayout";
 import bgImage from "assets/images/bg-sign-up-cover.jpeg";
 
 function ChangePassword() {
+  const location = useLocation();
+
+  const [mode, setMode] = useState("forcepassword");
+
+  useEffect(() => {
+    if (location.pathname.includes("force-password")) {
+      setMode("forcepassword");
+    } else if (location.pathname.includes("change-password")) {
+      setMode("changepassword");
+    }
+  }, [location]);
   const {
     register,
     handleSubmit,
@@ -43,27 +56,29 @@ function ChangePassword() {
           textAlign="center"
         >
           <MDTypography variant="h4" fontWeight="medium" color="white" mt={1}>
-            Change Password
+            {mode == "forcepassword" ? "Force Password" : "Change Password"}
           </MDTypography>
         </MDBox>
         <MDBox pt={4} pb={3} px={3}>
           {/* <MDBox component="form" role="form"> */}
           <form onSubmit={handleSubmit(onSubmit)}>
-            <MDBox mb={2}>
-              <MDInput
-                {...register("currentpassword", {
-                  required: true,
-                })}
-                type="password"
-                label="Current password*"
-                variant="standard"
-                name="currentpassword"
-                fullWidth
-              />
-              {errors.currentpassword && (
-                <p className="error-message">{"Current Password is required"}</p>
-              )}
-            </MDBox>
+            {mode == "changepassword" && (
+              <MDBox mb={2}>
+                <MDInput
+                  {...register("currentpassword", {
+                    required: true,
+                  })}
+                  type="password"
+                  label="Current password*"
+                  variant="standard"
+                  name="currentpassword"
+                  fullWidth
+                />
+                {errors.currentpassword && (
+                  <p className="error-message">{"Current Password is required"}</p>
+                )}
+              </MDBox>
+            )}
             <MDBox mb={2}>
               <MDInput
                 {...register("newpassword", {

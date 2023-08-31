@@ -38,15 +38,25 @@ Coded by www.creative-tim.com
 // Material Dashboard 2 React layouts
 import Dashboard from "layouts/dashboard";
 import Tables from "layouts/tables";
+import Department from "layouts/department";
+import Organization from "layouts/organizations";
+
+import Employees from "layouts/employees";
+
 import Billing from "layouts/billing";
 import RTL from "layouts/rtl";
 import Notifications from "layouts/notifications";
 import Profile from "layouts/profile";
+
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
+import Requests from "layouts/requests";
+import Partners from "layouts/partners";
+import PartnerApproval from "layouts/PartnerApproval";
+import ChangePassword from "layouts/authentication/sign-up";
 
 const routes = [
   {
@@ -60,47 +70,71 @@ const routes = [
 
   {
     type: "collapse",
-    name: "Projects",
-    key: "projects",
+    name: "Organizations",
+    key: "organizations",
     icon: <Icon fontSize="small">table_view</Icon>,
-    route: "/projects",
-    component: <Tables />,
+    route: "/organizations",
+    component: <Organization />,
   },
 
   {
     type: "collapse",
-    name: "Users",
-    key: "users",
+    name: "Departments",
+    key: "departments",
     icon: <Icon fontSize="small">table_view</Icon>,
-    route: "/users",
-    component: <Tables />,
+    route: "/departments",
+    component: <Department />,
   },
 
   {
     type: "collapse",
-    name: "Tables",
-    key: "tables",
+    name: "Employee OnBoarding",
+    key: "employeesOnBoarding",
     icon: <Icon fontSize="small">table_view</Icon>,
-    route: "/tables",
-    component: <Tables />,
+    route: "/employees",
+    component: <Employees />,
   },
+  {
+    type: "collapse",
+    name: "Partners onBoarding",
+    key: "partnersonBoarding",
+    icon: <Icon fontSize="small">table_view</Icon>,
+    route: "/partners",
+    component: <Partners />,
+  },
+
+  // {
+  //   type: "collapse",
+  //   name: "RTL",
+  //   key: "rtl",
+  //   icon: <Icon fontSize="small">format_textdirection_r_to_l</Icon>,
+  //   route: "/rtl",
+  //   component: <ProfileInfoCard />,
+  // },
 
   {
     type: "collapse",
-    name: "RTL",
-    key: "rtl",
-    icon: <Icon fontSize="small">format_textdirection_r_to_l</Icon>,
-    route: "/rtl",
-    component: <RTL />,
-  },
-
-  {
-    type: "collapse",
-    name: "Profile",
-    key: "profile",
+    name: " Employee Approval",
+    key: "emoloyeeApproval",
     icon: <Icon fontSize="small">person</Icon>,
-    route: "/profile",
-    component: <Profile />,
+    route: "/requests",
+    component: <Requests />,
+  },
+  {
+    type: "collapse",
+    name: " Partner Approval",
+    key: "partnerApproval",
+    icon: <Icon fontSize="small">person</Icon>,
+    route: "/partner-approval",
+    component: <PartnerApproval />,
+  },
+  {
+    type: "collapse",
+    name: "Change password",
+    key: "changepassword",
+    icon: <Icon fontSize="small">person</Icon>,
+    route: "/change-password",
+    component: <ChangePassword />,
   },
 ];
 

@@ -36,7 +36,7 @@ function Basic() {
   } = useForm();
 
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
-  const handleRedirect = () => <Navigate to="/dashboard" />;
+  // const handleRedirect = () => <Navigate to="/dashboard" />;
 
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
