@@ -1,9 +1,5 @@
-import { useState, useEffect } from "react";
-
-import { Link, useLocation } from "react-router-dom";
 // @mui material components
 import Card from "@mui/material/Card";
-import Checkbox from "@mui/material/Checkbox";
 import { useForm } from "react-hook-form";
 
 // Material Dashboard 2 React components
@@ -11,12 +7,7 @@ import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDInput from "components/MDInput";
 import MDButton from "components/MDButton";
-
-// Authentication layout components
-import CoverLayout from "layouts/authentication/components/CoverLayout";
-
 // Images
-import bgImage from "assets/images/bg-sign-up-cover.jpeg";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import Footer from "examples/Footer";

@@ -50,3 +50,28 @@ export const dummyLeaveTypes = [
   { value: "maternity_leave", label: "Maternity Leave" },
   // Add more dummy leave types as needed
 ];
+
+export const Languages = [
+  { value: "", label: "Select Language" },
+
+  { value: "en", label: "English" },
+  { value: "es", label: "Spanish" },
+  { value: "fr", label: "French" },
+  { value: "de", label: "German" },
+  // Add more languages with short forms as needed
+];
+
+export const Currencies = [
+  { value: "", label: "Select Currency" },
+  { value: "usd", label: "United States Dollar (USD)" },
+  { value: "eur", label: "Euro (EUR)" },
+  { value: "gbp", label: "British Pound Sterling (GBP)" },
+  { value: "jpy", label: "Japanese Yen (JPY)" },
+  { value: "cad", label: "Canadian Dollar (CAD)" },
+  { value: "aud", label: "Australian Dollar (AUD)" },
+  { value: "chf", label: "Swiss Franc (CHF)" },
+  { value: "cny", label: "Chinese Yuan (CNY)" },
+  { value: "inr", label: "Indian Rupee (INR)" },
+  { value: "brl", label: "Brazilian Real (BRL)" },
+  // Add more currencies with their respective codes as needed
+];

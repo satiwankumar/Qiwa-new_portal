@@ -66,7 +66,7 @@ function ViewEmployeeContract() {
                     <Typography variant="h6" gutterBottom>
                       Action*
                     </Typography>
-                    <Select placeholder="Select Status" options={statuses} />
+                    <Select placeholder="Select Action" options={statuses} />
                   </MDBox>
                 </MDBox>
                 <MDBox mb={2}>

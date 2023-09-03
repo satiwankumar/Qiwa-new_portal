@@ -13,6 +13,7 @@ import Select from "react-select";
 import { useLocation } from "react-router-dom";
 import { statuses } from "utils/common";
 import { dummyEmployeeNames } from "utils/common";
+import { Currencies } from "utils/common";
 
 function EmployeeContractForm() {
   const location = useLocation();
@@ -109,11 +110,13 @@ function EmployeeContractForm() {
 
                   {/* Currency */}
                   <MDBox mb={2}>
-                    <MDInput
+                    <Select placeholder="Select Currency" options={Currencies} />
+
+                    {/* <MDInput
                       {...register("currency", { required: true })}
                       label="Currency*"
                       fullWidth
-                    />
+                    /> */}
                     {errors.currency && <p className="error-message">{"Currency is required"}</p>}
                   </MDBox>
                   {mode === "edit" && (

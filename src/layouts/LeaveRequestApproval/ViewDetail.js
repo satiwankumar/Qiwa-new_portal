@@ -86,7 +86,7 @@ function LeaveRequestApproval() {
                   <Typography variant="h6" gutterBottom>
                     Action*
                   </Typography>
-                  <Select placeholder="Select Status" options={statuses} />
+                  <Select placeholder="Select Action" options={statuses} />
                 </MDBox>
 
                 <MDBox mb={2}>

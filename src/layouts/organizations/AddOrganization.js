@@ -13,6 +13,7 @@ import MDAlert from "components/MDAlert";
 import Select from "react-select";
 import Swal from "sweetalert2";
 import { companyNames } from "utils/common";
+import { Currencies } from "utils/common";
 
 function OrganizationForm() {
   const location = useLocation();
@@ -110,12 +111,9 @@ function OrganizationForm() {
 
                   {/* Currency */}
                   <MDBox mb={2}>
-                    <MDInput
-                      {...register("currency", { required: true })}
-                      label="Currency*"
-                      fullWidth
-                    />
-                    {errors.currency && <p className="error-message">{"Currency is required"}</p>}
+                    <Select placeholder="Select Currency*" options={Currencies} />
+
+                    {/* {errors.currency && <p className="error-message">{"Currency is required"}</p>} */}
                   </MDBox>
 
                   {/* Phone */}

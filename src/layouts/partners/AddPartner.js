@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Card, Grid } from "@mui/material";
+import { Card, Grid, InputLabel } from "@mui/material";
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDInput from "components/MDInput";
@@ -11,6 +11,7 @@ import Footer from "examples/Footer";
 import { useLocation } from "react-router-dom";
 import Select from "react-select";
 import { statuses } from "utils/common";
+import { Languages } from "utils/common";
 
 function AddPartnerForm() {
   const location = useLocation();
@@ -73,13 +74,19 @@ function AddPartnerForm() {
                 <form onSubmit={handleSubmit(onSubmit)}>
                   {columns.map((column) => (
                     <MDBox mb={2} key={column.accessor}>
-                      <MDInput
-                        {...register(column.accessor, { required: true })}
-                        label={`${column.Header}*`}
-                        fullWidth
-                      />
-                      {errors[column.accessor] && (
-                        <p className="error-message">{`${column.Header} is required`}</p>
+                      {column.Header == "Language" ? (
+                        <Select options={Languages} />
+                      ) : (
+                        <>
+                          <MDInput
+                            {...register(column.accessor, { required: true })}
+                            label={`${column.Header}*`}
+                            fullWidth
+                          />
+                          {errors[column.accessor] && (
+                            <p className="error-message">{`${column.Header} is required`}</p>
+                          )}
+                        </>
                       )}
                     </MDBox>
                   ))}
