@@ -48,17 +48,17 @@ import RTL from "layouts/rtl";
 import Notifications from "layouts/notifications";
 import Profile from "layouts/profile";
 
-import SignIn from "layouts/authentication/sign-in";
-import SignUp from "layouts/authentication/sign-up";
-
 // @mui icons
 import Icon from "@mui/material/Icon";
 import Requests from "layouts/requests";
 import EmployeeContract from "layouts/EmployeeContract";
+import EmployeeContractApproval from "layouts/employeeContractApproval";
+
 import Partners from "layouts/partners";
 import PartnerApproval from "layouts/PartnerApproval";
-import ChangePassword from "layouts/authentication/sign-up";
+import ChangePassword from "layouts/authentication/changePassword";
 import LeaveRequest from "layouts/LeaveRequest";
+import LeaveRequestApproval from "layouts/LeaveRequestApproval";
 
 const routes = [
   {
@@ -74,7 +74,7 @@ const routes = [
     type: "collapse",
     name: "Organizations",
     key: "organizations",
-    icon: <Icon fontSize="small">table_view</Icon>,
+    icon: <Icon fontSize="small">business</Icon>,
     route: "/organizations",
     component: <Organization />,
   },
@@ -83,26 +83,27 @@ const routes = [
     type: "collapse",
     name: "Departments",
     key: "departments",
-    icon: <Icon fontSize="small">table_view</Icon>,
+    icon: <Icon fontSize="small">apartment</Icon>,
     route: "/departments",
     component: <Department />,
   },
 
   {
     type: "collapse",
-    name: "Employee OnBoarding",
-    key: "employeesOnBoarding",
-    icon: <Icon fontSize="small">table_view</Icon>,
-    route: "/employees",
-    component: <Employees />,
-  },
-  {
-    type: "collapse",
     name: "Partners onBoarding",
     key: "partnersonBoarding",
-    icon: <Icon fontSize="small">table_view</Icon>,
+    icon: <Icon fontSize="small">business</Icon>,
     route: "/partners",
     component: <Partners />,
+  },
+
+  {
+    type: "collapse",
+    name: " Partner Approval",
+    key: "partnerApproval",
+    icon: <Icon fontSize="small">business</Icon>,
+    route: "/partner-approval",
+    component: <PartnerApproval />,
   },
 
   // {
@@ -113,22 +114,21 @@ const routes = [
   //   route: "/rtl",
   //   component: <ProfileInfoCard />,
   // },
-
+  {
+    type: "collapse",
+    name: "Employee OnBoarding",
+    key: "employeesOnBoarding",
+    icon: <Icon fontSize="small">group</Icon>,
+    route: "/employees",
+    component: <Employees />,
+  },
   {
     type: "collapse",
     name: " Employee Approval",
     key: "emoloyeeApproval",
-    icon: <Icon fontSize="small">person</Icon>,
+    icon: <Icon fontSize="small">group</Icon>,
     route: "/requests",
     component: <Requests />,
-  },
-  {
-    type: "collapse",
-    name: " Partner Approval",
-    key: "partnerApproval",
-    icon: <Icon fontSize="small">person</Icon>,
-    route: "/partner-approval",
-    component: <PartnerApproval />,
   },
 
   {
@@ -139,21 +139,37 @@ const routes = [
     route: "/employee-contract",
     component: <EmployeeContract />,
   },
+  {
+    type: "collapse",
+    name: " Employee Contract Approval",
+    key: "employeeContractApproval",
+    icon: <Icon fontSize="small">person</Icon>,
+    route: "/employee-contract-approval",
+    component: <EmployeeContractApproval />,
+  },
 
   {
     type: "collapse",
     name: " Leave Request",
     key: "leaveRequest",
-    icon: <Icon fontSize="small">person</Icon>,
+    icon: <Icon fontSize="small">event</Icon>,
     route: "/leave-requests",
     component: <LeaveRequest />,
+  },
+  {
+    type: "collapse",
+    name: " Leave Request Approval",
+    key: "leaveRequestApproval",
+    icon: <Icon fontSize="small">event</Icon>,
+    route: "/leave-requests-approval",
+    component: <LeaveRequestApproval />,
   },
 
   {
     type: "collapse",
     name: "Change password",
     key: "changepassword",
-    icon: <Icon fontSize="small">person</Icon>,
+    icon: <Icon fontSize="small">vpn_key</Icon>,
     route: "/change-password",
     component: <ChangePassword />,
   },

@@ -37,6 +37,7 @@ function AddPartnerForm() {
   };
 
   const columns = [
+    { Header: "Partner Name", accessor: "address", align: "left" },
     { Header: "Address", accessor: "address", align: "left" },
     { Header: "Tax ID", accessor: "taxId", align: "left" },
     { Header: "Phone", accessor: "phone", align: "left" },
@@ -89,9 +90,22 @@ function AddPartnerForm() {
                     </MDBox>
                   )}
 
-                  <MDBox mt={2}>
-                    <MDButton variant="gradient" color="info" type="submit" fullWidth>
+                  <MDBox mt={2} display="flex" justifyContent="center">
+                    <MDButton
+                      variant="gradient"
+                      color="info"
+                      type="submit"
+                      style={{ minWidth: "250px", marginRight: "4px" }}
+                    >
                       {mode === "edit" ? "Edit Partner" : "Add Partner"}
+                    </MDButton>
+                    <MDButton
+                      variant="gradient"
+                      color="error"
+                      type="reset"
+                      style={{ minWidth: "250px" }}
+                    >
+                      Reset
                     </MDButton>
                   </MDBox>
                 </form>

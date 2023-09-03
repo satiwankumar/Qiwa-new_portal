@@ -186,6 +186,7 @@ export default styled(Button)(({ theme, ownerState }) => {
       background: backgroundValue,
       color: colorValue,
       boxShadow: boxShadowValue,
+      textTransform: "Capitalize",
 
       "&:hover": {
         boxShadow: hoveredBoxShadowValue,

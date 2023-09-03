@@ -53,7 +53,7 @@ import { useMaterialUIController, setMiniSidenav, setOpenConfigurator } from "co
 import brandWhite from "assets/images/logo-ct.png";
 import brandDark from "assets/images/logo-ct-dark.png";
 import Signin from "layouts/authentication/sign-in";
-import Signup from "layouts/authentication/sign-up";
+import ChangePassword from "layouts/authentication/changePassword";
 import ForgotPassword from "layouts/authentication/reset-password/cover";
 import OTP from "layouts/authentication/reset-password/cover/otp";
 import ResetPassword from "layouts/authentication/reset-password/cover/password";
@@ -62,7 +62,10 @@ import AddDepartment from "layouts/department/AddDepartment";
 import AddEmployees from "layouts/employees/AddEmployees";
 import AddPartnerForm from "layouts/partners/AddPartner";
 import ViewRequestPage from "layouts/requests/ViewRequestDetail";
-import EmployeeContractForm from "layouts/EmployeeContract/AddEmployeesContact";
+import EmployeeContractForm from "layouts/EmployeeContract/AddEmployeesContract";
+import ViewEmployeeContract from "layouts/employeeContractApproval/ViewDetail";
+import LeaveRequestApproval from "layouts/LeaveRequestApproval/ViewDetail";
+
 import AddLeaveRequest from "layouts/LeaveRequest/addLeaveRequest";
 
 export default function App() {
@@ -206,8 +209,7 @@ export default function App() {
 
         <Route path="/sign-in" element={<Signin />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/change-password" element={<Signup />} />
-        <Route path="/force-password" element={<Signup />} />
+        <Route path="/change-password" element={<ChangePassword />} />
 
         <Route path="/otp" element={<OTP />} />
         <Route path="/reset-password" element={<ResetPassword />} />
@@ -215,18 +217,17 @@ export default function App() {
         <Route path={"/edit-organization/:id"} element={<AddOrganization />} />
         <Route path="/add-department" element={<AddDepartment />} />
         <Route path="/edit-department/:id" element={<AddDepartment />} />
-
         <Route path="/edit-employee/:id" element={<AddEmployees />} />
-
         <Route path="/add-partner" element={<AddPartnerForm />} />
         <Route path="/edit-partner/:id" element={<AddPartnerForm />} />
-
         <Route path="/view-requests" element={<ViewRequestPage />} />
         <Route path="/add-employees" element={<AddEmployees />} />
         <Route path="/add-employee-contract" element={<EmployeeContractForm />} />
         <Route path="/edit-employee-contract/:id" element={<EmployeeContractForm />} />
+        <Route path="/view-employee-contract/:id" element={<ViewEmployeeContract />} />
         <Route path="/add-leave-request" element={<AddLeaveRequest />} />
         <Route path="/edit-leave-request/1" element={<AddLeaveRequest />} />
+        <Route path="/view-leave-request/:id" element={<LeaveRequestApproval />} />
 
         <Route path="*" element={<Navigate to="/sign-in" />} />
 

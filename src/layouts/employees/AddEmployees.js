@@ -12,6 +12,11 @@ import MDTypography from "components/MDTypography";
 import Select from "react-select";
 import { useLocation } from "react-router-dom";
 import { statuses } from "utils/common";
+import { companyNames } from "utils/common";
+import { managers } from "utils/common";
+import { departments } from "utils/common";
+import { coaches } from "utils/common";
+import { dummyPositions } from "utils/common";
 
 function EmployeeForm() {
   const location = useLocation();
@@ -37,29 +42,6 @@ function EmployeeForm() {
     // Here you can perform further actions like sending the data to an API
   };
 
-  const companies = [
-    { value: "Company A", label: "Company A" },
-    { value: "Company B", label: "Company B" },
-    { value: "Company C", label: "Company C" },
-  ];
-
-  const departments = [
-    { value: "Department X", label: "Department X" },
-    { value: "Department Y", label: "Department Y" },
-    { value: "Department Z", label: "Department Z" },
-  ];
-
-  const managers = [
-    { value: "Manager A", label: "Manager A" },
-    { value: "Manager B", label: "Manager B" },
-    { value: "Manager C", label: "Manager C" },
-  ];
-
-  const coaches = [
-    { value: "Coach 1", label: "Coach 1" },
-    { value: "Coach 2", label: "Coach 2" },
-    { value: "Coach 3", label: "Coach 3" },
-  ];
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -97,11 +79,8 @@ function EmployeeForm() {
 
                   {/* Position */}
                   <MDBox mb={2}>
-                    <MDInput
-                      {...register("position", { required: true })}
-                      label="Position*"
-                      fullWidth
-                    />
+                    <Select placeholder="Select Position*" options={dummyPositions} />
+
                     {errors.position && <p className="error-message">{"Position is required"}</p>}
                   </MDBox>
 
@@ -129,49 +108,21 @@ function EmployeeForm() {
 
                   {/* Company */}
                   <MDBox mb={2}>
-                    {/* <Select {...register("company")} label="Company" fullWidth> */}
-                    {/* {companies.map((company) => (
-                        <MenuItem key={company} value={company}>
-                          {company}
-                        </MenuItem>
-                      ))}
-                    </Select> */}
-                    <Select placeholder="Select Company*" options={companies} />
+                    <Select placeholder="Select Company*" options={companyNames} />
                   </MDBox>
 
                   {/* Department */}
                   <MDBox mb={2}>
-                    {/* <Select {...register("department")} label="Department" fullWidth>
-                      {departments.map((department) => (
-                        <MenuItem key={department} value={department}>
-                          {department}
-                        </MenuItem>
-                      ))}
-                    </Select> */}
                     <Select placeholder="Select Department*" options={departments} />
                   </MDBox>
 
                   {/* Manager */}
                   <MDBox mb={2}>
-                    {/* <Select {...register("manager")} label="Manager" fullWidth>
-                      {managers.map((manager) => (
-                        <MenuItem key={manager} value={manager}>
-                          {manager}
-                        </MenuItem>
-                      ))}
-                    </Select> */}
                     <Select placeholder="Select Manager*" options={managers} />
                   </MDBox>
 
                   {/* Coach */}
                   <MDBox mb={2}>
-                    {/* <Select {...register("coach")} label="Coach" fullWidth>
-                      {coaches.map((coach) => (
-                        <MenuItem key={coach} value={coach}>
-                          {coach}
-                        </MenuItem>
-                      ))}
-                    </Select> */}
                     <Select placeholder="Select Coaches*" options={coaches} />
                   </MDBox>
 
@@ -182,9 +133,22 @@ function EmployeeForm() {
                     </MDBox>
                   )}
 
-                  <MDBox mt={2}>
-                    <MDButton variant="gradient" color="info" type="submit" fullWidth>
+                  <MDBox mt={2} display="flex" justifyContent="center">
+                    <MDButton
+                      variant="gradient"
+                      color="info"
+                      type="submit"
+                      style={{ minWidth: "250px", marginRight: "4px" }}
+                    >
                       {mode === "edit" ? "Edit Employee" : "Add Employee"}
+                    </MDButton>
+                    <MDButton
+                      variant="gradient"
+                      color="error"
+                      type="reset"
+                      style={{ minWidth: "250px" }}
+                    >
+                      Reset
                     </MDButton>
                   </MDBox>
                 </form>

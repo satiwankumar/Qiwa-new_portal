@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
-import { Card, Grid, MenuItem } from "@mui/material";
+import { Card, Grid, InputLabel, MenuItem } from "@mui/material";
 import MDBox from "components/MDBox";
 import MDInput from "components/MDInput";
 import MDButton from "components/MDButton";
@@ -12,6 +12,7 @@ import MDTypography from "components/MDTypography";
 import Select from "react-select";
 import { useLocation } from "react-router-dom";
 import { statuses } from "utils/common";
+import { dummyLeaveTypes } from "utils/common";
 
 function AddLeaveRequest() {
   const location = useLocation();
@@ -62,23 +63,24 @@ function AddLeaveRequest() {
                 <form onSubmit={handleSubmit(onSubmit)}>
                   {/* Employee Name (Dropdown) */}
                   <MDBox mb={2}>
-                    <Select
-                      placeholder="Select Employee"
-                      options={statuses}
-                      // {...register("employeeName", { required: true })}
+                    <MDInput
+                      {...register("employeeName", { required: true })}
+                      value="John Walk"
+                      placeholder="John Walker...."
+                      fullWidth
+                      disabled
                     />
-                    {/* {errors.employeeName && (
+                    {errors.employeeName && (
                       <p className="error-message">{"Employee Name is required"}</p>
-                    )} */}
+                    )}
                   </MDBox>
 
                   {/* Start Date */}
                   <MDBox mb={2}>
-                    <MDInput
-                      {...register("startDate", { required: true })}
-                      label="Start Date*"
-                      fullWidth
-                    />
+                    <InputLabel shrink={true} htmlFor="startDate">
+                      Start Date*
+                    </InputLabel>
+                    <MDInput {...register("startDate", { required: true })} type="date" fullWidth />
                     {errors.startDate && (
                       <p className="error-message">{"Start Date is required"}</p>
                     )}
@@ -86,11 +88,10 @@ function AddLeaveRequest() {
 
                   {/* End Date */}
                   <MDBox mb={2}>
-                    <MDInput
-                      {...register("endDate", { required: true })}
-                      label="End Date*"
-                      fullWidth
-                    />
+                    <InputLabel shrink={true} htmlFor="endDate">
+                      End Date*
+                    </InputLabel>
+                    <MDInput {...register("endDate", { required: true })} type="date" fullWidth />
                     {errors.endDate && <p className="error-message">{"End Date is required"}</p>}
                   </MDBox>
 
@@ -98,14 +99,30 @@ function AddLeaveRequest() {
                   <MDBox mb={2}>
                     <MDInput
                       {...register("managerName", { required: true })}
-                      label="Manager Name*"
+                      placeholder="manager "
+                      value="Manager A"
+                      disabled
                       fullWidth
                     />
                     {errors.managerName && (
                       <p className="error-message">{"Manager Name is required"}</p>
                     )}
                   </MDBox>
+                  {/* Leave LEave Type (Dropdown) */}
+                  <MDBox mb={2}>
+                    <Select placeholder="Select Leave Approval" options={dummyLeaveTypes} />
+                  </MDBox>
 
+                  <MDBox mb={2}>
+                    <MDInput
+                      {...register("leaveReason", { required: true })}
+                      label="Leave Reason*"
+                      fullWidth
+                    />
+                    {errors.leaveReason && (
+                      <p className="error-message">{"Leave Reason is required"}</p>
+                    )}
+                  </MDBox>
                   {/* Leave Approval (Dropdown) */}
                   <MDBox mb={2}>
                     <Select
@@ -121,7 +138,7 @@ function AddLeaveRequest() {
                   {/* Action */}
                   <MDBox mt={2}>
                     <MDButton variant="gradient" color="info" type="submit" fullWidth>
-                      {mode === "edit" ? "Edit Contract" : "Add Contract"}
+                      {mode === "edit" ? "Edit Leave" : "Add Leave"}
                     </MDButton>
                   </MDBox>
                 </form>

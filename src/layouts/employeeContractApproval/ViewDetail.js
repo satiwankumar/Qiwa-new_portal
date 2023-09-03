@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Card, Grid, Icon, TextareaAutosize, Tooltip, Typography } from "@mui/material";
+import { Button, Card, Grid, TextareaAutosize, Tooltip, Typography } from "@mui/material";
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import Divider from "@mui/material/Divider";
@@ -7,31 +7,26 @@ import ProfileInfoCard from "examples/Cards/InfoCards/ProfileInfoCard"; // Impor
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import { Link } from "react-router-dom";
-import Select from "react-select";
-import { statuses } from "utils/common";
 import MDButton from "components/MDButton";
+import { statuses } from "utils/common";
+import Select from "react-select";
 
-const requestInfo = {
-  "Employee Id ": "EMP123",
-  "Employee Name ": "John Doe",
-  "Position ": "Software Engineer",
-  "Work Email ": "john.doe@example.com",
-  "Company ": "Example Corp",
-  "Department ": "Engineering",
-  "Manager ": "Jane Smith",
+const contractInfo = {
+  "Employee ID": "EMP123",
+  "Employee Name": "John Doe",
+  "Contract Name": "Software Engineer",
+  "Start Date": "2023-01-01",
+  "End Date": "2023-12-31",
+  "Salary ": "$80,000",
+  "Currency ": "USD",
+  // Add any other fields you need
 };
-
-const socialLinks = [
-  { link: "#", icon: <Icon>facebook</Icon>, color: "facebook" },
-  { link: "#", icon: <Icon>twitter</Icon>, color: "twitter" },
-  { link: "#", icon: <Icon>linkedin</Icon>, color: "linkedin" },
-];
 
 const action = {
   route: "/edit-profile", // Replace with the actual route
   tooltip: "Edit Profile",
 };
-function ViewRequestPage() {
+function ViewEmployeeContract() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -53,11 +48,11 @@ function ViewRequestPage() {
                 justifyContent="space-between"
               >
                 <MDTypography variant="h6" color="white">
-                  View Requests
+                  View Employee Contract
                 </MDTypography>
               </MDBox>
               <MDBox px={6} py={6} display="flex" flexWrap="wrap">
-                {Object.entries(requestInfo).map(([key, value]) => (
+                {Object.entries(contractInfo).map(([key, value]) => (
                   <MDBox key={key} flexBasis="33.33%" px={3} py={2}>
                     <MDTypography variant="subtitle1">
                       <strong>{key}:</strong> {value}
@@ -67,12 +62,13 @@ function ViewRequestPage() {
               </MDBox>
               <MDBox px={6} py={3} display="flex" flexDirection="column">
                 <MDBox mb={2}>
-                  <Typography variant="h6" gutterBottom>
-                    Action*
-                  </Typography>
-                  <Select placeholder="Select Status" options={statuses} />
+                  <MDBox mb={2}>
+                    <Typography variant="h6" gutterBottom>
+                      Action*
+                    </Typography>
+                    <Select placeholder="Select Status" options={statuses} />
+                  </MDBox>
                 </MDBox>
-
                 <MDBox mb={2}>
                   <Typography variant="h6" gutterBottom>
                     Remarks*
@@ -121,4 +117,4 @@ function ViewRequestPage() {
   );
 }
 
-export default ViewRequestPage;
+export default ViewEmployeeContract;

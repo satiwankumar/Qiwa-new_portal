@@ -12,6 +12,8 @@ import MDTypography from "components/MDTypography";
 import Select from "react-select";
 import { useLocation } from "react-router-dom";
 import { statuses } from "utils/common";
+import { dummyEmployeeNames } from "utils/common";
+import { companyNames } from "utils/common";
 
 function DepartmentForm() {
   const location = useLocation();
@@ -44,13 +46,6 @@ function DepartmentForm() {
     return msg;
   };
 
-  const companyNames = [
-    { value: "apple", label: "Apple Inc." },
-    { value: "google", label: "Google LLC" },
-    { value: "microsoft", label: "Microsoft Corporation" },
-    { value: "amazon", label: "Amazon.com, Inc." },
-    // Add more company names as needed
-  ];
   const onMenuOpen = () => setIsMenuOpen(true);
   const onMenuClose = () => setIsMenuOpen(false);
 
@@ -91,12 +86,15 @@ function DepartmentForm() {
 
                   {/* Manager */}
                   <MDBox mb={2}>
-                    <MDInput
+                    {/* <MDInput
                       {...register("manager", { required: true })}
                       label="Manager*"
                       fullWidth
-                    />
-                    {errors.manager && <p className="error-message">{"Manager is required"}</p>}
+                    /> */}
+                    <MDBox mb={2}>
+                      <Select placeholder="Select Manager" options={dummyEmployeeNames} />
+                    </MDBox>
+                    {/* {errors.manager && <p className="error-message">{"Manager is required"}</p>} */}
                   </MDBox>
 
                   {/* Parent Department */}
@@ -121,10 +119,22 @@ function DepartmentForm() {
                       <Select placeholder="Select Status" options={statuses} />
                     </MDBox>
                   )}
-
-                  <MDBox mt={2}>
-                    <MDButton variant="gradient" color="info" type="submit" fullWidth>
+                  <MDBox mt={2} display="flex" justifyContent="center">
+                    <MDButton
+                      variant="gradient"
+                      color="info"
+                      type="submit"
+                      style={{ minWidth: "250px", marginRight: "4px" }}
+                    >
                       {mode === "edit" ? "Edit Department" : "Add Department"}
+                    </MDButton>
+                    <MDButton
+                      variant="gradient"
+                      color="error"
+                      type="reset"
+                      style={{ minWidth: "250px" }}
+                    >
+                      Reset
                     </MDButton>
                   </MDBox>
                 </form>

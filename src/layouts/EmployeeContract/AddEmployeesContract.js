@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
-import { Card, Grid, MenuItem } from "@mui/material";
+import { Card, Grid, InputLabel, MenuItem } from "@mui/material";
 import MDBox from "components/MDBox";
 import MDInput from "components/MDInput";
 import MDButton from "components/MDButton";
@@ -12,6 +12,7 @@ import MDTypography from "components/MDTypography";
 import Select from "react-select";
 import { useLocation } from "react-router-dom";
 import { statuses } from "utils/common";
+import { dummyEmployeeNames } from "utils/common";
 
 function EmployeeContractForm() {
   const location = useLocation();
@@ -37,29 +38,6 @@ function EmployeeContractForm() {
     // Here you can perform further actions like sending the data to an API
   };
 
-  const companies = [
-    { value: "Company A", label: "Company A" },
-    { value: "Company B", label: "Company B" },
-    { value: "Company C", label: "Company C" },
-  ];
-
-  const departments = [
-    { value: "Department X", label: "Department X" },
-    { value: "Department Y", label: "Department Y" },
-    { value: "Department Z", label: "Department Z" },
-  ];
-
-  const managers = [
-    { value: "Manager A", label: "Manager A" },
-    { value: "Manager B", label: "Manager B" },
-    { value: "Manager C", label: "Manager C" },
-  ];
-
-  const coaches = [
-    { value: "Coach 1", label: "Coach 1" },
-    { value: "Coach 2", label: "Coach 2" },
-    { value: "Coach 3", label: "Coach 3" },
-  ];
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -85,7 +63,7 @@ function EmployeeContractForm() {
                 <form onSubmit={handleSubmit(onSubmit)}>
                   {/* Employee Id */}
                   <MDBox mb={2}>
-                    <Select placeholder="Select Employyee" options={statuses} />
+                    <Select placeholder="Select Employee" options={dummyEmployeeNames} />
                   </MDBox>
 
                   <MDBox mb={2}>
@@ -101,11 +79,10 @@ function EmployeeContractForm() {
 
                   {/* Start Date */}
                   <MDBox mb={2}>
-                    <MDInput
-                      {...register("startDate", { required: true })}
-                      label="Start Date*"
-                      fullWidth
-                    />
+                    <InputLabel shrink={true} htmlFor="startDate">
+                      Start Date*
+                    </InputLabel>
+                    <MDInput {...register("startDate", { required: true })} type="date" fullWidth />
                     {errors.startDate && (
                       <p className="error-message">{"Start Date is required"}</p>
                     )}
@@ -113,11 +90,10 @@ function EmployeeContractForm() {
 
                   {/* End Date */}
                   <MDBox mb={2}>
-                    <MDInput
-                      {...register("endDate", { required: true })}
-                      label="End Date*"
-                      fullWidth
-                    />
+                    <InputLabel shrink={true} htmlFor="endDate">
+                      End Date*
+                    </InputLabel>
+                    <MDInput {...register("endDate", { required: true })} type="date" fullWidth />
                     {errors.endDate && <p className="error-message">{"End Date is required"}</p>}
                   </MDBox>
 
@@ -149,9 +125,24 @@ function EmployeeContractForm() {
 
                   {/* Action */}
                   <MDBox mt={2}>
-                    <MDButton variant="gradient" color="info" type="submit" fullWidth>
-                      {mode === "edit" ? "Edit Contract" : "Add Contract"}
-                    </MDButton>
+                    <MDBox mt={2} display="flex" justifyContent="center">
+                      <MDButton
+                        variant="gradient"
+                        color="info"
+                        type="submit"
+                        style={{ minWidth: "250px", marginRight: "4px" }}
+                      >
+                        {mode === "edit" ? "Edit Contract" : "Add Contract"}
+                      </MDButton>
+                      <MDButton
+                        variant="gradient"
+                        color="error"
+                        type="reset"
+                        style={{ minWidth: "250px" }}
+                      >
+                        Reset
+                      </MDButton>
+                    </MDBox>
                   </MDBox>
                 </form>
               </MDBox>

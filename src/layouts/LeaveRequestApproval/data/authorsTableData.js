@@ -16,6 +16,9 @@ Coded by www.creative-tim.com
 */
 
 // Material Dashboard 2 React components
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDAvatar from "components/MDAvatar";
@@ -26,36 +29,30 @@ import team2 from "assets/images/team-2.jpg";
 import team3 from "assets/images/team-3.jpg";
 import team4 from "assets/images/team-4.jpg";
 import { IconButton, Tooltip } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
-import { Link, useNavigate } from "react-router-dom";
-
+import VisibilityIcon from "@mui/icons-material/Visibility";
 export default function data() {
   const navigate = useNavigate();
   return {
     columns: [
-      { Header: "Partner Name", accessor: "partnerName", align: "left" },
-      { Header: "Address", accessor: "address", align: "left" },
-      { Header: "Tax ID", accessor: "taxId", align: "left" },
-      { Header: "Phone", accessor: "phone", align: "left" },
-      { Header: "Mobile", accessor: "mobile", align: "left" },
-      { Header: "Email", accessor: "email", align: "left" },
-      { Header: "Website", accessor: "website", align: "left" },
-      { Header: "Language", accessor: "language", align: "left" },
-      { Header: "Tags", accessor: "tags", align: "left" },
-      { Header: "Actions", accessor: "action", align: "left" },
+      { Header: "Employee Name", accessor: "employeeName", align: "left" },
+      { Header: "Start Date", accessor: "startDate", align: "left" },
+      { Header: "End Date", accessor: "endDate", align: "left" },
+      { Header: "Manager Name", accessor: "managerName", align: "left" },
+      { Header: "Leave Type", accessor: "leaveType", align: "left" },
+
+      { Header: "Action", accessor: "action", align: "left" },
     ],
 
     rows: [
       {
-        partnerName: "ABC Company",
-        address: "123 Main St, City",
-        taxId: "12345-67890",
-        phone: "123-456-7890",
-        mobile: "987-654-3210",
-        email: "info@example.com",
-        website: "www.example.com",
-        language: "en",
-        tags: "abc abcd ac",
+        employeeName: "Employee1",
+        startDate: "2023-08-31",
+        endDate: "2024-08-31",
+        managerName: "Manager1",
+        leaveType: "Sick leave", // Display the selected manager's label
+        // Display the selected manager's label
+
+        // Display the selected manager's label
         action: (
           <>
             <MDTypography component={Link} to={""} variant="body2" color="secondary"></MDTypography>
@@ -64,18 +61,18 @@ export default function data() {
                 color="primary"
                 size="small"
                 onClick={() => {
-                  navigate("/edit-partner/1");
+                  navigate("/view-leave-request/1");
                 }}
               >
-                <Tooltip title={"Edit Icon"} placement="top">
-                  <EditIcon />
+                <Tooltip title={"View Icon"} placement="top">
+                  <VisibilityIcon />
                 </Tooltip>
               </IconButton>
             </MDBox>
           </>
         ),
       },
-      // Ad more rows here...
+      // Add more rows here...
     ],
   };
 }

@@ -12,6 +12,7 @@ import Footer from "examples/Footer";
 import MDAlert from "components/MDAlert";
 import Select from "react-select";
 import Swal from "sweetalert2";
+import { companyNames } from "utils/common";
 
 function OrganizationForm() {
   const location = useLocation();
@@ -94,14 +95,17 @@ function OrganizationForm() {
 
                   {/* Company ID */}
                   <MDBox mb={2}>
-                    <MDInput
+                    <MDBox mb={2}>
+                      <Select placeholder="Select Company" options={companyNames} />
+                    </MDBox>
+                    {/* <MDInput
                       {...register("companyId", { required: true })}
                       label="Company ID*"
                       fullWidth
-                    />
-                    {errors.companyId && (
+                    /> */}
+                    {/* {errors.companyId && (
                       <p className="error-message">{"Company ID is required"}</p>
-                    )}
+                    )} */}
                   </MDBox>
 
                   {/* Currency */}
@@ -152,27 +156,34 @@ function OrganizationForm() {
 
                   {/* Parent Company */}
                   <MDBox mb={2}>
-                    <MDInput
+                    {/* <MDInput
                       {...register("parentCompany", { required: true })}
                       label="Parent Company*"
                       fullWidth
-                    />
-                    {errors.parentCompany && (
+                    /> */}
+                    <MDBox mb={2}>
+                      <Select placeholder="Select Parent Company*" options={companyNames} />
+                    </MDBox>
+                    {/* {errors.parentCompany && (
                       <p className="error-message">{"Parent Company is required"}</p>
-                    )}
+                    )} */}
                   </MDBox>
 
                   {/* Company Favicon */}
                   <MDBox mb={2}>
-                    <MDInput
+                    <label htmlFor="companyFavicon">Company Logo</label>
+                    <br />
+                    <input
+                      type="file"
                       {...register("companyFavicon", { required: true })}
-                      label="Company Favicon*"
-                      fullWidth
+                      id="companyFavicon"
+                      accept="image/*" // Accept image files
                     />
                     {errors.companyFavicon && (
                       <p className="error-message">{"Company Favicon is required"}</p>
                     )}
                   </MDBox>
+
                   {mode === "edit" && (
                     <MDBox>
                       {/* <Switch checked={active} onChange={() => setActive(!active)} /> */}
@@ -180,9 +191,22 @@ function OrganizationForm() {
                     </MDBox>
                   )}
 
-                  <MDBox mt={4} mb={1}>
-                    <MDButton variant="gradient" color="info" type="submit" fullWidth>
+                  <MDBox mt={2} display="flex" justifyContent="center">
+                    <MDButton
+                      variant="gradient"
+                      color="info"
+                      type="submit"
+                      style={{ minWidth: "250px", marginRight: "4px" }}
+                    >
                       {mode === "edit" ? "Edit Organization" : "Add Organization"}
+                    </MDButton>
+                    <MDButton
+                      variant="gradient"
+                      color="error"
+                      type="reset"
+                      style={{ minWidth: "250px" }}
+                    >
+                      Reset
                     </MDButton>
                   </MDBox>
                 </form>

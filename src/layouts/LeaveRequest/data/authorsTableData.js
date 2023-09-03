@@ -51,6 +51,7 @@ export default function LeaveData() {
       { Header: "Start Date", accessor: "startDate", align: "left" },
       { Header: "End Date", accessor: "endDate", align: "left" },
       { Header: "Manager Name", accessor: "managerName", align: "left" },
+      { Header: "Leave Type", accessor: "leaveType", align: "left" },
       { Header: "Action", accessor: "action", align: "left" },
     ],
 
@@ -59,7 +60,9 @@ export default function LeaveData() {
         employeeName: "Employee1",
         startDate: "2023-08-31",
         endDate: "2024-08-31",
-        managerName: "Manager1", // Display the selected manager's label
+        managerName: "Manager1",
+        leaveType: "Sick Leave", // Display the selected manager's label
+        // Display the selected manager's label
         action: (
           <>
             <MDTypography component={Link} to={""} variant="body2" color="secondary"></MDTypography>

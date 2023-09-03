@@ -75,7 +75,7 @@ function ViewRequestPage() {
               <MDBox px={6} py={3} display="flex" flexDirection="column">
                 <MDBox mb={2}>
                   <Typography variant="h6" gutterBottom>
-                    Select Action
+                    Action*
                   </Typography>
                   <Select defaultValue="Accept" value="Accept" sx={{ width: "50%", p: 2 }}>
                     <MenuItem value="">Select</MenuItem>
@@ -87,16 +87,19 @@ function ViewRequestPage() {
 
                 <MDBox mb={2}>
                   <Typography variant="h6" gutterBottom>
-                    Message
+                    Remarks*
                   </Typography>
                   <TextareaAutosize
-                    rowsMin={3}
-                    placeholder="Enter your text here..."
+                    // {...register("remarks", { required: true })}
+                    rowsMin={4}
+                    placeholder="Enter your  Remarks here..."
                     style={{
-                      width: "50%",
+                      width: "100%",
                       border: "1px solid #ccc",
                       borderRadius: "4px",
                       paddingBottom: "50px",
+
+                      fontSize: "18px",
                     }}
                   />
                 </MDBox>
