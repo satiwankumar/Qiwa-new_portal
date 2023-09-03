@@ -12,8 +12,10 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import Footer from "examples/Footer";
 import { Grid } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 function ChangePassword() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -103,6 +105,7 @@ function ChangePassword() {
                         variant="gradient"
                         color="info"
                         type="submit"
+                        onClick={() => navigate("/sign-in")}
                         style={{ minWidth: "250px", marginRight: "4px" }}
                       >
                         Submit

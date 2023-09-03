@@ -13,8 +13,10 @@ import CoverLayout from "layouts/authentication/components/CoverLayout";
 // Images
 import bgImage from "assets/images/bg-reset-cover.jpeg";
 import BasicLayout from "layouts/authentication/components/BasicLayout";
+import { useNavigate } from "react-router-dom";
 
 function ForgotPassword() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -23,6 +25,7 @@ function ForgotPassword() {
   } = useForm();
   const onSubmit = (data) => {
     console.log(data);
+    navigate("/otp");
   };
   return (
     // <CoverLayout coverHeight="50vh" image={bgImage}>
@@ -40,7 +43,7 @@ function ForgotPassword() {
           textAlign="center"
         >
           <MDTypography variant="h3" fontWeight="medium" color="white" mt={1}>
-            Reset Password
+            Forgot Password
           </MDTypography>
           <MDTypography display="block" variant="button" color="white" my={1}>
             You will receive an e-mail in maximum 60 seconds
@@ -63,13 +66,13 @@ function ForgotPassword() {
               <MDBox mt={6} mb={1}>
                 <Grid container spacing={2}>
                   <Grid item xs={6}>
-                    <MDButton variant="gradient" color="error" fullWidth>
-                      Cancel
+                    <MDButton variant="gradient" color="info" type="submit" fullWidth>
+                      Submit
                     </MDButton>
                   </Grid>
                   <Grid item xs={6}>
-                    <MDButton variant="gradient" color="info" type="submit" fullWidth>
-                      Reset
+                    <MDButton variant="gradient" color="error" fullWidth>
+                      Cancel
                     </MDButton>
                   </Grid>
                 </Grid>

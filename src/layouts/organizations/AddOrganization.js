@@ -169,7 +169,15 @@ function OrganizationForm() {
 
                   {/* Company Favicon */}
                   <MDBox mb={2}>
-                    <label htmlFor="companyFavicon">Company Logo</label>
+                    <label
+                      htmlFor="companyFavicon"
+                      style={{
+                        fontSize: "15px",
+                        color: "#495057",
+                      }}
+                    >
+                      Logo
+                    </label>
                     <br />
                     <input
                       type="file"

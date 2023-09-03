@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 // react-router-dom components
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 // @mui material components
 import Card from "@mui/material/Card";
@@ -28,6 +28,7 @@ import bgImage from "assets/images/bg-sign-in-basic.jpeg";
 
 function Basic() {
   const [rememberMe, setRememberMe] = useState(false);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -44,6 +45,7 @@ function Basic() {
   console.log("errors", errors, email, password);
   const onSubmit = (data) => {
     console.log(data);
+    navigate("/dashboard");
   };
 
   return (

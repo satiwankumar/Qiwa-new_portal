@@ -28,8 +28,24 @@ import CoverLayout from "layouts/authentication/components/CoverLayout";
 // Images
 import bgImage from "assets/images/bg-reset-cover.jpeg";
 import BasicLayout from "layouts/authentication/components/BasicLayout";
+import { Grid } from "@mui/material";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 function ResetPassword() {
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data);
+    navigate("/sign-in");
+  };
+  console.log("errors", errors);
   return (
     // <CoverLayout coverHeight="50vh" image={bgImage}>
     <BasicLayout image={bgImage}>
@@ -46,39 +62,56 @@ function ResetPassword() {
           textAlign="center"
         >
           <MDTypography variant="h3" fontWeight="medium" color="white" mt={1}>
-            Reset Password
+            Create Password
           </MDTypography>
           <MDTypography display="block" variant="button" color="white" my={1}>
             Enter the password here
           </MDTypography>
         </MDBox>
         <MDBox pt={4} pb={3} px={3}>
-          <MDBox component="form" role="form">
+          <form onSubmit={handleSubmit(onSubmit)}>
             <MDBox mb={2}>
               <MDInput
+                {...register("newpassword", {
+                  required: true,
+                })}
                 type="password"
                 label="New Password"
-                required={true}
                 variant="standard"
                 fullWidth
               />
+              {errors.newpassword && <p className="error-message">{"New Password is required"}</p>}
             </MDBox>
             <MDBox mb={2}>
               <MDInput
                 type="password"
+                {...register("confirmPassword", {
+                  required: true,
+                })}
                 label="Confirm Password"
-                required={true}
                 variant="standard"
                 fullWidth
               />
+              {errors.confirmPassword && (
+                <p className="error-message">{"Confirm Password is required"}</p>
+              )}
             </MDBox>
 
-            <MDBox mt={4} mb={1}>
-              <MDButton variant="gradient" type="submit" color="info" fullWidth>
-                Submit
-              </MDButton>
+            <MDBox mt={6} mb={1}>
+              <Grid container spacing={2}>
+                <Grid item xs={6}>
+                  <MDButton variant="gradient" color="info" type="submit" fullWidth>
+                    Submit
+                  </MDButton>
+                </Grid>
+                <Grid item xs={6}>
+                  <MDButton variant="gradient" color="error" fullWidth>
+                    Cancel
+                  </MDButton>
+                </Grid>
+              </Grid>
             </MDBox>
-          </MDBox>
+          </form>
         </MDBox>
       </Card>
     </BasicLayout>

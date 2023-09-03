@@ -31,8 +31,10 @@ import CoverLayout from "layouts/authentication/components/CoverLayout";
 // Images
 import bgImage from "assets/images/bg-reset-cover.jpeg";
 import BasicLayout from "layouts/authentication/components/BasicLayout";
+import { useNavigate } from "react-router-dom";
 
 function OTP() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -65,7 +67,7 @@ function OTP() {
           textAlign="center"
         >
           <MDTypography variant="h3" fontWeight="medium" color="white" mt={1}>
-            Reset Password
+            Forgot Password
           </MDTypography>
           <MDTypography display="block" variant="button" color="white" my={1}>
             Enter the Otp you received here
@@ -88,20 +90,24 @@ function OTP() {
               {/* {errors && <p className="error-message">{"OTP is required"}</p>} */}
             </MDBox>
             <MDBox mt={6} mb={1}>
-              <MDBox mt={6} mb={1}>
-                <Grid container spacing={2}>
-                  <Grid item xs={6}>
-                    <MDButton variant="gradient" color="error" fullWidth>
-                      Cancel
-                    </MDButton>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <MDButton variant="gradient" color="info" type="submit" fullWidth>
-                      Reset
-                    </MDButton>
-                  </Grid>
+              <Grid container spacing={2}>
+                <Grid item xs={6}>
+                  <MDButton
+                    variant="gradient"
+                    onClick={() => navigate("/reset-password")}
+                    color="info"
+                    type="button"
+                    fullWidth
+                  >
+                    Submit
+                  </MDButton>
                 </Grid>
-              </MDBox>
+                <Grid item xs={6}>
+                  <MDButton variant="gradient" color="error" fullWidth>
+                    Cancel
+                  </MDButton>
+                </Grid>
+              </Grid>
             </MDBox>
           </form>
         </MDBox>
