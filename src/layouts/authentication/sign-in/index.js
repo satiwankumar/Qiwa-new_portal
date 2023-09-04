@@ -25,8 +25,10 @@ import BasicLayout from "layouts/authentication/components/BasicLayout";
 
 // Images
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
+import { useTranslation } from "react-i18next";
 
 function Basic() {
+  const { t } = useTranslation();
   const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate();
   const {
@@ -107,7 +109,7 @@ function Basic() {
             </MDBox>
             <MDBox mt={4} mb={1}>
               <MDButton variant="gradient" color="info" type="submit" fullWidth>
-                sign in
+                {t("sign in")}
               </MDButton>
             </MDBox>
 

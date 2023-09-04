@@ -26,9 +26,11 @@ import Icon from "@mui/material/Icon";
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
+import { useTranslation } from "react-i18next";
 
 function Breadcrumbs({ icon, title, route, light }) {
   const routes = route.slice(0, -1);
+  const { t } = useTranslation();
 
   return (
     <MDBox mr={{ xs: 0, xl: 8 }}>
@@ -61,7 +63,7 @@ function Breadcrumbs({ icon, title, route, light }) {
               opacity={light ? 0.8 : 0.5}
               sx={{ lineHeight: 0 }}
             >
-              {el}
+              {t("el")}
             </MDTypography>
           </Link>
         ))}

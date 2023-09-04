@@ -29,22 +29,68 @@ import team4 from "assets/images/team-4.jpg";
 import { IconButton, Tooltip } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 export default function data() {
   const navigate = useNavigate();
+  const [t] = useTranslation();
 
   return {
     columns: [
-      { Header: "Employee ID", accessor: "employeeId", align: "left" },
-      { Header: "Employee Name", accessor: "employeeName", align: "left" },
-      { Header: "Position", accessor: "position", align: "left" },
-      { Header: "Work Mobile", accessor: "workMobile", align: "left" },
-      { Header: "Work Phone", accessor: "workPhone", align: "left" },
-      { Header: "Work Email", accessor: "workEmail", align: "left" },
-      { Header: "Company", accessor: "company", align: "left" },
-      { Header: "Department", accessor: "department", align: "left" },
-      { Header: "Manager", accessor: "manager", align: "left" },
-      { Header: "Coach", accessor: "coach", align: "left" },
-      { Header: "Actions", accessor: "action", align: "left" },
+      {
+        Header: t("Employee ID"), // Translate "Employee ID"
+        accessor: "employeeId",
+        align: "left",
+      },
+      {
+        Header: t("Employee Name"), // Translate "Employee Name"
+        accessor: "employeeName",
+        align: "left",
+      },
+      {
+        Header: t("Position"), // Translate "Position"
+        accessor: "position",
+        align: "left",
+      },
+      {
+        Header: t("Work Mobile"), // Translate "Work Mobile"
+        accessor: "workMobile",
+        align: "left",
+      },
+      {
+        Header: t("Work Phone"), // Translate "Work Phone"
+        accessor: "workPhone",
+        align: "left",
+      },
+      {
+        Header: t("Work Email"), // Translate "Work Email"
+        accessor: "workEmail",
+        align: "left",
+      },
+      {
+        Header: t("Company"), // Translate "Company"
+        accessor: "company",
+        align: "left",
+      },
+      {
+        Header: t("Department"), // Translate "Department"
+        accessor: "department",
+        align: "left",
+      },
+      {
+        Header: t("Manager"), // Translate "Manager"
+        accessor: "manager",
+        align: "left",
+      },
+      {
+        Header: t("Coach"), // Translate "Coach"
+        accessor: "coach",
+        align: "left",
+      },
+      {
+        Header: t("Actions"), // Translate "Actions"
+        accessor: "action",
+        align: "left",
+      },
     ],
 
     rows: [

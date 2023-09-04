@@ -13,9 +13,10 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import Footer from "examples/Footer";
 import { Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-
+import { useTranslation } from "react-i18next";
 function ChangePassword() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -45,8 +46,8 @@ function ChangePassword() {
                 mb={2}
                 textAlign="center"
               >
-                <MDTypography variant="h4" fontWeight="medium" color="white" mt={1}>
-                  Change Password
+                <MDTypography variant="h5" fontWeight="small" color="white" mt={1}>
+                  {t("Change Password")}
                 </MDTypography>
               </MDBox>
               <MDBox pt={4} pb={3} px={3}>
@@ -58,13 +59,13 @@ function ChangePassword() {
                         required: true,
                       })}
                       type="password"
-                      label="Current password*"
+                      label={t("Current password*")}
                       variant="standard"
                       name="currentpassword"
                       fullWidth
                     />
                     {errors.currentpassword && (
-                      <p className="error-message">{"Current Password is required"}</p>
+                      <p className="error-message">{t("Current Password is required")}</p>
                     )}
                   </MDBox>
 
@@ -74,13 +75,13 @@ function ChangePassword() {
                         required: true,
                       })}
                       type="password"
-                      label="New Password*"
+                      label={t("New Password*")}
                       name="newpassword"
                       variant="standard"
                       fullWidth
                     />
                     {errors.newpassword && (
-                      <p className="error-message">{"New Password is required"}</p>
+                      <p className="error-message">{t("New Password is required")}</p>
                     )}
                   </MDBox>
                   <MDBox mb={2}>
@@ -90,12 +91,12 @@ function ChangePassword() {
                       })}
                       type="password"
                       name="confirmpassword"
-                      label="Confirm Password*"
+                      label={t("Confirm Password*")}
                       variant="standard"
                       fullWidth
                     />
                     {errors.confirmpassword && (
-                      <p className="error-message">{"Confirm Password is required"}</p>
+                      <p className="error-message">{t("Confirm Password is required")}</p>
                     )}
                   </MDBox>
 
@@ -108,7 +109,7 @@ function ChangePassword() {
                         onClick={() => navigate("/sign-in")}
                         style={{ minWidth: "250px", marginRight: "4px" }}
                       >
-                        Submit
+                        {t("Submit")}
                       </MDButton>
                       <MDButton
                         variant="gradient"
@@ -116,7 +117,7 @@ function ChangePassword() {
                         type="reset"
                         style={{ minWidth: "250px" }}
                       >
-                        Reset
+                        {t("Reset")}
                       </MDButton>
                     </MDBox>
                   </MDBox>

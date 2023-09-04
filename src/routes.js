@@ -59,6 +59,7 @@ import PartnerApproval from "layouts/PartnerApproval";
 import ChangePassword from "layouts/authentication/changePassword";
 import LeaveRequest from "layouts/LeaveRequest";
 import LeaveRequestApproval from "layouts/LeaveRequestApproval";
+import ProfileInfoCard from "examples/Cards/InfoCards/ProfileInfoCard";
 
 const routes = [
   {
@@ -91,50 +92,41 @@ const routes = [
   {
     type: "collapse",
     name: "Partners onBoarding",
-    key: "partnersonBoarding",
+    key: "partners-onBoarding",
     icon: <Icon fontSize="small">business</Icon>,
-    route: "/partners",
+    route: "/partners-onBoarding",
     component: <Partners />,
   },
 
   {
     type: "collapse",
     name: " Partner Approval",
-    key: "partnerApproval",
+    key: "partner-approval",
     icon: <Icon fontSize="small">business</Icon>,
     route: "/partner-approval",
     component: <PartnerApproval />,
   },
-
-  // {
-  //   type: "collapse",
-  //   name: "RTL",
-  //   key: "rtl",
-  //   icon: <Icon fontSize="small">format_textdirection_r_to_l</Icon>,
-  //   route: "/rtl",
-  //   component: <ProfileInfoCard />,
-  // },
   {
     type: "collapse",
     name: "Employee OnBoarding",
-    key: "employeesOnBoarding",
+    key: "employees-onboarding",
     icon: <Icon fontSize="small">group</Icon>,
-    route: "/employees",
+    route: "/employees-onboarding",
     component: <Employees />,
   },
   {
     type: "collapse",
-    name: " Employee Approval",
-    key: "emoloyeeApproval",
+    name: "Employee Approval",
+    key: "emoloyee-approval",
     icon: <Icon fontSize="small">group</Icon>,
-    route: "/requests",
+    route: "/emoloyee-approval",
     component: <Requests />,
   },
 
   {
     type: "collapse",
     name: " Employee Contract",
-    key: "employeeContract",
+    key: "employee-contract",
     icon: <Icon fontSize="small">person</Icon>,
     route: "/employee-contract",
     component: <EmployeeContract />,
@@ -142,7 +134,7 @@ const routes = [
   {
     type: "collapse",
     name: " Employee Contract Approval",
-    key: "employeeContractApproval",
+    key: "employee-contract-approval",
     icon: <Icon fontSize="small">person</Icon>,
     route: "/employee-contract-approval",
     component: <EmployeeContractApproval />,
@@ -151,7 +143,7 @@ const routes = [
   {
     type: "collapse",
     name: " Leave Request",
-    key: "leaveRequest",
+    key: "leave-requests",
     icon: <Icon fontSize="small">event</Icon>,
     route: "/leave-requests",
     component: <LeaveRequest />,
@@ -159,7 +151,7 @@ const routes = [
   {
     type: "collapse",
     name: " Leave Request Approval",
-    key: "leaveRequestApproval",
+    key: "leave-requests-approval",
     icon: <Icon fontSize="small">event</Icon>,
     route: "/leave-requests-approval",
     component: <LeaveRequestApproval />,
@@ -168,7 +160,7 @@ const routes = [
   {
     type: "collapse",
     name: "Change password",
-    key: "changepassword",
+    key: "change-password",
     icon: <Icon fontSize="small">vpn_key</Icon>,
     route: "/change-password",
     component: <ChangePassword />,

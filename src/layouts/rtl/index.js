@@ -51,6 +51,8 @@ function RTL() {
     return () => setDirection(dispatch, "ltr");
   }, []);
 
+  console.log("direction", useMaterialUIController());
+
   return (
     <DashboardLayout>
       <DashboardNavbar />

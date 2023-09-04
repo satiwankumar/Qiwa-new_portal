@@ -78,7 +78,12 @@ function MaterialUIControllerProvider({ children }) {
     transparentNavbar: true,
     fixedNavbar: true,
     openConfigurator: false,
-    direction: "ltr",
+    direction:
+      localStorage.getItem("selectedLanguage") == "en"
+        ? "ltr"
+        : localStorage.getItem("selectedLanguage") == "ar"
+        ? "rtl"
+        : "ltr",
     layout: "dashboard",
     darkMode: false,
   };

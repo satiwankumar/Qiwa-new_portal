@@ -17,8 +17,10 @@ import projectsTableData from "./data/projectsTableData";
 import { IconButton } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add"; //
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function Departments() {
+  const { t } = useTranslation();
   const { columns, rows } = authorsTableData();
   const { columns: pColumns, rows: pRows } = projectsTableData();
 
@@ -43,7 +45,7 @@ function Departments() {
                 justifyContent="space-between" // Add this line
               >
                 <MDTypography variant="h6" color="white">
-                  Department
+                  {t("Department")}
                 </MDTypography>
                 {/* Add button icon */}
                 <IconButton

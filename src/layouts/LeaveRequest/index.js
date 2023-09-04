@@ -17,9 +17,11 @@ import projectsTableData from "./data/projectsTableData";
 import IconButton from "@mui/material/IconButton";
 import AddIcon from "@mui/icons-material/Add"; //
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function LeaveRequest() {
   const { columns, rows } = authorsTableData();
+  const { t } = useTranslation();
   const { columns: pColumns, rows: pRows } = projectsTableData();
 
   return (
@@ -43,7 +45,7 @@ function LeaveRequest() {
                 justifyContent="space-between" // Add this line
               >
                 <MDTypography variant="h6" color="white">
-                  Leave Requests
+                  {t("Leave Requests")}
                 </MDTypography>
                 {/* Add button icon */}
                 <IconButton

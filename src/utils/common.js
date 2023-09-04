@@ -75,3 +75,12 @@ export const Currencies = [
   { value: "brl", label: "Brazilian Real (BRL)" },
   // Add more currencies with their respective codes as needed
 ];
+
+export const E2A = (s, lang) => {
+  if (lang == "ar") {
+    return s.replace(/\d/g, (d) => "٠١٢٣٤٥٦٧٨٩"[d]);
+  }
+  if (lang == "en") {
+    return s.replace(/\d/g, (d) => "0123456789"[d]);
+  }
+};
