@@ -67,6 +67,10 @@ import ViewEmployeeContract from "layouts/employeeContractApproval/ViewDetail";
 import LeaveRequestApproval from "layouts/LeaveRequestApproval/ViewDetail";
 
 import AddLeaveRequest from "layouts/LeaveRequest/addLeaveRequest";
+import AddProjectForm from "layouts/project/AddProjectForm";
+import ProjectApprovalRequest from "layouts/projectApproval/ViewDetail";
+import AddTimeSheetForm from "layouts/timeSheet/addTimeSheetForm";
+import TimeSheetApprovalRequest from "layouts/timeSheetApproval/ViewDetail";
 
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
@@ -228,11 +232,17 @@ export default function App() {
         <Route path="/add-leave-request" element={<AddLeaveRequest />} />
         <Route path="/edit-leave-request/1" element={<AddLeaveRequest />} />
         <Route path="/view-leave-request/:id" element={<LeaveRequestApproval />} />
+        <Route path="/edit-project/:id" element={<AddProjectForm />} />
+        <Route path="/add-project" element={<AddProjectForm />} />
+        <Route path="/project-approval-request" element={<ProjectApprovalRequest />} />
+        <Route path="/add-time-sheet" element={<AddTimeSheetForm />} />
+        <Route path="/edit-time-sheet/:id" element={<AddTimeSheetForm />} />
+        <Route path="/time-sheet-approval-request" element={<TimeSheetApprovalRequest />} />
 
         <Route path="*" element={<Navigate to="/sign-in" />} />
 
         {/* <Route path="*" element={<Navigate to="/dashboard" />} /> */}
       </Routes>
-    </ThemeProvider>
+    </ThemeProvider> 
   );
 }
