@@ -28,8 +28,11 @@ import team4 from "assets/images/team-4.jpg";
 import { Icon, IconButton, Tooltip } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
+import { useTranslation } from "react-i18next";
 
 export default function data() {
+  const { t } = useTranslation();
+
   const navigate = useNavigate();
   const Author = ({ image, name, email }) => (
     <MDBox display="flex" alignItems="center" lineHeight={1}>
@@ -54,17 +57,17 @@ export default function data() {
 
   return {
     columns: [
-      { Header: "Address", accessor: "address", align: "left" },
-      { Header: "Tax ID", accessor: "taxId", align: "left" },
-      { Header: "Company ID", accessor: "companyId", align: "left" },
-      { Header: "Currency", accessor: "currency", align: "left" },
-      { Header: "Phone", accessor: "phone", align: "left" },
-      { Header: "Mobile", accessor: "mobile", align: "left" },
-      { Header: "Email", accessor: "email", align: "left" },
-      { Header: "Website", accessor: "website", align: "left" },
-      { Header: "Parent Company", accessor: "parentCompany", align: "left" },
-      { Header: "Company Favicon", accessor: "companyFavicon", align: "left" },
-      { Header: "Actions", accessor: "action", align: "left" },
+      { Header: t("Address"), accessor: "address", align: "left" },
+      { Header: t("Tax ID"), accessor: "taxId", align: "left" },
+      { Header: t("Company ID"), accessor: "companyId", align: "left" },
+      { Header: t("Currency"), accessor: "currency", align: "left" },
+      { Header: t("Phone"), accessor: "phone", align: "left" },
+      { Header: t("Mobile"), accessor: "mobile", align: "left" },
+      { Header: t("Email"), accessor: "email", align: "left" },
+      { Header: t("Website"), accessor: "website", align: "left" },
+      { Header: t("Parent Company"), accessor: "parentCompany", align: "left" },
+      { Header: t("Company Favicon"), accessor: "companyFavicon", align: "left" },
+      { Header: t("Actions"), accessor: "action", align: "left" },
     ],
 
     rows: [

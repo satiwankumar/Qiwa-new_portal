@@ -17,10 +17,12 @@ import projectsTableData from "./data/projectsTableData";
 import IconButton from "@mui/material/IconButton";
 import AddIcon from "@mui/icons-material/Add"; //
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function Requests() {
   const { columns, rows } = authorsTableData();
   const { columns: pColumns, rows: pRows } = projectsTableData();
+  const { t } = useTranslation();
 
   return (
     <DashboardLayout>
@@ -43,7 +45,7 @@ function Requests() {
                 justifyContent="space-between" // Add this line
               >
                 <MDTypography variant="h6" color="white">
-                  Employee Approval
+                  {t("Employee Approval")}
                 </MDTypography>
               </MDBox>
               <MDBox pt={3}>

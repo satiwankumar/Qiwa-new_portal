@@ -14,10 +14,10 @@ Coded by www.creative-tim.com
 */
 
 import { useState, useEffect, useMemo } from "react";
-
+import { I18nextProvider } from "react-i18next";
+import i18n from "../src/hooks/useLocale/useLocale";
 // react-router components
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
-
 // @mui material components
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -72,6 +72,7 @@ import ProjectApprovalRequest from "layouts/projectApproval/ViewDetail";
 import AddTimeSheetForm from "layouts/timeSheet/addTimeSheetForm";
 import TimeSheetApprovalRequest from "layouts/timeSheetApproval/ViewDetail";
 
+import { LanguageProvider } from "../src/context/languageContext";
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
   const {
@@ -166,83 +167,114 @@ export default function App() {
   );
 
   return direction === "rtl" ? (
-    <CacheProvider value={rtlCache}>
-      <ThemeProvider theme={darkMode ? themeDarkRTL : themeRTL}>
-        <CssBaseline />
-        {layout === "dashboard" && (
-          <>
-            <Sidenav
-              color={sidenavColor}
-              brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-              brandName="Qiwa Portal"
-              routes={routes}
-              onMouseEnter={handleOnMouseEnter}
-              onMouseLeave={handleOnMouseLeave}
-            />
-            <Configurator />
-            {configsButton}
-          </>
-        )}
-        {layout === "vr" && <Configurator />}
-        <Routes>
-          {getRoutes(routes)}
-          <Route path="*" element={<Navigate to="/dashboard" />} />
-        </Routes>
-      </ThemeProvider>
-    </CacheProvider>
+    <LanguageProvider>
+      <I18nextProvider i18n={i18n}>
+        <CacheProvider value={rtlCache}>
+          <ThemeProvider theme={darkMode ? themeDarkRTL : themeRTL}>
+            <CssBaseline />
+            {layout === "dashboard" && (
+              <>
+                <Sidenav
+                  color={sidenavColor}
+                  brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
+                  brandName="Qiwa Portal"
+                  routes={routes}
+                  onMouseEnter={handleOnMouseEnter}
+                  onMouseLeave={handleOnMouseLeave}
+                />
+                <Configurator />
+                {configsButton}
+              </>
+            )}
+            {layout === "vr" && <Configurator />}
+            <Routes>
+              {getRoutes(routes)}
+
+              <Route path="/sign-in" element={<Signin />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/change-password" element={<ChangePassword />} />
+
+              <Route path="/otp" element={<OTP />} />
+              <Route path="/reset-password" element={<ResetPassword />} />
+              <Route path={"/add-organization"} element={<AddOrganization />} />
+              <Route path={"/edit-organization/:id"} element={<AddOrganization />} />
+              <Route path="/add-department" element={<AddDepartment />} />
+              <Route path="/edit-department/:id" element={<AddDepartment />} />
+              <Route path="/edit-employee/:id" element={<AddEmployees />} />
+              <Route path="/add-partner" element={<AddPartnerForm />} />
+              <Route path="/edit-partner/:id" element={<AddPartnerForm />} />
+              <Route path="/view-requests" element={<ViewRequestPage />} />
+              <Route path="/add-employees" element={<AddEmployees />} />
+              <Route path="/add-employee-contract" element={<EmployeeContractForm />} />
+              <Route path="/edit-employee-contract/:id" element={<EmployeeContractForm />} />
+              <Route path="/view-employee-contract/:id" element={<ViewEmployeeContract />} />
+              <Route path="/add-leave-request" element={<AddLeaveRequest />} />
+              <Route path="/edit-leave-request/1" element={<AddLeaveRequest />} />
+              <Route path="/view-leave-request/:id" element={<LeaveRequestApproval />} />
+
+              <Route path="*" element={<Navigate to="/sign-in" />} />
+            </Routes>
+          </ThemeProvider>
+        </CacheProvider>
+      </I18nextProvider>
+    </LanguageProvider>
   ) : (
-    <ThemeProvider theme={darkMode ? themeDark : theme}>
-      <CssBaseline />
-      {layout === "dashboard" && (
-        <>
-          <Sidenav
-            color={sidenavColor}
-            brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-            brandName="Qiwa Portal"
-            routes={routes}
-            onMouseEnter={handleOnMouseEnter}
-            onMouseLeave={handleOnMouseLeave}
-          />
-          <Configurator />
-          {configsButton}
-        </>
-      )}
-      {layout === "vr" && <Configurator />}
-      <Routes>
-        {getRoutes(routes)}
+    <LanguageProvider>
+      <I18nextProvider i18n={i18n}>
+        <ThemeProvider theme={darkMode ? themeDark : theme}>
+          <CssBaseline />
+          {layout === "dashboard" && (
+            <>
+              <Sidenav
+                color={sidenavColor}
+                brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
+                brandName="Qiwa Portal"
+                routes={routes}
+                onMouseEnter={handleOnMouseEnter}
+                onMouseLeave={handleOnMouseLeave}
+              />
+              <Configurator />
+              {configsButton}
+            </>
+          )}
+          {layout === "vr" && <Configurator />}
+          <Routes>
+            {getRoutes(routes)}
 
-        <Route path="/sign-in" element={<Signin />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/change-password" element={<ChangePassword />} />
+            <Route path="/sign-in" element={<Signin />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/change-password" element={<ChangePassword />} />
 
-        <Route path="/otp" element={<OTP />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
-        <Route path={"/add-organization"} element={<AddOrganization />} />
-        <Route path={"/edit-organization/:id"} element={<AddOrganization />} />
-        <Route path="/add-department" element={<AddDepartment />} />
-        <Route path="/edit-department/:id" element={<AddDepartment />} />
-        <Route path="/edit-employee/:id" element={<AddEmployees />} />
-        <Route path="/add-partner" element={<AddPartnerForm />} />
-        <Route path="/edit-partner/:id" element={<AddPartnerForm />} />
-        <Route path="/view-requests" element={<ViewRequestPage />} />
-        <Route path="/add-employees" element={<AddEmployees />} />
-        <Route path="/add-employee-contract" element={<EmployeeContractForm />} />
-        <Route path="/edit-employee-contract/:id" element={<EmployeeContractForm />} />
-        <Route path="/view-employee-contract/:id" element={<ViewEmployeeContract />} />
-        <Route path="/add-leave-request" element={<AddLeaveRequest />} />
-        <Route path="/edit-leave-request/1" element={<AddLeaveRequest />} />
-        <Route path="/view-leave-request/:id" element={<LeaveRequestApproval />} />
-        <Route path="/edit-project/:id" element={<AddProjectForm />} />
-        <Route path="/add-project" element={<AddProjectForm />} />
-        <Route path="/project-approval-request" element={<ProjectApprovalRequest />} />
-        <Route path="/add-time-sheet" element={<AddTimeSheetForm />} />
-        <Route path="/edit-time-sheet/:id" element={<AddTimeSheetForm />} />
-        <Route path="/time-sheet-approval-request" element={<TimeSheetApprovalRequest />} />
+            <Route path="/otp" element={<OTP />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path={"/add-organization"} element={<AddOrganization />} />
+            <Route path={"/edit-organization/:id"} element={<AddOrganization />} />
+            <Route path="/add-department" element={<AddDepartment />} />
+            <Route path="/edit-department/:id" element={<AddDepartment />} />
+            <Route path="/edit-employee/:id" element={<AddEmployees />} />
+            <Route path="/add-partner" element={<AddPartnerForm />} />
+            <Route path="/edit-partner/:id" element={<AddPartnerForm />} />
+            <Route path="/view-requests" element={<ViewRequestPage />} />
+            <Route path="/add-employees" element={<AddEmployees />} />
+            <Route path="/add-employee-contract" element={<EmployeeContractForm />} />
+            <Route path="/edit-employee-contract/:id" element={<EmployeeContractForm />} />
+            <Route path="/view-employee-contract/:id" element={<ViewEmployeeContract />} />
+            <Route path="/add-leave-request" element={<AddLeaveRequest />} />
+            <Route path="/edit-leave-request/1" element={<AddLeaveRequest />} />
+            <Route path="/view-leave-request/:id" element={<LeaveRequestApproval />} />
+            <Route path="/edit-project/:id" element={<AddProjectForm />} />
+            <Route path="/add-project" element={<AddProjectForm />} />
+            <Route path="/project-approval-request" element={<ProjectApprovalRequest />} />
+            <Route path="/add-time-sheet" element={<AddTimeSheetForm />} />
+            <Route path="/edit-time-sheet/:id" element={<AddTimeSheetForm />} />
+            <Route path="/time-sheet-approval-request" element={<TimeSheetApprovalRequest />} />
 
-        <Route path="*" element={<Navigate to="/sign-in" />} />
+            <Route path="*" element={<Navigate to="/sign-in" />} />
 
-        {/* <Route path="*" element={<Navigate to="/dashboard" />} /> */}
-      </Routes>
-    </ThemeProvider> 
+            {/* <Route path="*" element={<Navigate to="/dashboard" />} /> */}
+          </Routes>
+        </ThemeProvider>
+      </I18nextProvider>
+    </LanguageProvider>
   );
 }

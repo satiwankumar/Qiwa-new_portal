@@ -82,3 +82,12 @@ export const dummyProjectTask = [
   { value: "task4", label: "Task 4" },
   // Add more dummy employee names as needed
 ];
+
+export const E2A = (s, lang) => {
+  if (lang == "ar") {
+    return s.replace(/\d/g, (d) => "٠١٢٣٤٥٦٧٨٩"[d]);
+  }
+  if (lang == "en") {
+    return s.replace(/\d/g, (d) => "0123456789"[d]);
+  }
+};

@@ -30,17 +30,42 @@ import team3 from "assets/images/team-3.jpg";
 import team4 from "assets/images/team-4.jpg";
 import { IconButton, Tooltip } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import { useTranslation } from "react-i18next";
 export default function data() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   return {
     columns: [
-      { Header: "Employee Name", accessor: "employeeName", align: "left" },
-      { Header: "Start Date", accessor: "startDate", align: "left" },
-      { Header: "End Date", accessor: "endDate", align: "left" },
-      { Header: "Manager Name", accessor: "managerName", align: "left" },
-      { Header: "Leave Type", accessor: "leaveType", align: "left" },
-
-      { Header: "Action", accessor: "action", align: "left" },
+      {
+        Header: t("Employee Name"), // Translate "Employee Name"
+        accessor: "employeeName",
+        align: "left",
+      },
+      {
+        Header: t("Start Date"), // Translate "Start Date"
+        accessor: "startDate",
+        align: "left",
+      },
+      {
+        Header: t("End Date"), // Translate "End Date"
+        accessor: "endDate",
+        align: "left",
+      },
+      {
+        Header: t("Manager Name"), // Translate "Manager Name"
+        accessor: "managerName",
+        align: "left",
+      },
+      {
+        Header: t("Leave Type"), // Translate "Leave Type"
+        accessor: "leaveType",
+        align: "left",
+      },
+      {
+        Header: t("Action"), // Translate "Action"
+        accessor: "action",
+        align: "left",
+      },
     ],
 
     rows: [

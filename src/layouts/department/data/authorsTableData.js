@@ -29,17 +29,39 @@ import team3 from "assets/images/team-3.jpg";
 import team4 from "assets/images/team-4.jpg";
 import { IconButton, Tooltip } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
+import { useTranslation } from "react-i18next";
 
 export default function data() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return {
     columns: [
-      { Header: "Department Name", accessor: "departmentName", align: "left" },
-      { Header: "Manager", accessor: "manager", align: "left" },
-      { Header: "Parent Department", accessor: "parentDepartment", align: "left" },
-      { Header: "Company", accessor: "company", align: "left" },
-      { Header: "Actions", accessor: "action", align: "left" },
+      {
+        Header: t("Department Name"), // Translate "Department Name"
+        accessor: "departmentName",
+        align: "left",
+      },
+      {
+        Header: t("Manager"), // Translate "Manager"
+        accessor: "manager",
+        align: "left",
+      },
+      {
+        Header: t("Parent Department"), // Translate "Parent Department"
+        accessor: "parentDepartment",
+        align: "left",
+      },
+      {
+        Header: t("Company"), // Translate "Company"
+        accessor: "company",
+        align: "left",
+      },
+      {
+        Header: t("Actions"), // Translate "Actions"
+        accessor: "action",
+        align: "left",
+      },
     ],
 
     rows: [

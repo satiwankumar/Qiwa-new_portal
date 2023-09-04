@@ -38,6 +38,7 @@ import MDPagination from "components/MDPagination";
 // Material Dashboard 2 React example components
 import DataTableHeadCell from "examples/Tables/DataTable/DataTableHeadCell";
 import DataTableBodyCell from "examples/Tables/DataTable/DataTableBodyCell";
+import { useTranslation } from "react-i18next";
 
 function DataTable({
   entriesPerPage,
@@ -54,6 +55,7 @@ function DataTable({
     : ["5", "10", "15", "20", "25"];
   const columns = useMemo(() => table.columns, [table]);
   const data = useMemo(() => table.rows, [table]);
+  const { t } = useTranslation();
 
   const tableInstance = useTable(
     { columns, data, initialState: { pageIndex: 0 } },
@@ -163,7 +165,7 @@ function DataTable({
                 renderInput={(params) => <MDInput {...params} />}
               />
               <MDTypography variant="caption" color="secondary">
-                &nbsp;&nbsp;entries per page
+                &nbsp;&nbsp;{t("entries per page")}
               </MDTypography>
             </MDBox>
           )}
@@ -232,7 +234,8 @@ function DataTable({
         {showTotalEntries && (
           <MDBox mb={{ xs: 3, sm: 0 }}>
             <MDTypography variant="button" color="secondary" fontWeight="regular">
-              Showing {entriesStart} to {entriesEnd} of {rows.length} entries
+              {t("Showing")} {entriesStart} {t("to")} {entriesEnd} {t("of")} {rows.length}{" "}
+              {t("entries")}
             </MDTypography>
           </MDBox>
         )}

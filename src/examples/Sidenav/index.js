@@ -27,16 +27,24 @@ import {
   setWhiteSidenav,
 } from "context";
 import { Padding } from "@mui/icons-material";
+import { setDirection } from "context";
+import i18n from "hooks/useLocale/useLocale";
 
 function Sidenav({ color, brand, brandName, routes, ...rest }) {
   const [controller, dispatch] = useMaterialUIController();
-  const { miniSidenav, transparentSidenav, whiteSidenav, darkMode, sidenavColor } = controller;
+  const { miniSidenav, transparentSidenav, whiteSidenav, darkMode, sidenavColor, direction } =
+    controller;
   const location = useLocation();
   const collapseName = location.pathname.replace("/", "");
 
-  const [currentLanguage, setCurrentLanguage] = useState("en");
-  const handleChange = (language) => {
-    setCurrentLanguage(language);
+  const [currentLanguage, setCurrentLanguage] = useState("ltr");
+  const handleChange = (e) => {
+    console.log("keysdfsdfdsf", e.target);
+    let language = e.target.value == "rtl" ? "ar" : e.target.value == "ltr" ? "en" : "en";
+    setDirection(dispatch, e.target.value);
+    i18n.changeLanguage(language);
+    setCurrentLanguage(e.target.value);
+    localStorage.setItem("selectedLanguage", language);
   };
   const languages = [
     { value: "ltr", label: "en" },
@@ -129,6 +137,8 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
     return returnValue;
   });
 
+  console.log("direction", direction);
+
   return (
     <SidenavRoot
       {...rest}
@@ -165,13 +175,20 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
               {brandName}
             </MDTypography>
             <ToggleButtonGroup
-              style={{ background: "white", marginLeft: "10px" }}
+              style={{ marginLeft: "10px" }}
               exclusive
               value={currentLanguage}
               onChange={handleChange}
             >
               {languages.map((language) => (
-                <ToggleButton key={language.value} value={language.value}>
+                <ToggleButton
+                  key={language.value}
+                  value={language.value}
+                  style={{
+                    background: language.value === direction ? "blue" : "white",
+                    color: language.value === direction ? "white" : "black", // Optional: Adjust text color
+                  }}
+                >
                   {language.label}
                 </ToggleButton>
               ))}

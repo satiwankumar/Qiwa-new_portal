@@ -28,21 +28,63 @@ import team4 from "assets/images/team-4.jpg";
 import { IconButton, Tooltip } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function data() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   return {
     columns: [
-      { Header: "Partner Name", accessor: "partnerName", align: "left" },
-      { Header: "Address", accessor: "address", align: "left" },
-      { Header: "Tax ID", accessor: "taxId", align: "left" },
-      { Header: "Phone", accessor: "phone", align: "left" },
-      { Header: "Mobile", accessor: "mobile", align: "left" },
-      { Header: "Email", accessor: "email", align: "left" },
-      { Header: "Website", accessor: "website", align: "left" },
-      { Header: "Language", accessor: "language", align: "left" },
-      { Header: "Tags", accessor: "tags", align: "left" },
-      { Header: "Actions", accessor: "action", align: "left" },
+      {
+        Header: t("Partner Name"), // Translate "Partner Name"
+        accessor: "partnerName",
+        align: "left",
+      },
+      {
+        Header: t("Address"), // Translate "Address"
+        accessor: "address",
+        align: "left",
+      },
+      {
+        Header: t("Tax ID"), // Translate "Tax ID"
+        accessor: "taxId",
+        align: "left",
+      },
+      {
+        Header: t("Phone"), // Translate "Phone"
+        accessor: "phone",
+        align: "left",
+      },
+      {
+        Header: t("Mobile"), // Translate "Mobile"
+        accessor: "mobile",
+        align: "left",
+      },
+      {
+        Header: t("Email"), // Translate "Email"
+        accessor: "email",
+        align: "left",
+      },
+      {
+        Header: t("Website"), // Translate "Website"
+        accessor: "website",
+        align: "left",
+      },
+      {
+        Header: t("Language"), // Translate "Language"
+        accessor: "language",
+        align: "left",
+      },
+      {
+        Header: t("Tags"), // Translate "Tags"
+        accessor: "tags",
+        align: "left",
+      },
+      {
+        Header: t("Actions"), // Translate "Actions"
+        accessor: "action",
+        align: "left",
+      },
     ],
 
     rows: [

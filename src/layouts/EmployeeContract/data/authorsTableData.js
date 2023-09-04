@@ -24,20 +24,54 @@ import team4 from "assets/images/team-4.jpg";
 import { IconButton, Tooltip } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function ContractData() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return {
     columns: [
-      { Header: "Employee Id", accessor: "employeeID", align: "left" },
-      { Header: "Employee Name", accessor: "employeeName", align: "left" },
-      { Header: "Contract Name", accessor: "contractName", align: "left" },
-      { Header: "Start Date", accessor: "startDate", align: "left" },
-      { Header: "End Date", accessor: "endDate", align: "left" },
-      { Header: "Salary", accessor: "salary", align: "left" },
-      { Header: "Currency", accessor: "currency", align: "left" },
-      { Header: "Action", accessor: "action", align: "left" },
+      {
+        Header: t("Employee Id"), // Translate "Employee Id"
+        accessor: "employeeID",
+        align: "left",
+      },
+      {
+        Header: t("Employee Name"), // Translate "Employee Name"
+        accessor: "employeeName",
+        align: "left",
+      },
+      {
+        Header: t("Contract Name"), // Translate "Contract Name"
+        accessor: "contractName",
+        align: "left",
+      },
+      {
+        Header: t("Start Date"), // Translate "Start Date"
+        accessor: "startDate",
+        align: "left",
+      },
+      {
+        Header: t("End Date"), // Translate "End Date"
+        accessor: "endDate",
+        align: "left",
+      },
+      {
+        Header: t("Salary"), // Translate "Salary"
+        accessor: "salary",
+        align: "left",
+      },
+      {
+        Header: t("Currency"), // Translate "Currency"
+        accessor: "currency",
+        align: "left",
+      },
+      {
+        Header: t("Action"), // Translate "Action"
+        accessor: "action",
+        align: "left",
+      },
     ],
 
     rows: [
