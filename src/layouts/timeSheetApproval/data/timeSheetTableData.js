@@ -35,18 +35,23 @@ export default function data() {
   const navigate = useNavigate();
   return {
     columns: [
-      { Header: "Month", accessor: "month", align: "left" },
-      { Header: "Resource Name", accessor: "resourceName", align: "left" },
-      { Header: "Submission Date", accessor: "submissionDate", align: "left" },
+      { Header: "Project Task", accessor: "projectTask", align: "left" },
+      { Header: "Time Spent", accessor: "timeSpent", align: "left" },
+      { Header: "Time Unit", accessor: "timeUnit", align: "left" },
+      { Header: "Date Started", accessor: "dateStarted", align: "left" },
+      { Header: "Time Started", accessor: "timeStarted", align: "left" },
+      { Header: "Work Description", accessor: "description", align: "left" },
     ],
 
     rows: [
       {
-        month: 'Jan',
-        resourceName: "ABC Project",
-        submissionDate: "2023-08-22",
+        projectTask: "ABC Project",
+        timeSpent: "10 hours",
+        timeUnit: "10",
+        dateStarted: "2023-08-22",
+        timeStarted: "4:50:00",
+        description: "thank for regards",
       },
-      // Ad more rows here...
     ],
   };
 }

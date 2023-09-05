@@ -33,6 +33,7 @@ function DepartmentForm() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -48,6 +49,9 @@ function DepartmentForm() {
     return msg;
   };
 
+  const handleReset = () => {
+    reset();
+  };
   const onMenuOpen = () => setIsMenuOpen(true);
   const onMenuClose = () => setIsMenuOpen(false);
 
@@ -77,12 +81,18 @@ function DepartmentForm() {
                   {/* Department Name */}
                   <MDBox mb={2}>
                     <MDInput
-                      {...register("departmentName", { required: true })}
+                      {...register("departmentName", {
+                        required: "Department Name is required",
+                        maxLength: {
+                          value: 20,
+                          message: "Maximum length is 20 characters",
+                        },
+                      })}
                       label={t("Department Name*")}
                       fullWidth
                     />
                     {errors.departmentName && (
-                      <p className="error-message">{t("Department Name is required")}</p>
+                      <p className="error-message">{errors.departmentName.message}</p>
                     )}
                   </MDBox>
 
@@ -123,7 +133,8 @@ function DepartmentForm() {
                     <MDButton
                       variant="gradient"
                       color="error"
-                      type="reset"
+                      type="button"
+                      onClick={handleReset}
                       style={{ minWidth: "250px" }}
                     >
                       {t("Reset")}

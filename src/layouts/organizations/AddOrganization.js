@@ -33,6 +33,7 @@ function OrganizationForm() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -64,6 +65,10 @@ function OrganizationForm() {
     // Add more status options as needed
   ];
 
+  const handleReset = () => {
+    reset();
+  };
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -93,11 +98,11 @@ function OrganizationForm() {
                   {/* Tax ID */}
                   <MDBox mb={2}>
                     <MDInput
-                      {...register("taxId", { required: true })}
+                      {...register("taxId", { required: t("Tax ID is required") })}
                       label={t("Tax ID*")}
                       fullWidth
                     />
-                    {errors.taxId && <p className="error-message">{t("Tax ID is required")}</p>}
+                    {errors.taxId && <p className="error-message">{errors.taxId.message}</p>}
                   </MDBox>
 
                   {/* Company ID */}
@@ -125,33 +130,49 @@ function OrganizationForm() {
                   {/* Phone */}
                   <MDBox mb={2}>
                     <MDInput
-                      {...register("phone", { required: true })}
+                      {...register("phone", {
+                        required: t("Phone is required"),
+                        pattern: {
+                          value: /^[0-9]+$/,
+                          message: "Please enter a valid phone number with only numbers.",
+                        },
+                      })}
                       label={t("Phone*")}
                       fullWidth
                     />
-                    {errors.phone && <p className="error-message">{t("Phone is required")}</p>}
+                    {errors.phone && <p className="error-message">{errors.phone.message}</p>}
                   </MDBox>
 
                   {/* Mobile */}
                   <MDBox mb={2}>
                     <MDInput
-                      {...register("mobile", { required: true })}
+                      {...register("mobile", {
+                        required: t("Mobile is required"),
+                        pattern: {
+                          value: /^[0-9]+$/,
+                          message: "Please enter a valid phone number with only numbers.",
+                        },
+                      })}
                       label="Mobile*"
                       fullWidth
                     />
-                    {errors.mobile && <p className="error-message">{t("Mobile is required")}</p>}
+                    {errors.mobile && <p className="error-message">{errors.mobile.message}</p>}
                   </MDBox>
 
                   {/* Email */}
                   <MDBox mb={2}>
                     <MDInput
-                      {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
+                      {...register("email", {
+                        required: t("Valid email is required"),
+                        pattern: {
+                          value: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/i,
+                          message: "Please enter a valid email address.",
+                        },
+                      })}
                       label={t("Email*")}
                       fullWidth
                     />
-                    {errors.email && (
-                      <p className="error-message">{t("Valid email is required")}</p>
-                    )}
+                    {errors.email && <p className="error-message">{errors.email.message}</p>}
                   </MDBox>
 
                   {/* Website */}
@@ -221,7 +242,8 @@ function OrganizationForm() {
                     <MDButton
                       variant="gradient"
                       color="error"
-                      type="reset"
+                      type="button"
+                      onClick={handleReset}
                       style={{ minWidth: "250px" }}
                     >
                       {t("Reset")}

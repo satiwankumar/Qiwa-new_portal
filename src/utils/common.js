@@ -82,6 +82,10 @@ export const dummyProjectTask = [
   { value: "task4", label: "Task 4" },
   // Add more dummy employee names as needed
 ];
+export const dummyTimeUnit = [
+  { value: "halfDay", label: "Half Day" },
+  { value: "fullDay", label: "Full Day" },
+];
 
 export const E2A = (s, lang) => {
   if (lang == "ar") {

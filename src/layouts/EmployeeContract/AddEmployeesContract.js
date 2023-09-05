@@ -17,6 +17,7 @@ import { Currencies } from "utils/common";
 
 function EmployeeContractForm() {
   const location = useLocation();
+  const today = new Date().toISOString().split("T")[0];
 
   const [mode, setMode] = useState("add");
   const [active, setActive] = useState(true);
@@ -31,6 +32,7 @@ function EmployeeContractForm() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -38,6 +40,10 @@ function EmployeeContractForm() {
     console.log(data);
     // Here you can perform further actions like sending the data to an API
   };
+
+  const handleReset = () =>{
+    reset()
+  }
 
   return (
     <DashboardLayout>
@@ -69,12 +75,18 @@ function EmployeeContractForm() {
 
                   <MDBox mb={2}>
                     <MDInput
-                      {...register("contractName", { required: true })}
+                      {...register("contractName", {
+                        required: "Contract Name is required",
+                        maxLength: {
+                          value: 20,
+                          message: "Maximum length 20 characters",
+                        },
+                      })}
                       label="Contract Name*"
                       fullWidth
                     />
                     {errors.contractName && (
-                      <p className="error-message">{"Contract Name is required"}</p>
+                      <p className="error-message">{errors.contractName.message}</p>
                     )}
                   </MDBox>
 
@@ -83,9 +95,19 @@ function EmployeeContractForm() {
                     <InputLabel shrink={true} htmlFor="startDate">
                       Start Date*
                     </InputLabel>
-                    <MDInput {...register("startDate", { required: true })} type="date" fullWidth />
+                    <MDInput
+                      {...register("startDate", {
+                        required: "Start Date is required",
+                        max: {
+                          value: today,
+                          message: "Please select a date after today",
+                        },
+                      })}
+                      type="date"
+                      fullWidth
+                    />
                     {errors.startDate && (
-                      <p className="error-message">{"Start Date is required"}</p>
+                      <p className="error-message">{errors.startDate.message}</p>
                     )}
                   </MDBox>
 
@@ -94,18 +116,24 @@ function EmployeeContractForm() {
                     <InputLabel shrink={true} htmlFor="endDate">
                       End Date*
                     </InputLabel>
-                    <MDInput {...register("endDate", { required: true })} type="date" fullWidth />
-                    {errors.endDate && <p className="error-message">{"End Date is required"}</p>}
+                    <MDInput
+                      {...register("endDate", {
+                        required: "End Date is required",
+                      })}
+                      type="date"
+                      fullWidth
+                    />
+                    {errors.endDate && <p className="error-message">{errors.endDate.message}</p>}
                   </MDBox>
 
                   {/* Salary */}
                   <MDBox mb={2}>
                     <MDInput
-                      {...register("salary", { required: true })}
+                      {...register("salary", { required: "Salary is required" })}
                       label="Salary*"
                       fullWidth
                     />
-                    {errors.salary && <p className="error-message">{"Salary is required"}</p>}
+                    {errors.salary && <p className="error-message">{errors.salary.message}</p>}
                   </MDBox>
 
                   {/* Currency */}
@@ -140,7 +168,8 @@ function EmployeeContractForm() {
                       <MDButton
                         variant="gradient"
                         color="error"
-                        type="reset"
+                        type="button"
+                        onClick={handleReset}
                         style={{ minWidth: "250px" }}
                       >
                         Reset

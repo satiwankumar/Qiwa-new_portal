@@ -20,6 +20,7 @@ function AddLeaveRequest() {
   const { t } = useTranslation();
   const [mode, setMode] = useState("add");
   const [active, setActive] = useState(true);
+  const today = new Date().toISOString().split("T")[0];
 
   useEffect(() => {
     if (location.pathname.includes("edit-leave-request")) {
@@ -81,9 +82,19 @@ function AddLeaveRequest() {
                     <InputLabel shrink={true} htmlFor="startDate">
                       {t("Start Date*")}
                     </InputLabel>
-                    <MDInput {...register("startDate", { required: true })} type="date" fullWidth />
+                    <MDInput
+                      {...register("startDate", {
+                        required: "Start Date is required",
+                        max: {
+                          value: today,
+                          message:t("Start Date is required"),
+                        },
+                      })}
+                      type="date"
+                      fullWidth
+                    />
                     {errors.startDate && (
-                      <p className="error-message">{t("Start Date is required")}</p>
+                      <p className="error-message">{errors.startDate.message}</p>
                     )}
                   </MDBox>
 
@@ -92,8 +103,12 @@ function AddLeaveRequest() {
                     <InputLabel shrink={true} htmlFor="endDate">
                       {t("End Date*")}
                     </InputLabel>
-                    <MDInput {...register("endDate", { required: true })} type="date" fullWidth />
-                    {errors.endDate && <p className="error-message">{"End Date is required"}</p>}
+                    <MDInput
+                      {...register("endDate", { required: "End Date is required" })}
+                      type="date"
+                      fullWidth
+                    />
+                    {errors.endDate && <p className="error-message">{errors.endDate.message}</p>}
                   </MDBox>
 
                   {/* Manager Name */}
@@ -116,12 +131,18 @@ function AddLeaveRequest() {
 
                   <MDBox mb={2}>
                     <MDInput
-                      {...register("leaveReason", { required: true })}
+                      {...register("leaveReason", {
+                        required: t("Leave Reason is required"),
+                        minLength: {
+                          value: 50,
+                          message: "Minimun length is 50 characters",
+                        },
+                      })}
                       label={t("Leave Reason*")}
                       fullWidth
                     />
                     {errors.leaveReason && (
-                      <p className="error-message">{t("Leave Reason is required")}</p>
+                      <p className="error-message">{errors.leaveReason.message}</p>
                     )}
                   </MDBox>
                   {/* Leave Approval (Dropdown) */}
