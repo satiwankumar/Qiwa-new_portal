@@ -115,14 +115,7 @@ const SidebarRoutes = () => {
       route: "/leave-requests-approval",
       component: <LeaveRequestApproval />,
     },
-    {
-      type: "collapse",
-      name: t("Change password"),
-      key: "change-password",
-      icon: <Icon fontSize="small">vpn_key</Icon>,
-      route: "/change-password",
-      component: <ChangePassword />,
-    },
+
     {
       type: "collapse",
       name: t("Projects"),
@@ -134,7 +127,7 @@ const SidebarRoutes = () => {
     {
       type: "collapse",
       name: t("Project Approval"),
-      key: "projectApproval",
+      key: "project-approval",
       icon: <Icon fontSize="small">A</Icon>,
       route: "/project-approval",
       component: <ProjectApproval />,
@@ -142,7 +135,7 @@ const SidebarRoutes = () => {
     {
       type: "collapse",
       name: t("TIme Sheet"),
-      key: "TImesheet",
+      key: "time-sheet",
       icon: <Icon fontSize="small">A</Icon>,
       route: "/time-sheet",
       component: <TimeSheet />,
@@ -150,10 +143,18 @@ const SidebarRoutes = () => {
     {
       type: "collapse",
       name: t("Time Sheet Approval"),
-      key: "timeSheetApproval",
+      key: "time-sheet-approval",
       icon: <Icon fontSize="small">A</Icon>,
       route: "/time-sheet-approval",
       component: <TimeSheetApproval />,
+    },
+    {
+      type: "collapse",
+      name: t("Change password"),
+      key: "change-password",
+      icon: <Icon fontSize="small">vpn_key</Icon>,
+      route: "/change-password",
+      component: <ChangePassword />,
     },
   ];
 
