@@ -14,9 +14,11 @@ import { useLocation } from "react-router-dom";
 import { statuses } from "utils/common";
 import { dummyEmployeeNames } from "utils/common";
 import { companyNames } from "utils/common";
+import { useTranslation } from "react-i18next";
 
 function DepartmentForm() {
   const location = useLocation();
+  const { t } = useTranslation();
 
   const [mode, setMode] = useState("add");
   const [active, setActive] = useState(true);
@@ -67,7 +69,7 @@ function DepartmentForm() {
                 coloredShadow="info"
               >
                 <MDTypography variant="h6" color="white">
-                  {mode === "edit" ? "Edit Departments" : "Add Departments"}
+                  {mode === "edit" ? t("Edit Departments") : t("Add Departments")}
                 </MDTypography>
               </MDBox>
               <MDBox px={2} pt={6} pb={3}>
@@ -76,11 +78,11 @@ function DepartmentForm() {
                   <MDBox mb={2}>
                     <MDInput
                       {...register("departmentName", { required: true })}
-                      label="Department Name*"
+                      label={t("Department Name*")}
                       fullWidth
                     />
                     {errors.departmentName && (
-                      <p className="error-message">{"Department Name is required"}</p>
+                      <p className="error-message">{t("Department Name is required")}</p>
                     )}
                   </MDBox>
 
@@ -92,31 +94,21 @@ function DepartmentForm() {
                       fullWidth
                     /> */}
                     <MDBox mb={2}>
-                      <Select placeholder="Select Manager" options={dummyEmployeeNames} />
+                      <Select placeholder={t("Select Manager")} options={dummyEmployeeNames} />
                     </MDBox>
                     {/* {errors.manager && <p className="error-message">{"Manager is required"}</p>} */}
                   </MDBox>
 
-                  {/* Parent Department */}
-                  {/* <MDBox mb={2}>
-                    <MDInput
-                      {...register("parentDepartment")}
-                      label="Parent Department"
-                      fullWidth
-                    />
-                  </MDBox> */}
-
                   <MDBox mb={2}>
-                    <Select placeholder="Parent Department" options={companyNames} />
+                    <Select placeholder={t("Parent Department")} options={companyNames} />
                   </MDBox>
 
                   <MDBox mb={2}>
-                    <Select placeholder="Select Company" options={companyNames} />
+                    <Select placeholder={t("Select Company")} options={companyNames} />
                   </MDBox>
                   {mode === "edit" && (
                     <MDBox>
-                      {/* <Switch checked={active} onChange={() => setActive(!active)} /> */}
-                      <Select placeholder="Select Status" options={statuses} />
+                      <Select placeholder={t("Select Status")} options={statuses} />
                     </MDBox>
                   )}
                   <MDBox mt={2} display="flex" justifyContent="center">
@@ -126,7 +118,7 @@ function DepartmentForm() {
                       type="submit"
                       style={{ minWidth: "250px", marginRight: "4px" }}
                     >
-                      {mode === "edit" ? "Edit Department" : "Add Department"}
+                      {mode === "edit" ? t("Edit Department") : t("Add Department")}
                     </MDButton>
                     <MDButton
                       variant="gradient"
@@ -134,7 +126,7 @@ function DepartmentForm() {
                       type="reset"
                       style={{ minWidth: "250px" }}
                     >
-                      Reset
+                      {t("Reset")}
                     </MDButton>
                   </MDBox>
                 </form>

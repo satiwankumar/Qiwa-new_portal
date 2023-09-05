@@ -12,9 +12,11 @@ import { useLocation } from "react-router-dom";
 import Select from "react-select";
 import { statuses } from "utils/common";
 import { Languages } from "utils/common";
+import { useTranslation } from "react-i18next";
 
 function AddPartnerForm() {
   const location = useLocation();
+  const { t } = useTranslation();
 
   const [mode, setMode] = useState("add");
   const [active, setActive] = useState(true);
@@ -38,15 +40,15 @@ function AddPartnerForm() {
   };
 
   const columns = [
-    { Header: "Partner Name", accessor: "address", align: "left" },
-    { Header: "Address", accessor: "address", align: "left" },
-    { Header: "Tax ID", accessor: "taxId", align: "left" },
-    { Header: "Phone", accessor: "phone", align: "left" },
-    { Header: "Mobile", accessor: "mobile", align: "left" },
-    { Header: "Email", accessor: "email", align: "left" },
-    { Header: "Website", accessor: "website", align: "left" },
-    { Header: "Language", accessor: "language", align: "left" },
-    { Header: "Tags", accessor: "tags", align: "left" },
+    { Header: t("Partner Name"), accessor: "address", align: "left" },
+    { Header: t("Address"), accessor: "address", align: "left" },
+    { Header: t("Tax ID"), accessor: "taxId", align: "left" },
+    { Header: t("Phone"), accessor: "phone", align: "left" },
+    { Header: t("Mobile"), accessor: "mobile", align: "left" },
+    { Header: t("Email"), accessor: "email", align: "left" },
+    { Header: t("Website"), accessor: "website", align: "left" },
+    { Header: t("Language"), accessor: "language", align: "left" },
+    { Header: t("Tags"), accessor: "tags", align: "left" },
   ];
 
   return (
@@ -67,7 +69,7 @@ function AddPartnerForm() {
                 coloredShadow="info"
               >
                 <MDTypography variant="h6" color="white">
-                  {mode === "edit" ? "Edit Partner" : "Add Partner"}
+                  {mode === "edit" ? t("Edit Partner") : t("Add Partner")}
                 </MDTypography>
               </MDBox>
               <MDBox px={2} pt={6} pb={3}>
@@ -84,7 +86,9 @@ function AddPartnerForm() {
                             fullWidth
                           />
                           {errors[column.accessor] && (
-                            <p className="error-message">{`${column.Header} is required`}</p>
+                            <p className="error-message">{`${column.Header} ${t(
+                              "is required"
+                            )}`}</p>
                           )}
                         </>
                       )}
@@ -93,7 +97,7 @@ function AddPartnerForm() {
                   {mode === "edit" && (
                     <MDBox>
                       {/* <Switch checked={active} onChange={() => setActive(!active)} /> */}
-                      <Select placeholder="Select Status" options={statuses} />
+                      <Select placeholder={t("Select Status")} options={statuses} />
                     </MDBox>
                   )}
 
@@ -104,7 +108,7 @@ function AddPartnerForm() {
                       type="submit"
                       style={{ minWidth: "250px", marginRight: "4px" }}
                     >
-                      {mode === "edit" ? "Edit Partner" : "Add Partner"}
+                      {mode === "edit" ? t("Edit Partner") : t("Add Partner")}
                     </MDButton>
                     <MDButton
                       variant="gradient"
@@ -112,7 +116,7 @@ function AddPartnerForm() {
                       type="reset"
                       style={{ minWidth: "250px" }}
                     >
-                      Reset
+                      {t("Reset")}
                     </MDButton>
                   </MDBox>
                 </form>

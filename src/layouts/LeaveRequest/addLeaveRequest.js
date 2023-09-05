@@ -13,10 +13,11 @@ import Select from "react-select";
 import { useLocation } from "react-router-dom";
 import { statuses } from "utils/common";
 import { dummyLeaveTypes } from "utils/common";
+import { useTranslation } from "react-i18next";
 
 function AddLeaveRequest() {
   const location = useLocation();
-
+  const { t } = useTranslation();
   const [mode, setMode] = useState("add");
   const [active, setActive] = useState(true);
 
@@ -56,7 +57,7 @@ function AddLeaveRequest() {
                 coloredShadow="info"
               >
                 <MDTypography variant="h6" color="white">
-                  {mode === "edit" ? "Edit Leave Request" : "Add Leave Request"}
+                  {mode === "edit" ? t("Edit Leave Request") : t("Add Leave Request")}
                 </MDTypography>
               </MDBox>
               <MDBox px={2} pt={6} pb={3}>
@@ -71,25 +72,25 @@ function AddLeaveRequest() {
                       disabled
                     />
                     {errors.employeeName && (
-                      <p className="error-message">{"Employee Name is required"}</p>
+                      <p className="error-message">{t("Employee Name is required")}</p>
                     )}
                   </MDBox>
 
                   {/* Start Date */}
                   <MDBox mb={2}>
                     <InputLabel shrink={true} htmlFor="startDate">
-                      Start Date*
+                      {t("Start Date*")}
                     </InputLabel>
                     <MDInput {...register("startDate", { required: true })} type="date" fullWidth />
                     {errors.startDate && (
-                      <p className="error-message">{"Start Date is required"}</p>
+                      <p className="error-message">{t("Start Date is required")}</p>
                     )}
                   </MDBox>
 
                   {/* End Date */}
                   <MDBox mb={2}>
                     <InputLabel shrink={true} htmlFor="endDate">
-                      End Date*
+                      {t("End Date*")}
                     </InputLabel>
                     <MDInput {...register("endDate", { required: true })} type="date" fullWidth />
                     {errors.endDate && <p className="error-message">{"End Date is required"}</p>}
@@ -105,28 +106,28 @@ function AddLeaveRequest() {
                       fullWidth
                     />
                     {errors.managerName && (
-                      <p className="error-message">{"Manager Name is required"}</p>
+                      <p className="error-message">{t("Manager Name is required")}</p>
                     )}
                   </MDBox>
                   {/* Leave LEave Type (Dropdown) */}
                   <MDBox mb={2}>
-                    <Select placeholder="Select Leave Approval" options={dummyLeaveTypes} />
+                    <Select placeholder={t("Select Leave Approval")} options={dummyLeaveTypes} />
                   </MDBox>
 
                   <MDBox mb={2}>
                     <MDInput
                       {...register("leaveReason", { required: true })}
-                      label="Leave Reason*"
+                      label={t("Leave Reason*")}
                       fullWidth
                     />
                     {errors.leaveReason && (
-                      <p className="error-message">{"Leave Reason is required"}</p>
+                      <p className="error-message">{t("Leave Reason is required")}</p>
                     )}
                   </MDBox>
                   {/* Leave Approval (Dropdown) */}
                   <MDBox mb={2}>
                     <Select
-                      placeholder="Select Leave Approval"
+                      placeholder={t("Select Leave Approval")}
                       options={statuses}
                       // {...register("leaveApproval", { required: true })}
                     />
@@ -138,7 +139,7 @@ function AddLeaveRequest() {
                   {/* Action */}
                   <MDBox mt={2}>
                     <MDButton variant="gradient" color="info" type="submit" fullWidth>
-                      {mode === "edit" ? "Edit Leave" : "Add Leave"}
+                      {mode === "edit" ? t("Edit Leave") : t("Add Leave")}
                     </MDButton>
                   </MDBox>
                 </form>

@@ -17,7 +17,7 @@ import SidenavCollapse from "examples/Sidenav/SidenavCollapse";
 // Custom styles for the Sidenav
 import SidenavRoot from "examples/Sidenav/SidenavRoot";
 import sidenavLogoLabel from "examples/Sidenav/styles/sidenav";
-import { ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { Avatar, ToggleButton, ToggleButtonGroup } from "@mui/material";
 
 // Material Dashboard 2 React context
 import {
@@ -175,7 +175,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
               {brandName}
             </MDTypography>
             <ToggleButtonGroup
-              style={{ marginLeft: "10px" }}
+              style={{ margin: "18px", width: "20px", height: "15px" }}
               exclusive
               value={currentLanguage}
               onChange={handleChange}

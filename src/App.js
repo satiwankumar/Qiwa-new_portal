@@ -14,7 +14,7 @@ Coded by www.creative-tim.com
 */
 
 import { useState, useEffect, useMemo } from "react";
-import { I18nextProvider } from "react-i18next";
+import { I18nextProvider, useTranslation } from "react-i18next";
 import i18n from "../src/hooks/useLocale/useLocale";
 // react-router components
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
@@ -44,8 +44,7 @@ import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 
 // Material Dashboard 2 React routes
-import routes from "routes";
-
+import SidebarRoutes from "./routes";
 // Material Dashboard 2 React contexts
 import { useMaterialUIController, setMiniSidenav, setOpenConfigurator } from "context";
 
@@ -70,6 +69,8 @@ import AddLeaveRequest from "layouts/LeaveRequest/addLeaveRequest";
 import { LanguageProvider } from "../src/context/languageContext";
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
+  const { t } = useTranslation();
+  const routes = SidebarRoutes();
   const {
     miniSidenav,
     direction,
@@ -172,7 +173,7 @@ export default function App() {
                 <Sidenav
                   color={sidenavColor}
                   brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-                  brandName="Qiwa Portal"
+                  brandName={t("Qiwa Portal")}
                   routes={routes}
                   onMouseEnter={handleOnMouseEnter}
                   onMouseLeave={handleOnMouseLeave}
@@ -223,7 +224,7 @@ export default function App() {
               <Sidenav
                 color={sidenavColor}
                 brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-                brandName="Qiwa Portal"
+                brandName={t("Qiwa Portal")}
                 routes={routes}
                 onMouseEnter={handleOnMouseEnter}
                 onMouseLeave={handleOnMouseLeave}
