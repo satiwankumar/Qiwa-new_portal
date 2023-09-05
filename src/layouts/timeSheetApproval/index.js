@@ -17,7 +17,7 @@ import IconButton from "@mui/material/IconButton";
 import AddIcon from "@mui/icons-material/Add"; //
 import { Link } from "react-router-dom";
 
-function ProjectApproval() {
+function timeSheetApproval() {
     const { columns, rows } = authorsTableData();
 
   return (
@@ -62,5 +62,5 @@ function ProjectApproval() {
   );
 }
 
-export default ProjectApproval;
+export default timeSheetApproval;
  
