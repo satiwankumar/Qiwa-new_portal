@@ -10,28 +10,26 @@ import { Link } from "react-router-dom";
 import Select from "react-select";
 import { statuses } from "utils/common";
 import MDButton from "components/MDButton";
-
-const requestInfo = {
-  "Employee Id ": "EMP123",
-  "Employee Name ": "John Doe",
-  "Position ": "Software Engineer",
-  "Work Email ": "john.doe@example.com",
-  "Company ": "Example Corp",
-  "Department ": "Engineering",
-  "Manager ": "Jane Smith",
-};
-
-const socialLinks = [
-  { link: "#", icon: <Icon>facebook</Icon>, color: "facebook" },
-  { link: "#", icon: <Icon>twitter</Icon>, color: "twitter" },
-  { link: "#", icon: <Icon>linkedin</Icon>, color: "linkedin" },
-];
+import { useTranslation } from "react-i18next";
 
 const action = {
   route: "/edit-profile", // Replace with the actual route
   tooltip: "Edit Profile",
 };
 function ViewRequestPage() {
+  const { t } = useTranslation();
+  const requestInfo = {
+    [t("Employee Id")]: "EMP123",
+    [t("Employee Name")]: "John Doe",
+    [t("Position")]: "Software Engineer",
+    [t("Work Email")]: "john.doe@example.com",
+    [t("Company")]: "Example Corp",
+    [t("Department")]: "Engineering",
+    [t("Manager")]: "Jane Smith",
+  };
+
+  // Helper function to wrap keys in 't'
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -53,7 +51,7 @@ function ViewRequestPage() {
                 justifyContent="space-between"
               >
                 <MDTypography variant="h6" color="white">
-                  View Requests
+                  {t("View Requests")}
                 </MDTypography>
               </MDBox>
               <MDBox px={6} py={6} display="flex" flexWrap="wrap">
@@ -68,19 +66,19 @@ function ViewRequestPage() {
               <MDBox px={6} py={3} display="flex" flexDirection="column">
                 <MDBox mb={2}>
                   <Typography variant="h6" gutterBottom>
-                    Action*
+                    {t("Action*")}
                   </Typography>
-                  <Select placeholder="Select Action" options={statuses} />
+                  <Select placeholder={t("Select Action")} options={statuses} />
                 </MDBox>
 
                 <MDBox mb={2}>
                   <Typography variant="h6" gutterBottom>
-                    Remarks*
+                    {t("Remarks*")}
                   </Typography>
                   <TextareaAutosize
                     // {...register("remarks", { required: true })}
                     rowsMin={4}
-                    placeholder="Enter your  Remarks here..."
+                    placeholder={t("Enter your  Remarks here...")}
                     style={{
                       width: "100%",
                       border: "1px solid #ccc",
@@ -100,7 +98,7 @@ function ViewRequestPage() {
                       type="submit"
                       style={{ minWidth: "250px", marginRight: "4px" }}
                     >
-                      Submit
+                      {"Submit"}
                     </MDButton>
                     <MDButton
                       variant="gradient"
@@ -108,7 +106,7 @@ function ViewRequestPage() {
                       type="reset"
                       style={{ minWidth: "250px" }}
                     >
-                      Reset
+                      {"Reset"}
                     </MDButton>
                   </MDBox>
                 </MDBox>

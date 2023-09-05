@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 // react-router-dom components
 import { Link, Navigate, useNavigate } from "react-router-dom";
@@ -31,6 +31,7 @@ function Basic() {
   const { t } = useTranslation();
   const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -65,7 +66,7 @@ function Basic() {
           textAlign="center"
         >
           <MDTypography variant="h4" fontWeight="medium" color="white" mt={1}>
-            Sign in
+            {t("Sign in")}
           </MDTypography>
         </MDBox>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -74,26 +75,26 @@ function Basic() {
               <MDInput
                 {...register("email", { required: true })}
                 type="email"
-                label="Email*"
+                label={"Email*"}
                 name="email"
                 onChange={(e) => setEmail(e.target.value)}
                 fullWidth
               />
             </MDBox>
-            {errors.email && <p className="error-message">{"Email is required"}</p>}
+            {errors.email && <p className="error-message">{t("Email is required")}</p>}
 
             <MDBox mb={2}>
               <MDInput
                 type="password"
                 name="password"
-                label="Password*"
+                label={t("Password*")}
                 onChange={(e) => setPassword(e.target.value)}
                 fullWidth
                 {...register("password", {
                   required: true,
                 })}
               />
-              {errors.password && <p className="error-message">{"Password is required"}</p>}
+              {errors.password && <p className="error-message">{t("Password is required")}</p>}
             </MDBox>
             <MDBox display="flex" alignItems="center" ml={-1}>
               <Switch checked={rememberMe} onChange={handleSetRememberMe} />
@@ -104,7 +105,7 @@ function Basic() {
                 onClick={handleSetRememberMe}
                 sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
               >
-                &nbsp;&nbsp;Remember me
+                &nbsp;&nbsp;{t("Remember me")}
               </MDTypography>
             </MDBox>
             <MDBox mt={4} mb={1}>
@@ -115,7 +116,7 @@ function Basic() {
 
             <MDBox mt={3} mb={1} textAlign="center">
               <MDTypography variant="button" color="text">
-                Forgot your password?{" "}
+                {t("Forgot your password?")}{" "}
                 <MDTypography
                   component={Link}
                   to="/forgot-password"
@@ -124,7 +125,7 @@ function Basic() {
                   fontWeight="medium"
                   textGradient
                 >
-                  Forgot password
+                  {t("Forgot password")}
                 </MDTypography>
               </MDTypography>
             </MDBox>

@@ -14,9 +14,11 @@ import { useLocation } from "react-router-dom";
 import { statuses } from "utils/common";
 import { dummyEmployeeNames } from "utils/common";
 import { Currencies } from "utils/common";
+import { useTranslation } from "react-i18next";
 
 function EmployeeContractForm() {
   const location = useLocation();
+  const { t } = useTranslation();
 
   const [mode, setMode] = useState("add");
   const [active, setActive] = useState(true);
@@ -57,20 +59,20 @@ function EmployeeContractForm() {
                 coloredShadow="info"
               >
                 <MDTypography variant="h6" color="white">
-                  {mode === "edit" ? "Edit Employee Contract" : "Add Employee Contract"}
+                  {mode === "edit" ? t("Edit Employee Contract") : t("Add Employee Contract")}
                 </MDTypography>
               </MDBox>
               <MDBox px={2} pt={6} pb={3}>
                 <form onSubmit={handleSubmit(onSubmit)}>
                   {/* Employee Id */}
                   <MDBox mb={2}>
-                    <Select placeholder="Select Employee" options={dummyEmployeeNames} />
+                    <Select placeholder={t("Select Employee")} options={dummyEmployeeNames} />
                   </MDBox>
 
                   <MDBox mb={2}>
                     <MDInput
                       {...register("contractName", { required: true })}
-                      label="Contract Name*"
+                      label={t("Contract Name*")}
                       fullWidth
                     />
                     {errors.contractName && (
@@ -81,48 +83,50 @@ function EmployeeContractForm() {
                   {/* Start Date */}
                   <MDBox mb={2}>
                     <InputLabel shrink={true} htmlFor="startDate">
-                      Start Date*
+                      {t("Start Date*")}
                     </InputLabel>
                     <MDInput {...register("startDate", { required: true })} type="date" fullWidth />
                     {errors.startDate && (
-                      <p className="error-message">{"Start Date is required"}</p>
+                      <p className="error-message">{t("Start Date is required")}</p>
                     )}
                   </MDBox>
 
                   {/* End Date */}
                   <MDBox mb={2}>
                     <InputLabel shrink={true} htmlFor="endDate">
-                      End Date*
+                      {t("End Date*")}
                     </InputLabel>
                     <MDInput {...register("endDate", { required: true })} type="date" fullWidth />
-                    {errors.endDate && <p className="error-message">{"End Date is required"}</p>}
+                    {errors.endDate && <p className="error-message">{t("End Date is required")}</p>}
                   </MDBox>
 
                   {/* Salary */}
                   <MDBox mb={2}>
                     <MDInput
                       {...register("salary", { required: true })}
-                      label="Salary*"
+                      label={t("Salary*")}
                       fullWidth
                     />
-                    {errors.salary && <p className="error-message">{"Salary is required"}</p>}
+                    {errors.salary && <p className="error-message">{t("Salary is required")}</p>}
                   </MDBox>
 
                   {/* Currency */}
                   <MDBox mb={2}>
-                    <Select placeholder="Select Currency" options={Currencies} />
+                    <Select placeholder={t("Select Currency")} options={Currencies} />
 
                     {/* <MDInput
                       {...register("currency", { required: true })}
                       label="Currency*"
                       fullWidth
                     /> */}
-                    {errors.currency && <p className="error-message">{"Currency is required"}</p>}
+                    {errors.currency && (
+                      <p className="error-message">{t("Currency is required")}</p>
+                    )}
                   </MDBox>
                   {mode === "edit" && (
                     <MDBox>
                       {/* <Switch checked={active} onChange={() => setActive(!active)} /> */}
-                      <Select placeholder="Select Status" options={statuses} />
+                      <Select placeholder={t("Select Status")} options={statuses} />
                     </MDBox>
                   )}
 
@@ -135,7 +139,7 @@ function EmployeeContractForm() {
                         type="submit"
                         style={{ minWidth: "250px", marginRight: "4px" }}
                       >
-                        {mode === "edit" ? "Edit Contract" : "Add Contract"}
+                        {mode === "edit" ? t("Edit Contract") : t("Add Contract")}
                       </MDButton>
                       <MDButton
                         variant="gradient"
@@ -143,7 +147,7 @@ function EmployeeContractForm() {
                         type="reset"
                         style={{ minWidth: "250px" }}
                       >
-                        Reset
+                        {t("Reset")}
                       </MDButton>
                     </MDBox>
                   </MDBox>

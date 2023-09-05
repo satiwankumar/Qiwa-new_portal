@@ -52,7 +52,6 @@
   "Manager Name": "Manager Name",
   "Leave Type": "Leave Type",
   "Leave Request Approvals": "Leave Request Approvals",
-
   "1": "1",
   "2": "2",
   "3": "3",
@@ -99,7 +98,6 @@
   "Add Partner": "Add Partner",
   "Edit Partner": "Edit Partner",
   "is required": "is required",
-
   "Employee Name*": "Employee Name*",
   "Employee Name is required": "Employee Name is required",
   "Select Position*": "Select Position*",
@@ -107,17 +105,14 @@
   "Work Mobile": "Work Mobile",
   "Work Phone": "Work Phone",
   "Work Email*": "Work Email*",
-
   "Select Company*": "Select Company*",
   "Select Department*": "Select Department*",
   "Select Manager*": "Select Manager*",
   "Select Coaches*": "Select Coaches*",
-
   "Edit Employee": "Edit Employee",
   "Add Employee": "Add Employee",
   "Edit Leave Request": "Edit Leave Request",
   "Add Leave Request": "Add Leave Request",
-
   "Start Date*": "Start Date*",
   "Start Date is required": "Start Date is required",
   "End Date*": "End Date*",
@@ -131,5 +126,31 @@
   "Projects": "Projects",
   "Project Approval": "Project Approval",
   "Time Sheet": "Time Sheet",
-  "Time Sheet Approval": "Time Sheet Approval"
+  "Time Sheet Approval": "Time Sheet Approval",
+  "Edit Employee Contract": "Edit Employee Contract",
+  "Add Employee Contract": "Add Employee Contract",
+  "Select Employee": "Select Employee",
+  "Contract Name*": "Contract Name*",
+  "Salary*": "Salary*",
+  "Select Currency": "Select Currency",
+  "Currency is required": "Currency is required",
+  "Edit Contract": "Edit Contract",
+  "Add Contract": "Add Contract",
+  "Remarks": "Remarks",
+  "View Employee Contract": "View Employee Contract",
+
+  "Action*": "Action*",
+  "Remarks*": "Remarks*",
+  "Select Action": "Select Action",
+  "Enter your Remarks here...": "Enter your Remarks here...",
+
+  "Sign in": "Sign in",
+  "Password*": "Password*",
+  "Email is required": "Email is required",
+  "Password is required": "Password is required",
+  "Remember me": "Remember me",
+  "sign in": "Sign in",
+  "Forgot your password?": "Forgot your password?",
+  "Forgot password": "Forgot password",
+  "View Requests": "View Requests"
 }
