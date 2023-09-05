@@ -75,6 +75,13 @@ export const Currencies = [
   { value: "brl", label: "Brazilian Real (BRL)" },
   // Add more currencies with their respective codes as needed
 ];
+export const dummyProjectTask = [
+  { value: "task1", label: "Task 1" },
+  { value: "Task2", label: "Task 2" },
+  { value: "task3", label: "Task 3" },
+  { value: "task4", label: "Task 4" },
+  // Add more dummy employee names as needed
+];
 
 export const E2A = (s, lang) => {
   if (lang == "ar") {

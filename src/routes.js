@@ -18,6 +18,11 @@ import ChangePassword from "layouts/authentication/changePassword";
 import LeaveRequest from "layouts/LeaveRequest";
 import LeaveRequestApproval from "layouts/LeaveRequestApproval";
 import { useTranslation } from "react-i18next";
+import Projects from "layouts/project";
+import ProjectApproval from "layouts/projectApproval";
+import TimeSheet from "layouts/timeSheet";
+import TimeSheetApproval from "layouts/timeSheetApproval";
+import ProfileInfoCard from "examples/Cards/InfoCards/ProfileInfoCard";
 
 const SidebarRoutes = () => {
   const { t } = useTranslation();
@@ -117,6 +122,38 @@ const SidebarRoutes = () => {
       icon: <Icon fontSize="small">vpn_key</Icon>,
       route: "/change-password",
       component: <ChangePassword />,
+    },
+    {
+      type: "collapse",
+      name: t("Projects"),
+      key: "projects",
+      icon: <Icon fontSize="small">Web</Icon>,
+      route: "/projects",
+      component: <Projects />,
+    },
+    {
+      type: "collapse",
+      name: t("Project Approval"),
+      key: "projectApproval",
+      icon: <Icon fontSize="small">A</Icon>,
+      route: "/project-approval",
+      component: <ProjectApproval />,
+    },
+    {
+      type: "collapse",
+      name: t("TIme Sheet"),
+      key: "TImesheet",
+      icon: <Icon fontSize="small">A</Icon>,
+      route: "/time-sheet",
+      component: <TimeSheet />,
+    },
+    {
+      type: "collapse",
+      name: t("Time Sheet Approval"),
+      key: "timeSheetApproval",
+      icon: <Icon fontSize="small">A</Icon>,
+      route: "/time-sheet-approval",
+      component: <TimeSheetApproval />,
     },
   ];
 

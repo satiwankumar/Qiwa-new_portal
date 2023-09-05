@@ -127,5 +127,9 @@
   "Leave Reason*": "سبب الإجازة*",
   "Leave Reason is required": "سبب الإجازة مطلوب",
   "Edit Leave": "تحرير الإجازة",
-  "Add Leave": "إضافة الإجازة"
+  "Add Leave": "إضافة الإجازة",
+  "Projects": "المشاريع",
+  "Project Approval": "موافقة المشروع",
+  "Time Sheet": "ورقة الزمن",
+  "Time Sheet Approval": "موافقة ورقة الزمن"
 }
