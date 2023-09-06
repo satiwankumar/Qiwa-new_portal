@@ -134,7 +134,7 @@ const SidebarRoutes = () => {
     },
     {
       type: "collapse",
-      name: t("TIme Sheet"),
+      name: t("Time Sheet"),
       key: "time-sheet",
       icon: <Icon fontSize="small">A</Icon>,
       route: "/time-sheet",
