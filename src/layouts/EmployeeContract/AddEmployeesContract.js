@@ -14,10 +14,12 @@ import { useLocation } from "react-router-dom";
 import { statuses } from "utils/common";
 import { dummyEmployeeNames } from "utils/common";
 import { Currencies } from "utils/common";
+import { useTranslation } from "react-i18next";
 
 function EmployeeContractForm() {
   const location = useLocation();
   const today = new Date().toISOString().split("T")[0];
+  const { t } = useTranslation();
 
   const [mode, setMode] = useState("add");
   const [active, setActive] = useState(true);
@@ -63,14 +65,14 @@ function EmployeeContractForm() {
                 coloredShadow="info"
               >
                 <MDTypography variant="h6" color="white">
-                  {mode === "edit" ? "Edit Employee Contract" : "Add Employee Contract"}
+                  {mode === "edit" ? t("Edit Employee Contract") : t("Add Employee Contract")}
                 </MDTypography>
               </MDBox>
               <MDBox px={2} pt={6} pb={3}>
                 <form onSubmit={handleSubmit(onSubmit)}>
                   {/* Employee Id */}
                   <MDBox mb={2}>
-                    <Select placeholder="Select Employee" options={dummyEmployeeNames} />
+                    <Select placeholder={t("Select Employee")} options={dummyEmployeeNames} />
                   </MDBox>
 
                   <MDBox mb={2}>
@@ -82,7 +84,7 @@ function EmployeeContractForm() {
                           message: "Maximum length 20 characters",
                         },
                       })}
-                      label="Contract Name*"
+                      label={t("Contract Name*")}
                       fullWidth
                     />
                     {errors.contractName && (
@@ -93,7 +95,7 @@ function EmployeeContractForm() {
                   {/* Start Date */}
                   <MDBox mb={2}>
                     <InputLabel shrink={true} htmlFor="startDate">
-                      Start Date*
+                      {t("Start Date*")}
                     </InputLabel>
                     <MDInput
                       {...register("startDate", {
@@ -107,14 +109,14 @@ function EmployeeContractForm() {
                       fullWidth
                     />
                     {errors.startDate && (
-                      <p className="error-message">{errors.startDate.message}</p>
+                      <p className="error-message">{t("Start Date is required")}</p>
                     )}
                   </MDBox>
 
                   {/* End Date */}
                   <MDBox mb={2}>
                     <InputLabel shrink={true} htmlFor="endDate">
-                      End Date*
+                      {t("End Date*")}
                     </InputLabel>
                     <MDInput
                       {...register("endDate", {
@@ -123,7 +125,7 @@ function EmployeeContractForm() {
                       type="date"
                       fullWidth
                     />
-                    {errors.endDate && <p className="error-message">{errors.endDate.message}</p>}
+                    {errors.endDate && <p className="error-message">{t("End Date is required")}</p>}
                   </MDBox>
 
                   {/* Salary */}
@@ -133,24 +135,26 @@ function EmployeeContractForm() {
                       label="Salary*"
                       fullWidth
                     />
-                    {errors.salary && <p className="error-message">{errors.salary.message}</p>}
+                    {errors.salary && <p className="error-message">{t("Salary is required")}</p>}
                   </MDBox>
 
                   {/* Currency */}
                   <MDBox mb={2}>
-                    <Select placeholder="Select Currency" options={Currencies} />
+                    <Select placeholder={t("Select Currency")} options={Currencies} />
 
                     {/* <MDInput
                       {...register("currency", { required: true })}
                       label="Currency*"
                       fullWidth
                     /> */}
-                    {errors.currency && <p className="error-message">{"Currency is required"}</p>}
+                    {errors.currency && (
+                      <p className="error-message">{t("Currency is required")}</p>
+                    )}
                   </MDBox>
                   {mode === "edit" && (
                     <MDBox>
                       {/* <Switch checked={active} onChange={() => setActive(!active)} /> */}
-                      <Select placeholder="Select Status" options={statuses} />
+                      <Select placeholder={t("Select Status")} options={statuses} />
                     </MDBox>
                   )}
 
@@ -163,7 +167,7 @@ function EmployeeContractForm() {
                         type="submit"
                         style={{ minWidth: "250px", marginRight: "4px" }}
                       >
-                        {mode === "edit" ? "Edit Contract" : "Add Contract"}
+                        {mode === "edit" ? t("Edit Contract") : t("Add Contract")}
                       </MDButton>
                       <MDButton
                         variant="gradient"
@@ -172,7 +176,7 @@ function EmployeeContractForm() {
                         onClick={handleReset}
                         style={{ minWidth: "250px" }}
                       >
-                        Reset
+                        {t("Reset")}
                       </MDButton>
                     </MDBox>
                   </MDBox>

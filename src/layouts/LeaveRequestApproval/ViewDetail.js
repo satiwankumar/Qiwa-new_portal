@@ -12,17 +12,7 @@ import Select from "react-select";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import MDButton from "components/MDButton";
-
-const leaveRequestInfo = {
-  "Employee Name": "John Doe",
-  "Start Date": "2023-01-01",
-  "End Date": "2023-12-31",
-  "Manager Name": "John Walker",
-  "Leave Type": "Sick Leave",
-  "Leave Reason": "Feeling Ill",
-
-  // Add any other fields you need
-};
+import { useTranslation } from "react-i18next";
 
 const action = {
   route: "/edit-profile", // Replace with the actual route
@@ -35,6 +25,18 @@ function LeaveRequestApproval() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const { t } = useTranslation();
+  const leaveRequestInfo = {
+    [t("Employee Name")]: "John Doe",
+    [t("Start Date")]: "2023-01-01",
+    [t("End Date")]: "2023-12-31",
+    [t("Manager Name")]: "John Walker",
+    [t("Leave Type")]: "Sick Leave",
+    [t("Leave Reason")]: "Feeling Ill",
+
+    // Add any other fields you need
+  };
+
   const onSubmit = (data) => {
     console.log(data);
     // Success("Organization Added Successfully");
@@ -69,7 +71,7 @@ function LeaveRequestApproval() {
                 justifyContent="space-between"
               >
                 <MDTypography variant="h6" color="white">
-                  Leave Request Approval
+                  {t("Leave Request Approval")}
                 </MDTypography>
               </MDBox>
               <MDBox px={6} py={6} display="flex" flexWrap="wrap">
@@ -84,19 +86,19 @@ function LeaveRequestApproval() {
               <MDBox px={6} py={3} display="flex" flexDirection="column">
                 <MDBox mb={2}>
                   <Typography variant="h6" gutterBottom>
-                    Action*
+                    {t("Action*")}
                   </Typography>
-                  <Select placeholder="Select Action" options={statuses} />
+                  <Select placeholder={t("Select Action")} options={statuses} />
                 </MDBox>
 
                 <MDBox mb={2}>
                   <Typography variant="h6" gutterBottom>
-                    Remarks*
+                    {t("Remarks*")}
                   </Typography>
                   <TextareaAutosize
                     // {...register("remarks", { required: true })}
                     rowsMin={4}
-                    placeholder="Enter your  Remarks here..."
+                    placeholder={t("Enter your  Remarks here...")}
                     style={{
                       width: "100%",
                       border: "1px solid #ccc",
@@ -116,7 +118,7 @@ function LeaveRequestApproval() {
                       type="submit"
                       style={{ minWidth: "250px", marginRight: "4px" }}
                     >
-                      Submit
+                      {t("Submit")}
                     </MDButton>
                     <MDButton
                       variant="gradient"
@@ -124,7 +126,7 @@ function LeaveRequestApproval() {
                       type="reset"
                       style={{ minWidth: "250px" }}
                     >
-                      Reset
+                      {t("Reset")}
                     </MDButton>
                   </MDBox>
                 </MDBox>

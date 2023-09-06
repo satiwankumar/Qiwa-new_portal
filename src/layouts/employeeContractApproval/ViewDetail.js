@@ -10,23 +10,25 @@ import { Link } from "react-router-dom";
 import MDButton from "components/MDButton";
 import { statuses } from "utils/common";
 import Select from "react-select";
-
-const contractInfo = {
-  "Employee ID": "EMP123",
-  "Employee Name": "John Doe",
-  "Contract Name": "Software Engineer",
-  "Start Date": "2023-01-01",
-  "End Date": "2023-12-31",
-  "Salary ": "$80,000",
-  "Currency ": "USD",
-  // Add any other fields you need
-};
+import { useTranslation } from "react-i18next";
 
 const action = {
   route: "/edit-profile", // Replace with the actual route
   tooltip: "Edit Profile",
 };
 function ViewEmployeeContract() {
+  const { t } = useTranslation();
+  let contractInfo = {
+    [t("Employee ID")]: "EMP123",
+    [t("Employee Name")]: "John Doe",
+    [t("Contract Name")]: "Software Engineer",
+    [t("Start Date")]: "2023-01-01",
+    [t("End Date")]: "2023-12-31",
+    [t("Salary")]: "$80,000",
+    [t("Currency")]: "USD",
+    // Add any other fields you need
+  };
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -48,7 +50,7 @@ function ViewEmployeeContract() {
                 justifyContent="space-between"
               >
                 <MDTypography variant="h6" color="white">
-                  View Employee Contract
+                  {t("View Employee Contract")}
                 </MDTypography>
               </MDBox>
               <MDBox px={6} py={6} display="flex" flexWrap="wrap">
@@ -64,19 +66,19 @@ function ViewEmployeeContract() {
                 <MDBox mb={2}>
                   <MDBox mb={2}>
                     <Typography variant="h6" gutterBottom>
-                      Action*
+                      {t("Action")}
                     </Typography>
-                    <Select placeholder="Select Action" options={statuses} />
+                    <Select placeholder={t("Select Action")} options={statuses} />
                   </MDBox>
                 </MDBox>
                 <MDBox mb={2}>
                   <Typography variant="h6" gutterBottom>
-                    Remarks*
+                    {t("Remarks")}
                   </Typography>
                   <TextareaAutosize
                     // {...register("remarks", { required: true })}
                     rowsMin={4}
-                    placeholder="Enter your  Remarks here..."
+                    placeholder={t("Enter your  Remarks here...")}
                     style={{
                       width: "100%",
                       border: "1px solid #ccc",
@@ -96,7 +98,7 @@ function ViewEmployeeContract() {
                       type="submit"
                       style={{ minWidth: "250px", marginRight: "4px" }}
                     >
-                      Submit
+                      {t("Submit")}
                     </MDButton>
                     <MDButton
                       variant="gradient"
@@ -104,7 +106,7 @@ function ViewEmployeeContract() {
                       type="reset"
                       style={{ minWidth: "250px" }}
                     >
-                      Reset
+                      {t("Reset")}
                     </MDButton>
                   </MDBox>
                 </MDBox>
