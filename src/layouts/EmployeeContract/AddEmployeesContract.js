@@ -15,10 +15,13 @@ import { statuses } from "utils/common";
 import { dummyEmployeeNames } from "utils/common";
 import { Currencies } from "utils/common";
 import { useTranslation } from "react-i18next";
+import { useMaterialUIController } from "context";
 
 function EmployeeContractForm() {
   const location = useLocation();
   const { t } = useTranslation();
+  const [controller, dispatch] = useMaterialUIController();
+  const { direction } = controller;
 
   const [mode, setMode] = useState("add");
   const [active, setActive] = useState(true);
@@ -85,7 +88,12 @@ function EmployeeContractForm() {
                     <InputLabel shrink={true} htmlFor="startDate">
                       {t("Start Date*")}
                     </InputLabel>
-                    <MDInput {...register("startDate", { required: true })} type="date" fullWidth />
+                    <MDInput
+                      {...register("startDate", { required: true })}
+                      id="startDateInput"
+                      type="date"
+                      fullWidth
+                    />
                     {errors.startDate && (
                       <p className="error-message">{t("Start Date is required")}</p>
                     )}
