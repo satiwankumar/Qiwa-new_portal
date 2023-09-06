@@ -12,8 +12,10 @@ import { useLocation } from "react-router-dom";
 import Select from "react-select";
 import { statuses } from "utils/common";
 import { Languages } from "utils/common";
+import { useTranslation } from "react-i18next";
 
 function AddProjectForm() {
+  const { t } = useTranslation();
   const location = useLocation();
   const [mode, setMode] = useState("add");
   const [active, setActive] = useState(true);
@@ -42,9 +44,9 @@ function AddProjectForm() {
   };
 
   const columns = [
-    { Header: "Project Name", accessor: "projectName", align: "left" },
-    { Header: "Start Date", accessor: "startDate", align: "left" },
-    { Header: "Hours", accessor: "hours", align: "left" },
+    { Header: t("Project Name"), accessor: "projectName", align: "left" },
+    { Header: t("Start Date"), accessor: "startDate", align: "left" },
+    { Header: t("Hours"), accessor: "hours", align: "left" },
   ];
 
   return (
@@ -65,21 +67,21 @@ function AddProjectForm() {
                 coloredShadow="info"
               >
                 <MDTypography variant="h6" color="white">
-                  {mode === "edit" ? "Edit Project" : "Add Project"}
+                  {mode === "edit" ? t("Edit Project") : t("Add Project")}
                 </MDTypography>
               </MDBox>
               <MDBox px={2} pt={6} pb={3}>
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <MDBox mb={2}>
                     <InputLabel shrink={true} htmlFor="dateStarted">
-                      Project Name*
+                      {t("Project Name*")}
                     </InputLabel>
                     <MDInput
                       {...register("projectName", {
-                        required: "Project Name field is required",
+                        required: t("Project Name field is required"),
                         maxLength: {
                           value: 50,
-                          message: "Maximum length is 50 characters",
+                          message: t("Maximum length is 50 characters"),
                         },
                       })}
                       type="text"
@@ -91,14 +93,14 @@ function AddProjectForm() {
                   )}
                   <MDBox mb={2}>
                     <InputLabel shrink={true} htmlFor="dateStarted">
-                      Start Date*
+                      {t("Start Date*")}
                     </InputLabel>
                     <MDInput
                       {...register("startDate", {
-                        required: "Start Date field is required",
+                        required: t("Start Date field is required"),
                         max: {
-                          value: new Date().toISOString().split("T")[0], 
-                          message: "Please select a date before today",
+                          value: new Date().toISOString().split("T")[0],
+                          message: t("Please select a date before today"),
                         },
                       })}
                       type="date"
@@ -110,10 +112,10 @@ function AddProjectForm() {
                   </MDBox>
                   <MDBox mb={2}>
                     <InputLabel shrink={true} htmlFor="dateStarted">
-                      Hours*
+                      {t("Hours*")}
                     </InputLabel>
                     <MDInput
-                      {...register("hours", { required: "Hours field is required" })}
+                      {...register("hours", { required: t("Hours field is required") })}
                       type="text"
                       fullWidth
                     />
@@ -126,7 +128,7 @@ function AddProjectForm() {
                       type="submit"
                       style={{ minWidth: "250px", marginRight: "4px" }}
                     >
-                      {mode === "edit" ? "Edit Project" : "Add Project"}
+                      {mode === "edit" ? t("Edit Project") : t("Add Project")}
                     </MDButton>
                     <MDButton
                       variant="gradient"
@@ -135,7 +137,7 @@ function AddProjectForm() {
                       onClick={handleReset}
                       style={{ minWidth: "250px" }}
                     >
-                      Reset
+                      {t("Reset")}
                     </MDButton>
                   </MDBox>
                 </form>

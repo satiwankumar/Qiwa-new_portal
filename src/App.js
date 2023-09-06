@@ -212,6 +212,12 @@ export default function App() {
               <Route path="/add-leave-request" element={<AddLeaveRequest />} />
               <Route path="/edit-leave-request/1" element={<AddLeaveRequest />} />
               <Route path="/view-leave-request/:id" element={<LeaveRequestApproval />} />
+              <Route path="/add-project" element={<AddProjectForm />} />
+              <Route path="/edit-project/:id" element={<AddProjectForm />} />
+              <Route path="/add-time-sheet" element={<AddTimeSheetForm />} />
+              <Route path="/edit-time-sheet/:id" element={<AddTimeSheetForm />} />
+              <Route path="/project-approval-request" element={<ProjectApprovalRequest />} />
+              <Route path="/time-sheet-approval-request" element={<TimeSheetApprovalRequest />} />
 
               <Route path="*" element={<Navigate to="/sign-in" />} />
             </Routes>

@@ -11,11 +11,13 @@ import Footer from "examples/Footer";
 import { useLocation } from "react-router-dom";
 import Select from "react-select";
 import { dummyProjectTask, dummyTimeUnit } from "utils/common";
+import { useTranslation } from "react-i18next";
 
 function AddTimeSheetForm() {
   const location = useLocation();
   const [mode, setMode] = useState("add");
   const [active, setActive] = useState(true);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (location.pathname.includes("edit-time-sheet")) {
@@ -59,23 +61,23 @@ function AddTimeSheetForm() {
                 coloredShadow="info"
               >
                 <MDTypography variant="h6" color="white">
-                  {mode === "edit" ? "Edit Project" : "Add Project"}
+                  {mode === "edit" ? t("Edit Project") : t("Add Project")}
                 </MDTypography>
               </MDBox>
               <MDBox px={2} pt={6} pb={3}>
                 <form onSubmit={handleSubmit(onSubmit)}>
                   {/* Employee Id */}
                   <MDBox mb={2}>
-                    <InputLabel shrink={true}>Task / Project*</InputLabel>
+                    <InputLabel shrink={true}>{t("Task / Project*")}</InputLabel>
                     <Controller
                       name="task"
                       control={control}
                       defaultValue={""}
-                      rules={{ required: "Task is required" }}
+                      rules={{ required: t("Task is required") }}
                       render={({ field }) => (
                         <Select
                           {...field}
-                          placeholder="Select Project Task"
+                          placeholder={t("Select Project Task")}
                           options={dummyProjectTask}
                         />
                       )}
@@ -83,23 +85,29 @@ function AddTimeSheetForm() {
                     {errors.task && <p className="error-message">{errors.task.message}</p>}
                   </MDBox>
                   <MDBox mb={2}>
-                    <InputLabel shrink={true}>TIme / Unit*</InputLabel>
+                    <InputLabel shrink={true}>{t("Time / Unit*")}</InputLabel>
                     <Controller
                       name="time_unit"
                       control={control}
                       defaultValue={""}
-                      rules={{ required: "Time Unit is required" }}
+                      rules={{ required: t("Time Unit is required") }}
                       render={({ field }) => (
-                        <Select {...field} placeholder="Select Time Unit" options={dummyTimeUnit} />
+                        <Select
+                          {...field}
+                          placeholder={t("Select Time Unit")}
+                          options={dummyTimeUnit}
+                        />
                       )}
                     />
-                    {errors.task && <p className="error-message">{errors.task.message}</p>}
+                    {errors.time_unit && (
+                      <p className="error-message">{errors.time_unit.message}</p>
+                    )}
                   </MDBox>
 
                   <MDBox mb={2}>
-                    <InputLabel shrink={true}>Time Spent*</InputLabel>
+                    <InputLabel shrink={true}>{t("Time Spent*")}</InputLabel>
                     <MDInput
-                      {...register("timeSpent", { required: "Contract Name is required" })}
+                      {...register("timeSpent", { required: t("Contract Name is required") })}
                       fullWidth
                     />
                     {errors.timeSpent && (
@@ -109,13 +117,13 @@ function AddTimeSheetForm() {
 
                   {/* Start Date */}
                   <MDBox mb={2}>
-                    <InputLabel shrink={true}>Date Started*</InputLabel>
+                    <InputLabel shrink={true}>{t("Date Started*")}</InputLabel>
                     <MDInput
                       {...register("dateStarted", {
-                        required: "Date Started field is required",
+                        required: t("Date Started field is required"),
                         max: {
                           value: new Date().toISOString().split("T")[0],
-                          message: "Please select a date before today",
+                          message: t("Please select a date before today"),
                         },
                       })}
                       type="date"
@@ -128,9 +136,11 @@ function AddTimeSheetForm() {
 
                   {/* End Date */}
                   <MDBox mb={2}>
-                    <InputLabel shrink={true}>Time Started*</InputLabel>
+                    <InputLabel shrink={true}>{t("Time Started*")}</InputLabel>
                     <MDInput
-                      {...register("timeStarted", { required: "Time Strated field is required" })}
+                      {...register("timeStarted", {
+                        required: t("Time Strated field is required"),
+                      })}
                       type="time"
                       fullWidth
                     />
@@ -141,21 +151,17 @@ function AddTimeSheetForm() {
 
                   {/* Salary */}
                   <MDBox mb={2}>
-                    <InputLabel shrink={true}>Description*</InputLabel>
+                    <InputLabel shrink={true}>{t("Description*")}</InputLabel>
                     <TextareaAutosize
                       {...register("description", {
-                        required: "This is required field",
+                        required: t("This is required field"),
                         minLength: {
                           value: 100,
-                          message: "Minimum length is 100 characters",
-                        },
-                        maxLength: {
-                          value: 500,
-                          message: "Maximum length is 500 characters",
+                          message: t("Minimum length is 100 characters"),
                         },
                       })}
                       rowsMin={4}
-                      placeholder="Description"
+                      placeholder={t("Description")}
                       style={{
                         width: "100%",
                         border: "1px solid #ccc",
@@ -177,7 +183,7 @@ function AddTimeSheetForm() {
                         type="submit"
                         style={{ minWidth: "250px", marginRight: "4px" }}
                       >
-                        {mode === "edit" ? "Edit Time Sheet" : "Add Time Sheet"}
+                        {mode === "edit" ? t("Edit Time Sheet") : t("Add Time Sheet")}
                       </MDButton>
                       <MDButton
                         variant="gradient"
@@ -186,7 +192,7 @@ function AddTimeSheetForm() {
                         onClick={handleReset}
                         style={{ minWidth: "250px" }}
                       >
-                        Reset
+                        {t("Reset")}
                       </MDButton>
                     </MDBox>
                   </MDBox>

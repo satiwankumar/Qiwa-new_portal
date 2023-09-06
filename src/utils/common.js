@@ -86,6 +86,12 @@ export const dummyTimeUnit = [
   { value: "halfDay", label: "Half Day" },
   { value: "fullDay", label: "Full Day" },
 ];
+export const phoneNumbers = [
+  { value: "+92", label: "+92" },
+  { value: "+95", label: "+95" },
+  { value: "+72", label: "+72" },
+  { value: "+10", label: "+10" },
+];
 
 export const E2A = (s, lang) => {
   if (lang == "ar") {

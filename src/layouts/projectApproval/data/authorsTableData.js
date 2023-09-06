@@ -30,14 +30,16 @@ import team3 from "assets/images/team-3.jpg";
 import team4 from "assets/images/team-4.jpg";
 import { IconButton } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import { useTranslation } from "react-i18next";
 export default function data() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   return {
     columns: [
-      { Header: "Project Name", accessor: "projectName", align: "left" },
-      { Header: "Start Date", accessor: "startDate", align: "left" },
-      { Header: "Hours", accessor: "hours", align: "left" },
-      { Header: "Actions", accessor: "action", align: "left" },
+      { Header: t("Project Name"), accessor: "projectName", align: "left" },
+      { Header: t("Start Date"), accessor: "startDate", align: "left" },
+      { Header: t("Hours"), accessor: "hours", align: "left" },
+      { Header: t("Actions"), accessor: "action", align: "left" },
     ],
 
     rows: [

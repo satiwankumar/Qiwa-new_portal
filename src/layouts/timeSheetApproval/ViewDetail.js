@@ -13,7 +13,7 @@ import Select from "react-select";
 
 const contractInfo = {
   "Total Hours": "40 hours",
-  "Total Day": "12",
+  "Total Days": "12",
 };
 
 const action = {
@@ -30,8 +30,10 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import timeSheetTableData from "./data/timeSheetTableData";
 import DataTable from "examples/Tables/DataTable";
+import { useTranslation } from "react-i18next";
 
 function TimeSheetApprovalRequest() {
+  const { t } = useTranslation();
   const { columns, rows } = timeSheetTableData();
 
   return (
@@ -55,21 +57,21 @@ function TimeSheetApprovalRequest() {
                 justifyContent="space-between"
               >
                 <MDTypography variant="h6" color="white">
-                  Project Approval Request
+                  {t("Time Sheet Approval Request")}
                 </MDTypography>
               </MDBox>
               <MDBox px={6} py={6} display="flex" flexWrap="wrap">
                 {Object.entries(contractInfo).map(([key, value]) => (
                   <MDBox key={key} flexBasis="33.33%" px={3} py={2}>
                     <MDTypography variant="subtitle1">
-                      <strong>{key}:</strong> {value}
+                      <strong>{t(key)}:</strong> {value}
                     </MDTypography>
                   </MDBox>
                 ))}
               </MDBox>
               <MDBox px={6} py={3} display="flex" flexDirection="column">
                 <MDBox pt={3}>
-                  <DataTable 
+                  <DataTable
                     table={{ columns, rows }}
                     isSorted={false}
                     entriesPerPage={true}
@@ -85,7 +87,7 @@ function TimeSheetApprovalRequest() {
                       type="submit"
                       style={{ minWidth: "250px", marginRight: "4px" }}
                     >
-                      Submit
+                      {t("Submit")}
                     </MDButton>
                     <MDButton
                       variant="gradient"
@@ -93,7 +95,7 @@ function TimeSheetApprovalRequest() {
                       type="reset"
                       style={{ minWidth: "250px" }}
                     >
-                      Cancel
+                      {t("Cancel")}
                     </MDButton>
                   </MDBox>
                 </MDBox>

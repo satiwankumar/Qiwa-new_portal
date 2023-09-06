@@ -28,37 +28,38 @@ import team4 from "assets/images/team-4.jpg";
 import { IconButton } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
-import EditIcon from "@mui/icons-material/Edit";
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function data() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   return {
     columns: [
-      { Header: "Month", accessor: "month", align: "left" },
-      { Header: "Resource Name", accessor: "resourceName", align: "left" },
-      { Header: "Submission Date", accessor: "submissionDate", align: "left" },
-      { Header: "Actions", accessor: "action", align: "left" },
+      { Header: t("Month"), accessor: "month", align: "left" },
+      { Header: t("Resource Name"), accessor: "resourceName", align: "left" },
+      { Header: t("Submission Date"), accessor: "submissionDate", align: "left" },
+      { Header: t("Actions"), accessor: "action", align: "left" },
     ],
 
     rows: [
       {
-        month: 'Jan',
+        month: "Jan",
         resourceName: "ABC Project",
         submissionDate: "2023-08-22",
         action: (
           <>
-           <MDBox>
-            <IconButton
-              color="primary"
-              size="small"
-              onClick={() => {
-                navigate("/time-sheet-approval-request");
-              }}
-            >
-              <VisibilityIcon />
-            </IconButton>
-          </MDBox>
+            <MDBox>
+              <IconButton
+                color="primary"
+                size="small"
+                onClick={() => {
+                  navigate("/time-sheet-approval-request");
+                }}
+              >
+                <VisibilityIcon />
+              </IconButton>
+            </MDBox>
           </>
         ),
       },

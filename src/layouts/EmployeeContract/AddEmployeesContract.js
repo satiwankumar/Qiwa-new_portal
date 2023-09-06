@@ -41,9 +41,9 @@ function EmployeeContractForm() {
     // Here you can perform further actions like sending the data to an API
   };
 
-  const handleReset = () =>{
-    reset()
-  }
+  const handleReset = () => {
+    reset();
+  };
 
   return (
     <DashboardLayout>

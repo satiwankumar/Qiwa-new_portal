@@ -16,9 +16,11 @@ import authorsTableData from "./data/authorsTableData";
 import IconButton from "@mui/material/IconButton";
 import AddIcon from "@mui/icons-material/Add"; //
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function timeSheetApproval() {
-    const { columns, rows } = authorsTableData();
+  const { columns, rows } = authorsTableData();
+  const { t } = useTranslation();
 
   return (
     <DashboardLayout>
@@ -41,7 +43,7 @@ function timeSheetApproval() {
                 justifyContent="space-between" // Add this line
               >
                 <MDTypography variant="h6" color="white">
-                  Time Sheet Approval
+                  {t("Time Sheet Approval")}
                 </MDTypography>
               </MDBox>
               <MDBox pt={3}>
@@ -63,4 +65,3 @@ function timeSheetApproval() {
 }
 
 export default timeSheetApproval;
- 

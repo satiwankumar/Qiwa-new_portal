@@ -1,0 +1,14 @@
+.number{
+padding: 5px ;
+border: 1px solid #cccccc !important;
+border-radius: 5px;
+}
+.number, input{
+    width: 100% !important;
+    border: none;
+    height: 2.8375em;
+    color: #495057;
+}
+.number, input:focus{
+outline: none !important;
+}

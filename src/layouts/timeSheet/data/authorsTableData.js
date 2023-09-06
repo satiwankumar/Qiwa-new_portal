@@ -29,18 +29,20 @@ import { IconButton, Tooltip } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function data() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   return {
     columns: [
-      { Header: "Project Task", accessor: "projectTask", align: "left" },
-      { Header: "Time Spent", accessor: "timeSpent", align: "left" },
-      { Header: "Time Unit", accessor: "timeUnit", align: "left" },
-      { Header: "Date Started", accessor: "dateStarted", align: "left" },
-      { Header: "Time Started", accessor: "timeStarted", align: "left" },
-      { Header: "Work Description", accessor: "workDescription", align: "left" },
-      { Header: "Actions", accessor: "action", align: "left" },
+      { Header: t("Project Task"), accessor: "projectTask", align: "left" },
+      { Header: t("Time Spent"), accessor: "timeSpent", align: "left" },
+      { Header: t("Time Unit"), accessor: "timeUnit", align: "left" },
+      { Header: t("Date Started"), accessor: "dateStarted", align: "left" },
+      { Header: t("Time Started"), accessor: "timeStarted", align: "left" },
+      { Header: t("Work Description"), accessor: "workDescription", align: "left" },
+      { Header: t("Actions"), accessor: "action", align: "left" },
     ],
 
     rows: [

@@ -28,15 +28,17 @@ import team4 from "assets/images/team-4.jpg";
 import { IconButton, Tooltip } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function data() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   return {
     columns: [
-      { Header: "Project Name", accessor: "projectName", align: "left" },
-      { Header: "Start Date", accessor: "startDate", align: "left" },
-      { Header: "Hours", accessor: "hours", align: "left" },
-      { Header: "Actions", accessor: "action", align: "left" },
+      { Header: t("Project Name"), accessor: "projectName", align: "left" },
+      { Header: t("Start Date"), accessor: "startDate", align: "left" },
+      { Header: t("Hours"), accessor: "hours", align: "left" },
+      { Header: t("Actions"), accessor: "action", align: "left" },
     ],
 
     rows: [

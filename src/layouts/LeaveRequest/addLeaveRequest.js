@@ -87,7 +87,7 @@ function AddLeaveRequest() {
                         required: "Start Date is required",
                         max: {
                           value: today,
-                          message:t("Start Date is required"),
+                          message: t("Start Date is required"),
                         },
                       })}
                       type="date"

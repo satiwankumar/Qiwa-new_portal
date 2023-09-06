@@ -45,8 +45,8 @@ function EmployeeForm() {
   };
 
   const handleReset = () => {
-    reset()
-  }
+    reset();
+  };
 
   return (
     <DashboardLayout>
