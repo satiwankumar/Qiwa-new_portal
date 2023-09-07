@@ -3,6 +3,7 @@
   "Dashboard": "Dashboard",
   "Departments": "Departments",
   "Partners onBoarding": "Partners onBoarding",
+  "PartnersonBoarding": "Partners onBoarding",
   "Employee Contract Approval": "Employee Contract Approval",
   "Leave Request": "Leave Request",
   "Leave Request Approval": "Leave Request Approval",
@@ -125,6 +126,8 @@
   "Add Leave": "Add Leave",
   "Projects": "Projects",
   "Project Approval": "Project Approval",
+  "Projectapproval": "Project Approval",
+
   "Time Sheet": "Time Sheet",
   "Time Sheet Approval": "Time Sheet Approval",
   "Edit Employee Contract": "Edit Employee Contract",
@@ -142,7 +145,7 @@
   "Action*": "Action*",
   "Remarks*": "Remarks*",
   "Select Action": "Select Action",
-  "Enter your Remarks here...": "Enter your Remarks here...",
+  "Enter your Remarks here": "Enter your Remarks here",
 
   "Sign in": "Sign in",
   "Password*": "Password*",

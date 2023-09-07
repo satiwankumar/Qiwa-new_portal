@@ -98,7 +98,7 @@ function LeaveRequestApproval() {
                   <TextareaAutosize
                     // {...register("remarks", { required: true })}
                     rowsMin={4}
-                    placeholder={t("Enter your  Remarks here...")}
+                    placeholder={t("Enter your Remarks here")}
                     style={{
                       width: "100%",
                       border: "1px solid #ccc",

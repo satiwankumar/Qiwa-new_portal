@@ -27,11 +27,13 @@ import Icon from "@mui/material/Icon";
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import { useTranslation } from "react-i18next";
-
+import { Dashboard } from "@mui/icons-material";
+import { capitalizeFirstLetter } from "../../utils/common";
 function Breadcrumbs({ icon, title, route, light }) {
   const routes = route.slice(0, -1);
   const { t } = useTranslation();
 
+  console.log("title", title);
   return (
     <MDBox mr={{ xs: 0, xl: 8 }}>
       <MuiBreadcrumbs
@@ -49,7 +51,7 @@ function Breadcrumbs({ icon, title, route, light }) {
             opacity={light ? 0.8 : 0.5}
             sx={{ lineHeight: 0 }}
           >
-            <Icon>{icon}</Icon>
+            <Icon>{title}</Icon>
           </MDTypography>
         </Link>
         {routes.map((el) => (
@@ -74,7 +76,7 @@ function Breadcrumbs({ icon, title, route, light }) {
           color={light ? "white" : "dark"}
           sx={{ lineHeight: 0 }}
         >
-          {title.replace("-", " ")}
+          {t(capitalizeFirstLetter(title.replace(/-/g, "")))}
         </MDTypography>
       </MuiBreadcrumbs>
       <MDTypography
@@ -84,7 +86,7 @@ function Breadcrumbs({ icon, title, route, light }) {
         color={light ? "white" : "dark"}
         noWrap
       >
-        {title.replace("-", " ")}
+        {t(capitalizeFirstLetter(title.replace(/-/g, "")))}
       </MDTypography>
     </MDBox>
   );
