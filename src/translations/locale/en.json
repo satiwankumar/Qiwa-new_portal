@@ -156,5 +156,10 @@
   "Forgot your password?": "Forgot your password?",
   "Forgot password": "Forgot password",
   "View Requests": "View Requests",
-  "Leave Reason": "Leave Reason"
+  "Leave Reason": "Leave Reason",
+
+  "Check in": "Check in",
+  "Check out": "Check out",
+  "Search here": "Search here",
+  "Time": "Time"
 }

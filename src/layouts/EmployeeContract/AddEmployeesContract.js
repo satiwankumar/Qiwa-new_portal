@@ -16,6 +16,10 @@ import { dummyEmployeeNames } from "utils/common";
 import { Currencies } from "utils/common";
 import { useTranslation } from "react-i18next";
 import { useMaterialUIController } from "context";
+import CustomDatePicker from "customComponents/datePicker";
+import arLocale from "date-fns/locale/ar-SA"; // Import the Arabic locale
+import enLocale from "date-fns/locale/en-US";
+import PropTypes from "prop-types";
 
 function EmployeeContractForm() {
   const location = useLocation();
@@ -25,6 +29,11 @@ function EmployeeContractForm() {
 
   const [mode, setMode] = useState("add");
   const [active, setActive] = useState(true);
+  const [selectedDate, setSelectedDate] = useState(null);
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
 
   useEffect(() => {
     if (location.pathname.includes("edit-employee-contract")) {
@@ -92,8 +101,14 @@ function EmployeeContractForm() {
                       {...register("startDate", { required: true })}
                       id="startDateInput"
                       type="date"
+                      locale={arLocale}
                       fullWidth
                     />
+                    {/* <CustomDatePicker
+                      selected={selectedDate}
+                      onChange={handleDateChange}
+                      locale={direction == "ltr" ? "en-US" : "ar-SA"}
+                    /> */}
                     {errors.startDate && (
                       <p className="error-message">{t("Start Date is required")}</p>
                     )}

@@ -54,8 +54,10 @@ import {
 } from "context";
 import MDButton from "components/MDButton";
 import { Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 function DashboardNavbar({ absolute, light, isMini }) {
+  const { t } = useTranslation();
   const [navbarType, setNavbarType] = useState();
   const [controller, dispatch] = useMaterialUIController();
   const { miniSidenav, transparentNavbar, fixedNavbar, openConfigurator, darkMode } = controller;
@@ -172,10 +174,14 @@ function DashboardNavbar({ absolute, light, isMini }) {
         {isMini ? null : (
           <MDBox sx={(theme) => navbarRow(theme, { isMini })}>
             <MDBox pr={1}>
-              <MDInput label="Search here" />
+              <MDInput label={t("Search here")} />
             </MDBox>
             <MDBox pr={1}>
-              {isCheckedIn && <Typography>Time :{formatTimeElapsed()}</Typography>}
+              {isCheckedIn && (
+                <Typography>
+                  {t("Time")} :{formatTimeElapsed()}
+                </Typography>
+              )}
             </MDBox>
 
             <MDBox color={light ? "white" : "inherit"}>
@@ -190,7 +196,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
                   }}
                   onClick={isCheckedIn ? handleCheckOut : handleCheckIn}
                 >
-                  {!isCheckedIn ? "Check in" : "Check out "}
+                  {!isCheckedIn ? t("Check in") : t("Check out")}
                 </MDButton>
                 {/* <Typography>Checked In at: {checkInTime.toLocaleTimeString()}</Typography> */}
 

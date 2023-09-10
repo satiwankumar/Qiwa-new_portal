@@ -174,5 +174,10 @@
   "Forgot your password?": "هل نسيت كلمة المرور؟",
   "Forgot password": "نسيت كلمة المرور",
   "View Requests": "عرض الطلبات",
-  "Leave Reason": "سبب الإجازة"
+  "Leave Reason": "سبب الإجازة",
+
+  "Check in": "تسجيل الدخول",
+  "Check out": "الخروج",
+  "Search here": "ابحث هنا",
+  "Time": "الوقت"
 }
