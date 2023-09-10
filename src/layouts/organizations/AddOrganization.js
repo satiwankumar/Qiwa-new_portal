@@ -16,7 +16,7 @@ import PhoneInput from "react-phone-number-input";
 import { companyNames } from "utils/common";
 import { Currencies } from "utils/common";
 import { useTranslation } from "react-i18next";
-import  './organization.css'
+import "./organization.css";
 import "react-phone-number-input/style.css";
 const styles = (theme) => ({
   field: {
@@ -26,8 +26,6 @@ const styles = (theme) => ({
     ...theme.typography.body1,
   },
 });
-
-
 
 function OrganizationForm() {
   const location = useLocation();
@@ -151,7 +149,7 @@ function OrganizationForm() {
                       value={value}
                       onChange={setValue}
                       className="number"
-international
+                      international
                     />
 
                     {/* <div

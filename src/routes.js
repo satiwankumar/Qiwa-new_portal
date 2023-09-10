@@ -23,6 +23,7 @@ import ProjectApproval from "layouts/projectApproval";
 import TimeSheet from "layouts/timeSheet";
 import TimeSheetApproval from "layouts/timeSheetApproval";
 import ProfileInfoCard from "examples/Cards/InfoCards/ProfileInfoCard";
+import RightAssignment from "layouts/rightAssignment";
 
 const SidebarRoutes = () => {
   const { t } = useTranslation();
@@ -155,6 +156,14 @@ const SidebarRoutes = () => {
       icon: <Icon fontSize="small">vpn_key</Icon>,
       route: "/change-password",
       component: <ChangePassword />,
+    },
+    {
+      type: "collapse",
+      name: t("Right Assignment"),
+      key: "right-assignment",
+      icon: <Icon fontSize="small">assignment_turned_ind</Icon>,
+      route: "/right-assignment",
+      component: <RightAssignment />,
     },
   ];
 
