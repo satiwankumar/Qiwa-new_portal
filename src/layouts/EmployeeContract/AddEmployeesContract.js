@@ -52,6 +52,7 @@ function EmployeeContractForm() {
     console.log(data);
     // Here you can perform further actions like sending the data to an API
   };
+  console.log("directionPArent", direction);
 
   return (
     <DashboardLayout>
@@ -97,18 +98,12 @@ function EmployeeContractForm() {
                     <InputLabel shrink={true} htmlFor="startDate">
                       {t("Start Date*")}
                     </InputLabel>
-                    <MDInput
-                      {...register("startDate", { required: true })}
-                      id="startDateInput"
-                      type="date"
-                      locale={arLocale}
-                      fullWidth
-                    />
-                    {/* <CustomDatePicker
+
+                    <CustomDatePicker
                       selected={selectedDate}
                       onChange={handleDateChange}
-                      locale={direction == "ltr" ? "en-US" : "ar-SA"}
-                    /> */}
+                      direction={direction == "rtl" ? "ar-SA" : "en-US"}
+                    />
                     {errors.startDate && (
                       <p className="error-message">{t("Start Date is required")}</p>
                     )}
@@ -119,7 +114,12 @@ function EmployeeContractForm() {
                     <InputLabel shrink={true} htmlFor="endDate">
                       {t("End Date*")}
                     </InputLabel>
-                    <MDInput {...register("endDate", { required: true })} type="date" fullWidth />
+                    {/* <MDInput {...register("endDate", { required: true })} type="date" fullWidth /> */}
+                    <CustomDatePicker
+                      selected={selectedDate}
+                      onChange={handleDateChange}
+                      direction={direction == "rtl" ? "ar-SA" : "en-US"}
+                    />
                     {errors.endDate && <p className="error-message">{t("End Date is required")}</p>}
                   </MDBox>
 

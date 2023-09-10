@@ -1,31 +1,50 @@
-import React from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { registerLocale } from "react-datepicker";
-import arLocale from "date-fns/locale/ar-SA"; // Import the Arabic locale
-import enLocale from "date-fns/locale/en-US"; // Import the English locale
+import React, { useEffect, useState } from "react";
+import dayjs from "dayjs";
+import "dayjs/locale/ar"; // Import the Arabic locale for Day.js
+import "dayjs/locale/en"; // Import the English locale for Day.js
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DateField } from "@mui/x-date-pickers/DateField";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
+// Set the locale for Day.js to Arabic
 
-// Register both Arabic and English locales
-registerLocale("ar-SA", arLocale);
-registerLocale("en-US", enLocale);
+function CustomDatePicker({ direction }) {
+  // Determine the locale and format based on the direction
+  const [locale, setLocale] = useState("en-US");
+  const { t } = useTranslation();
 
-const CustomDatePicker = ({ selectedDate, onDateChange, locale }) => {
+  useEffect(() => {
+    // Update dayjs locale whenever the direction prop changes
+    if (direction === "ar-SA") {
+      console.log("trueAR");
+      dayjs.locale("ar");
+    } else {
+      console.log("trueEN");
+
+      dayjs.locale("en");
+    }
+  }, [direction]);
+  console.log("direction", direction);
+  const dateFormat = direction === "ar-SA" ? "YYYY/MM/DD" : "MM/DD/YYYY";
   return (
-    <DatePicker
-      selected={selectedDate}
-      onChange={onDateChange}
-      dateFormat="dd/MM/yyyy" // Customize date format as needed
-      locale={locale} // Set the locale based on the 'locale' prop
-      calendarClassName="arabic-calendar" // Add a class for Arabic styling if needed
-    />
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <DemoContainer components={["DatePicker"]}>
+        <DatePicker
+          label={t("Date Picker")}
+          format={dateFormat}
+          // onChange={(newValue) => setValue(newValue)}
+          locale={direction}
+        />
+      </DemoContainer>
+    </LocalizationProvider>
   );
-};
+}
 
 CustomDatePicker.propTypes = {
-  selectedDate: PropTypes.instanceOf(Date), // Require selectedDate to be a Date object
-  onDateChange: PropTypes.func.isRequired, // Require onDateChange to be a function
-  locale: PropTypes.string.isRequired, // Pass the locale as a prop ('en-US' or 'ar-SA')
+  direction: PropTypes.string.isRequired, // Example prop validation for 'isRTL' prop
 };
 
 export default CustomDatePicker;
