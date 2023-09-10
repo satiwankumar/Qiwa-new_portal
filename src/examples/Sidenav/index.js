@@ -18,6 +18,7 @@ import SidenavCollapse from "examples/Sidenav/SidenavCollapse";
 import SidenavRoot from "examples/Sidenav/SidenavRoot";
 import sidenavLogoLabel from "examples/Sidenav/styles/sidenav";
 import { Avatar, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import logo from "./../../assets/images/logos/logo.png";
 
 // Material Dashboard 2 React context
 import {
@@ -159,8 +160,13 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
             <Icon sx={{ fontWeight: "bold" }}>close</Icon>
           </MDTypography>
         </MDBox>
-        <MDBox display="flex" alignItems="center">
-          {brand && <MDBox component="img" src={brand} alt="Brand" width="2rem" />}
+        <MDBox display="flex" flexDirection="column" alignItems="left">
+          <MDBox
+            width={!brandName && "100%"}
+            sx={(theme) => sidenavLogoLabel(theme, { miniSidenav })}
+          >
+            {brand && <MDBox component="img" src={logo} alt="Brand" width="10rem" />}
+          </MDBox>
           <MDBox
             width={!brandName && "100%"}
             sx={(theme) => sidenavLogoLabel(theme, { miniSidenav })}

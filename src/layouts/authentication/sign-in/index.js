@@ -75,7 +75,7 @@ function Basic() {
               <MDInput
                 {...register("email", { required: true })}
                 type="email"
-                label={"Email*"}
+                label={t("Email*")}
                 name="email"
                 onChange={(e) => setEmail(e.target.value)}
                 fullWidth

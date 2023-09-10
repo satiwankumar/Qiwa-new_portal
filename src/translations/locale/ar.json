@@ -1,11 +1,19 @@
 {
   "Qiwa Portal": "بوابة قوى",
   "Dashboard": "لوحة القيادة",
+  "dashboard": "لوحة القيادة",
   "Departments": "الأقسام",
   "Partners onBoarding": "شركاء العمل",
+
+  "PartnersonBoarding": "شركاء العمل",
+
   "Employee Contract Approval": "موافقة عقد الموظف",
+  "Employeecontractapproval": "موافقة عقد الموظف",
+
   "Leave Request": "طلب إجازة",
   "Leave Request Approval": "موافقة طلب الإجازة",
+  "Leaverequestsapproval": "موافقة طلب الإجازة",
+
   "Change password": "تغيير كلمة المرور",
   "Organizations": "المنظمات",
   "Projects OnBoarding": "المشاريع على متن الطائرة",
@@ -30,10 +38,14 @@
   "Language": "اللغة",
   "Tags": "الوسوم",
   "Partner Approval": "موافقة الشريك",
+  "Partnerapproval": "موافقة الشريك",
+
   "Employee ID": "رقم الموظف",
   "Employee Name": "اسم الموظف",
 
   "Employee OnBoarding": "استقبال الموظفين",
+  "Employeesonboarding": "استقبال الموظفين",
+
   "Employee Id": "رقم الموظف",
   "Contract Name": "اسم العقد",
   "Start Date": "تاريخ البدء",
@@ -41,7 +53,7 @@
   "Salary": "الراتب",
   "Action": "الإجراء",
   "Employee Contract Approvals": "موافقات عقود الموظفين",
-
+  "Employeecontract-Approval": "موافقات عقود الموظفين",
   "Change Password": "تغيير كلمة المرور",
   "Current password*": "كلمة المرور الحالية*",
   "New Password*": "كلمة المرور الجديدة*",
@@ -52,7 +64,11 @@
   "Submit": "إرسال",
   "Reset": "إعادة تعيين",
   "Employee Contract": "عقد الموظف",
+  "Employeecontract": "عقد الموظف",
+
   "Leave Requests": "طلبات الإجازة",
+  "Leaverequests": "طلبات الإجازة",
+
   "Manager Name": "اسم المدير",
   "Leave Type": "نوع الإجازة",
   "Leave Request Approvals": "موافقات طلبات الإجازة",
@@ -68,6 +84,8 @@
   "8": "٨",
   "9": "٩",
   "Employee Approval": "موافقة الموظف",
+  "Emoloyeeapproval": "موافقة الموظف",
+
   "entries per page": "عناصر في الصفحة",
   "Showing": "عرض",
   "to": "إلى",
@@ -190,7 +208,7 @@
   "View Employee Contract": "عرض عقد الموظف",
   "Remarks*": "ملاحظات*",
   "Select Action": "اختر الإجراء",
-  "Enter your Remarks here...": "أدخل ملاحظاتك هنا...",
+  "Enter your Remarks here": "أدخل ملاحظاتك هنا",
   "Sign in": "تسجيل الدخول",
   "Password*": "كلمة المرور*",
   "Email is required": "البريد الإلكتروني مطلوب",
@@ -210,5 +228,12 @@
   "Write": "يكتب",
   "Select All":"اختر الكل",
   "Select All Read":"حدد الكل للقراءة",
-  "Select All Write":"حدد الكل الكتابة"
+  "Select All Write":"حدد الكل الكتابة",
+
+  "Check in": "تسجيل الدخول",
+  "Check out": "الخروج",
+  "Search here": "ابحث هنا",
+  "Time": "الوقت",
+  "Date Picker": "منتقي التاريخ",
+  "YYYY/MM/DD": "سنة/شهر/يوم"
 }

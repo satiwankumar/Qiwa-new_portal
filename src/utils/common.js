@@ -107,3 +107,6 @@ export const E2A = (s, lang) => {
     return s.replace(/\d/g, (d) => "0123456789"[d]);
   }
 };
+export const capitalizeFirstLetter = (inputString) => {
+  return inputString.charAt(0).toUpperCase() + inputString.slice(1);
+};

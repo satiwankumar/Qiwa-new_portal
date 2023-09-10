@@ -3,6 +3,7 @@
   "Dashboard": "Dashboard",
   "Departments": "Departments",
   "Partners onBoarding": "Partners onBoarding",
+  "PartnersonBoarding": "Partners onBoarding",
   "Employee Contract Approval": "Employee Contract Approval",
   "Leave Request": "Leave Request",
   "Leave Request Approval": "Leave Request Approval",
@@ -126,6 +127,8 @@
   "Add Leave": "Add Leave",
   "Projects": "Projects",
   "Project Approval": "Project Approval",
+  "Projectapproval": "Project Approval",
+
   "Time Sheet": "Time Sheet",
   "Time Sheet Approval": "Time Sheet Approval",
 
@@ -185,7 +188,7 @@
 
   "Action*": "Action*",
   "Select Action": "Select Action",
-  "Enter your Remarks here...": "Enter your Remarks here...",
+  "Enter your Remarks here": "Enter your Remarks here",
 
   "Sign in": "Sign in",
   "Password*": "Password*",
@@ -202,5 +205,11 @@
   "Select Role": "Select Role",
   "Add Right Assignment": "Add Right Assignment",
   "Edit Right Assignment": "Edit Right Assignment",
-  "Privilege Name": "Privilege Name"
+  "Privilege Name": "Privilege Name",
+  "Check in": "Check in",
+  "Check out": "Check out",
+  "Search here": "Search here",
+  "Time": "Time",
+  "Date Picker": "Date Picker",
+  "YYYY/MM/DD": "YYYY/MM/DD"
 }
