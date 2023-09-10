@@ -14,7 +14,7 @@ Coded by www.creative-tim.com
 */
 
 import { useState, useEffect } from "react";
-
+import Switch from "@mui/material/Switch";
 // react-router components
 import { useLocation, Link } from "react-router-dom";
 
@@ -52,8 +52,12 @@ import {
   setMiniSidenav,
   setOpenConfigurator,
 } from "context";
+import MDButton from "components/MDButton";
+import { Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 function DashboardNavbar({ absolute, light, isMini }) {
+  const { t } = useTranslation();
   const [navbarType, setNavbarType] = useState();
   const [controller, dispatch] = useMaterialUIController();
   const { miniSidenav, transparentNavbar, fixedNavbar, openConfigurator, darkMode } = controller;
@@ -122,6 +126,40 @@ function DashboardNavbar({ absolute, light, isMini }) {
       return colorValue;
     },
   });
+  const [isCheckedIn, setIsCheckedIn] = useState(false);
+  const [checkInTime, setCheckInTime] = useState(null);
+  const [checkOutTime, setCheckOutTime] = useState(null);
+
+  useEffect(() => {
+    if (isCheckedIn) {
+      // User is checked in, start the timer
+      const intervalId = setInterval(() => {
+        setCheckOutTime(new Date());
+      }, 1000); // Update every second
+
+      // Save the interval ID for cleanup
+      return () => clearInterval(intervalId);
+    }
+  }, [isCheckedIn]);
+  const handleCheckIn = () => {
+    setIsCheckedIn(true);
+    setCheckInTime(new Date());
+  };
+
+  const handleCheckOut = () => {
+    setIsCheckedIn(false);
+    setCheckOutTime(null);
+  };
+  const formatTimeElapsed = () => {
+    if (checkInTime && checkOutTime) {
+      const elapsedMilliseconds = checkOutTime - checkInTime;
+      const seconds = Math.floor(elapsedMilliseconds / 1000);
+      const minutes = Math.floor(seconds / 60);
+      const formattedTime = `${minutes} m ${seconds % 60} s`;
+      return formattedTime;
+    }
+    return "";
+  };
 
   return (
     <AppBar
@@ -136,9 +174,36 @@ function DashboardNavbar({ absolute, light, isMini }) {
         {isMini ? null : (
           <MDBox sx={(theme) => navbarRow(theme, { isMini })}>
             <MDBox pr={1}>
-              <MDInput label="Search here" />
+              <MDInput label={t("Search here")} />
             </MDBox>
+            <MDBox pr={1}>
+              {isCheckedIn && (
+                <Typography>
+                  {t("Time")} :{formatTimeElapsed()}
+                </Typography>
+              )}
+            </MDBox>
+
             <MDBox color={light ? "white" : "inherit"}>
+              <>
+                <MDButton
+                  type="button"
+                  style={{
+                    background: isCheckedIn
+                      ? "linear-gradient(195deg, #EC407A, #D81B60)"
+                      : "#66BB6A",
+                    color: "white",
+                  }}
+                  onClick={isCheckedIn ? handleCheckOut : handleCheckIn}
+                >
+                  {!isCheckedIn ? t("Check in") : t("Check out")}
+                </MDButton>
+                {/* <Typography>Checked In at: {checkInTime.toLocaleTimeString()}</Typography> */}
+
+                {/* <MDButton onClick={handleCheckOut}>Check Out</MDButton>
+                 */}
+              </>
+
               <Link to="/authentication/sign-in/basic">
                 <IconButton sx={navbarIconButton} size="small" disableRipple>
                   <Icon sx={iconsStyle}>account_circle</Icon>

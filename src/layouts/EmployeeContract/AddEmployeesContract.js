@@ -15,14 +15,26 @@ import { statuses } from "utils/common";
 import { dummyEmployeeNames } from "utils/common";
 import { Currencies } from "utils/common";
 import { useTranslation } from "react-i18next";
+import { useMaterialUIController } from "context";
+import CustomDatePicker from "customComponents/datePicker";
+import arLocale from "date-fns/locale/ar-SA"; // Import the Arabic locale
+import enLocale from "date-fns/locale/en-US";
+import PropTypes from "prop-types";
 
 function EmployeeContractForm() {
   const location = useLocation();
   const today = new Date().toISOString().split("T")[0];
   const { t } = useTranslation();
+  const [controller, dispatch] = useMaterialUIController();
+  const { direction } = controller;
 
   const [mode, setMode] = useState("add");
   const [active, setActive] = useState(true);
+  const [selectedDate, setSelectedDate] = useState(null);
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
 
   useEffect(() => {
     if (location.pathname.includes("edit-employee-contract")) {
@@ -42,6 +54,7 @@ function EmployeeContractForm() {
     console.log(data);
     // Here you can perform further actions like sending the data to an API
   };
+  console.log("directionPArent", direction);
 
   const handleReset = () => {
     reset();
@@ -97,16 +110,11 @@ function EmployeeContractForm() {
                     <InputLabel shrink={true} htmlFor="startDate">
                       {t("Start Date*")}
                     </InputLabel>
-                    <MDInput
-                      {...register("startDate", {
-                        required: "Start Date is required",
-                        max: {
-                          value: today,
-                          message: "Please select a date after today",
-                        },
-                      })}
-                      type="date"
-                      fullWidth
+
+                    <CustomDatePicker
+                      selected={selectedDate}
+                      onChange={handleDateChange}
+                      direction={direction == "rtl" ? "ar-SA" : "en-US"}
                     />
                     {errors.startDate && (
                       <p className="error-message">{t("Start Date is required")}</p>
@@ -118,12 +126,11 @@ function EmployeeContractForm() {
                     <InputLabel shrink={true} htmlFor="endDate">
                       {t("End Date*")}
                     </InputLabel>
-                    <MDInput
-                      {...register("endDate", {
-                        required: "End Date is required",
-                      })}
-                      type="date"
-                      fullWidth
+                    {/* <MDInput {...register("endDate", { required: true })} type="date" fullWidth /> */}
+                    <CustomDatePicker
+                      selected={selectedDate}
+                      onChange={handleDateChange}
+                      direction={direction == "rtl" ? "ar-SA" : "en-US"}
                     />
                     {errors.endDate && <p className="error-message">{t("End Date is required")}</p>}
                   </MDBox>
