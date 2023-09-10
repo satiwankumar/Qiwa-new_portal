@@ -116,7 +116,6 @@ const SidebarRoutes = () => {
       route: "/leave-requests-approval",
       component: <LeaveRequestApproval />,
     },
-
     {
       type: "collapse",
       name: t("Projects"),
