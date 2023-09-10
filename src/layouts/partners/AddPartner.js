@@ -13,12 +13,18 @@ import Select from "react-select";
 import { statuses } from "utils/common";
 import { Languages } from "utils/common";
 import { useTranslation } from "react-i18next";
+import PhoneInput from "react-phone-number-input";
+import "react-phone-number-input/style.css";
+
 
 function AddPartnerForm() {
   const location = useLocation();
   const { t } = useTranslation();
+  const [phone, setPhone] = useState("");
 
   const [mode, setMode] = useState("add");
+  const [value, setValue] = useState();
+
   const [active, setActive] = useState(true);
 
   useEffect(() => {
@@ -101,20 +107,15 @@ function AddPartnerForm() {
                             </>
                           ) : (
                             <>
-                              {column.accessor === "phone" || column.accessor === "mobile" ? (
+                              {column.accessor === "phone"  ? (
                                 <>
-                                  <MDInput
-                                    {...register(column.accessor, {
-                                      required: `${column.Header} is required`,
-                                      pattern: {
-                                        value: /^\d+$/,
-                                        message: "Invalid phone number",
-                                      },
-                                    })}
-                                    label={`${column.Header}*`}
-                                    fullWidth
-                                    type="number"
-                                  />
+                    <PhoneInput
+                      placeholder="Enter phone number"
+                      value={value}
+                      onChange={setValue}
+                      className="number"
+                      international
+                    />
                                 </>
                               ) : (
                                 <>

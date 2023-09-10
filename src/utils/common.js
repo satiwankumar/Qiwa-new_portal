@@ -93,6 +93,12 @@ export const phoneNumbers = [
   { value: "+10", label: "+10" },
 ];
 
+export const dummyRoles = [
+  { value: "devops", label: "Devops" },
+  { value: "ui_designer", label: "UI Designer" },
+  { value: "ux_designer", label: "UX Designer" },
+];
+
 export const E2A = (s, lang) => {
   if (lang == "ar") {
     return s.replace(/\d/g, (d) => "٠١٢٣٤٥٦٧٨٩"[d]);

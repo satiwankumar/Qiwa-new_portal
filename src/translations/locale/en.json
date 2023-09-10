@@ -196,5 +196,11 @@
   "Forgot your password?": "Forgot your password?",
   "Forgot password": "Forgot password",
   "View Requests": "View Requests",
-  "Leave Reason": "Leave Reason"
+  "Leave Reason": "Leave Reason",
+
+  "Right Assignment": "Right Assignment",
+  "Select Role": "Select Role",
+  "Add Right Assignment": "Add Right Assignment",
+  "Edit Right Assignment": "Edit Right Assignment",
+  "Privilege Name": "Privilege Name"
 }

@@ -200,5 +200,15 @@
   "Forgot your password?": "هل نسيت كلمة المرور؟",
   "Forgot password": "نسيت كلمة المرور",
   "View Requests": "عرض الطلبات",
-  "Leave Reason": "سبب الإجازة"
+  "Leave Reason": "سبب الإجازة",
+  "Right Assignment": "الاحالة الصحيحة",
+  "Select Role": "حدد الدور",
+  "Add Right Assignment": "إضافة التنازل الصحيح",
+  "Edit Right Assignment": "تحرير الواجب الصحيح",
+  "Privilege Name": "اسم الامتياز",
+  "Read": "يقرأ",
+  "Write": "يكتب",
+  "Select All":"اختر الكل",
+  "Select All Read":"حدد الكل للقراءة",
+  "Select All Write":"حدد الكل الكتابة"
 }
