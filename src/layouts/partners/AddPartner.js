@@ -31,12 +31,17 @@ function AddPartnerForm() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
   const onSubmit = (data) => {
     console.log(data);
     // Here you can perform further actions like sending the data to an API
+  };
+
+  const handleReset = () => {
+    reset();
   };
 
   const columns = [
@@ -76,24 +81,81 @@ function AddPartnerForm() {
                 <form onSubmit={handleSubmit(onSubmit)}>
                   {columns.map((column) => (
                     <MDBox mb={2} key={column.accessor}>
-                      {column.Header == "Language" ? (
+                      {column.Header === "Language" ? (
                         <Select options={Languages} />
                       ) : (
                         <>
-                          <MDInput
-                            {...register(column.accessor, { required: true })}
-                            label={`${column.Header}*`}
-                            fullWidth
-                          />
+                          {column.accessor === "email" ? (
+                            <>
+                              <MDInput
+                                {...register(column.accessor, {
+                                  required: `${column.Header} is required`,
+                                  pattern: {
+                                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                                    message: "Invalid email address",
+                                  },
+                                })}
+                                label={`${column.Header}*`}
+                                fullWidth
+                              />
+                            </>
+                          ) : (
+                            <>
+                              {column.accessor === "phone" || column.accessor === "mobile" ? (
+                                <>
+                                  <MDInput
+                                    {...register(column.accessor, {
+                                      required: `${column.Header} is required`,
+                                      pattern: {
+                                        value: /^\d+$/,
+                                        message: "Invalid phone number",
+                                      },
+                                    })}
+                                    label={`${column.Header}*`}
+                                    fullWidth
+                                    type="number"
+                                  />
+                                </>
+                              ) : (
+                                <>
+                                  {column.accessor === "partnerName" ||
+                                  column.accessor === "address" ? (
+                                    <>
+                                      <MDInput
+                                        {...register(column.accessor, {
+                                          required: `${column.Header} is required`,
+                                          minLength: {
+                                            value: 20,
+                                            message: "Minimum length is 20 characters",
+                                          },
+                                        })}
+                                        label={`${column.Header}*`}
+                                        fullWidth
+                                      />
+                                    </>
+                                  ) : (
+                                    <>
+                                      <MDInput
+                                        {...register(column.accessor, {
+                                          required: `${column.Header} is required`,
+                                        })}
+                                        label={`${column.Header}*`}
+                                        fullWidth
+                                      />
+                                    </>
+                                  )}
+                                </>
+                              )}
+                            </>
+                          )}
                           {errors[column.accessor] && (
-                            <p className="error-message">{`${column.Header} ${t(
-                              "is required"
-                            )}`}</p>
+                            <p className="error-message">{errors[column.accessor].message}</p>
                           )}
                         </>
                       )}
                     </MDBox>
                   ))}
+
                   {mode === "edit" && (
                     <MDBox>
                       {/* <Switch checked={active} onChange={() => setActive(!active)} /> */}
@@ -113,7 +175,8 @@ function AddPartnerForm() {
                     <MDButton
                       variant="gradient"
                       color="error"
-                      type="reset"
+                      type="button"
+                      onClick={handleReset}
                       style={{ minWidth: "250px" }}
                     >
                       {t("Reset")}

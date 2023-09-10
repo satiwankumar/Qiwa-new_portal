@@ -23,6 +23,7 @@ import PropTypes from "prop-types";
 
 function EmployeeContractForm() {
   const location = useLocation();
+  const today = new Date().toISOString().split("T")[0];
   const { t } = useTranslation();
   const [controller, dispatch] = useMaterialUIController();
   const { direction } = controller;
@@ -45,6 +46,7 @@ function EmployeeContractForm() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -53,6 +55,10 @@ function EmployeeContractForm() {
     // Here you can perform further actions like sending the data to an API
   };
   console.log("directionPArent", direction);
+
+  const handleReset = () => {
+    reset();
+  };
 
   return (
     <DashboardLayout>
@@ -84,12 +90,18 @@ function EmployeeContractForm() {
 
                   <MDBox mb={2}>
                     <MDInput
-                      {...register("contractName", { required: true })}
+                      {...register("contractName", {
+                        required: "Contract Name is required",
+                        maxLength: {
+                          value: 20,
+                          message: "Maximum length 20 characters",
+                        },
+                      })}
                       label={t("Contract Name*")}
                       fullWidth
                     />
                     {errors.contractName && (
-                      <p className="error-message">{"Contract Name is required"}</p>
+                      <p className="error-message">{errors.contractName.message}</p>
                     )}
                   </MDBox>
 
@@ -126,8 +138,8 @@ function EmployeeContractForm() {
                   {/* Salary */}
                   <MDBox mb={2}>
                     <MDInput
-                      {...register("salary", { required: true })}
-                      label={t("Salary*")}
+                      {...register("salary", { required: "Salary is required" })}
+                      label="Salary*"
                       fullWidth
                     />
                     {errors.salary && <p className="error-message">{t("Salary is required")}</p>}
@@ -167,7 +179,8 @@ function EmployeeContractForm() {
                       <MDButton
                         variant="gradient"
                         color="error"
-                        type="reset"
+                        type="button"
+                        onClick={handleReset}
                         style={{ minWidth: "250px" }}
                       >
                         {t("Reset")}

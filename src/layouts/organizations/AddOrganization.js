@@ -12,9 +12,22 @@ import Footer from "examples/Footer";
 import MDAlert from "components/MDAlert";
 import Select from "react-select";
 import Swal from "sweetalert2";
+import PhoneInput from "react-phone-number-input";
 import { companyNames } from "utils/common";
 import { Currencies } from "utils/common";
 import { useTranslation } from "react-i18next";
+import  './organization.css'
+import "react-phone-number-input/style.css";
+const styles = (theme) => ({
+  field: {
+    margin: "10px 0",
+  },
+  countryList: {
+    ...theme.typography.body1,
+  },
+});
+
+
 
 function OrganizationForm() {
   const location = useLocation();
@@ -23,6 +36,7 @@ function OrganizationForm() {
   const [mode, setMode] = useState("add");
   const [active, setActive] = useState(true);
 
+  const [phone, setPhone] = useState("");
   useEffect(() => {
     if (location.pathname.includes("edit-organization")) {
       setMode("edit");
@@ -33,9 +47,13 @@ function OrganizationForm() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
-
+  const [value, setValue] = useState();
+  const handleOnChange = (value) => {
+    setPhone(value);
+  };
   const onSubmit = (data) => {
     console.log(data);
     // Success("Organization Added Successfully");
@@ -63,6 +81,10 @@ function OrganizationForm() {
     { value: "closed", label: "Closed" },
     // Add more status options as needed
   ];
+
+  const handleReset = () => {
+    reset();
+  };
 
   return (
     <DashboardLayout>
@@ -93,11 +115,11 @@ function OrganizationForm() {
                   {/* Tax ID */}
                   <MDBox mb={2}>
                     <MDInput
-                      {...register("taxId", { required: true })}
+                      {...register("taxId", { required: t("Tax ID is required") })}
                       label={t("Tax ID*")}
                       fullWidth
                     />
-                    {errors.taxId && <p className="error-message">{t("Tax ID is required")}</p>}
+                    {errors.taxId && <p className="error-message">{errors.taxId.message}</p>}
                   </MDBox>
 
                   {/* Company ID */}
@@ -124,34 +146,76 @@ function OrganizationForm() {
 
                   {/* Phone */}
                   <MDBox mb={2}>
-                    <MDInput
-                      {...register("phone", { required: true })}
-                      label={t("Phone*")}
-                      fullWidth
+                    <PhoneInput
+                      placeholder="Enter phone number"
+                      value={value}
+                      onChange={setValue}
+                      className="number"
+international
                     />
-                    {errors.phone && <p className="error-message">{t("Phone is required")}</p>}
+
+                    {/* <div
+                      style={{ display: "flex", alignItems: "center", borders: "4 solid black" }}
+                    >
+                      <Select
+                        sx={{
+                          width: 100,
+                          height: 40,
+                          marginRight: 15,
+                          border: "1px solid darkgrey",
+                          color: "#fff",
+                          "& .MuiSvgIcon-root": {
+                            color: "white",
+                          },
+                        }}
+                        placeholder={t("+92")}
+                        options={phoneNumbers}
+                      />
+                      <MDInput
+                        {...register("phone", {
+                          required: t("Phone is required"),
+                          pattern: {
+                            value: /^[0-9]+$/,
+                            message: t("Please enter a valid phone number with only numbers."),
+                          },
+                        })}
+                        label={t("Phone*")}
+                        fullWidth
+                      />
+                    </div>
+                    {errors.phone && <p className="error-message">{errors.phone.message}</p>} */}
                   </MDBox>
 
                   {/* Mobile */}
                   <MDBox mb={2}>
                     <MDInput
-                      {...register("mobile", { required: true })}
+                      {...register("mobile", {
+                        required: t("Mobile is required"),
+                        pattern: {
+                          value: /^[0-9]+$/,
+                          message: "Please enter a valid phone number with only numbers.",
+                        },
+                      })}
                       label="Mobile*"
                       fullWidth
                     />
-                    {errors.mobile && <p className="error-message">{t("Mobile is required")}</p>}
+                    {errors.mobile && <p className="error-message">{errors.mobile.message}</p>}
                   </MDBox>
 
                   {/* Email */}
                   <MDBox mb={2}>
                     <MDInput
-                      {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
+                      {...register("email", {
+                        required: t("Valid email is required"),
+                        pattern: {
+                          value: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/i,
+                          message: "Please enter a valid email address.",
+                        },
+                      })}
                       label={t("Email*")}
                       fullWidth
                     />
-                    {errors.email && (
-                      <p className="error-message">{t("Valid email is required")}</p>
-                    )}
+                    {errors.email && <p className="error-message">{errors.email.message}</p>}
                   </MDBox>
 
                   {/* Website */}
@@ -221,7 +285,8 @@ function OrganizationForm() {
                     <MDButton
                       variant="gradient"
                       color="error"
-                      type="reset"
+                      type="button"
+                      onClick={handleReset}
                       style={{ minWidth: "250px" }}
                     >
                       {t("Reset")}

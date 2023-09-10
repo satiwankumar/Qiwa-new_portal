@@ -10,11 +10,12 @@ import { Link } from "react-router-dom";
 import MDButton from "components/MDButton";
 import { statuses } from "utils/common";
 import Select from "react-select";
+import { useTranslation } from "react-i18next";
 
 const contractInfo = {
   "Project Name": "ABC Project",
   "Start Date": "2023-08-22",
-  "Hours": "10",
+  Hours: "10",
 };
 
 const action = {
@@ -22,6 +23,7 @@ const action = {
   tooltip: "Edit Profile",
 };
 function ProjectApprovalRequest() {
+  const { t } = useTranslation();
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -43,14 +45,14 @@ function ProjectApprovalRequest() {
                 justifyContent="space-between"
               >
                 <MDTypography variant="h6" color="white">
-                  Project Approval Request
+                  {t("Project Approval Request")}
                 </MDTypography>
               </MDBox>
               <MDBox px={6} py={6} display="flex" flexWrap="wrap">
                 {Object.entries(contractInfo).map(([key, value]) => (
                   <MDBox key={key} flexBasis="33.33%" px={3} py={2}>
                     <MDTypography variant="subtitle1">
-                      <strong>{key}:</strong> {value}
+                      <strong>{t(key)}:</strong> {value}
                     </MDTypography>
                   </MDBox>
                 ))}
@@ -59,14 +61,14 @@ function ProjectApprovalRequest() {
                 <MDBox mb={2}>
                   <MDBox mb={2}>
                     <Typography variant="h6" gutterBottom>
-                      Action*
+                      {t("Action*")}
                     </Typography>
                     <Select placeholder="Select Action" options={statuses} />
                   </MDBox>
                 </MDBox>
                 <MDBox mb={2}>
                   <Typography variant="h6" gutterBottom>
-                    Remarks*
+                    {t("Remarks*")}
                   </Typography>
                   <TextareaAutosize
                     // {...register("remarks", { required: true })}
@@ -91,7 +93,7 @@ function ProjectApprovalRequest() {
                       type="submit"
                       style={{ minWidth: "250px", marginRight: "4px" }}
                     >
-                      Submit
+                      {t("Submit")}
                     </MDButton>
                     <MDButton
                       variant="gradient"
@@ -99,7 +101,7 @@ function ProjectApprovalRequest() {
                       type="reset"
                       style={{ minWidth: "250px" }}
                     >
-                      Reset
+                      {t("Reset")}
                     </MDButton>
                   </MDBox>
                 </MDBox>

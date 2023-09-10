@@ -17,8 +17,10 @@ import projectsTableData from "./data/projectsTableData";
 import IconButton from "@mui/material/IconButton";
 import AddIcon from "@mui/icons-material/Add"; //
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function ProjectApproval() {
+  const { t } = useTranslation();
   const { columns, rows } = authorsTableData();
   const { columns: pColumns, rows: pRows } = projectsTableData();
 
@@ -43,7 +45,7 @@ function ProjectApproval() {
                 justifyContent="space-between" // Add this line
               >
                 <MDTypography variant="h6" color="white">
-                  Project Approval
+                  {t("Project Approval")}
                 </MDTypography>
               </MDBox>
               <MDBox pt={3}>
@@ -65,4 +67,3 @@ function ProjectApproval() {
 }
 
 export default ProjectApproval;
- 

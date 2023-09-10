@@ -35,12 +35,17 @@ function EmployeeForm() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
   const onSubmit = (data) => {
     console.log(data);
     // Here you can perform further actions like sending the data to an API
+  };
+
+  const handleReset = () => {
+    reset();
   };
 
   return (
@@ -69,12 +74,18 @@ function EmployeeForm() {
                   {/* Employee Name */}
                   <MDBox mb={2}>
                     <MDInput
-                      {...register("employeeName", { required: true })}
+                      {...register("employeeName", {
+                        required: "Employee Name is required",
+                        maxLength: {
+                          value: 20,
+                          message: "Maximum length is 20 characters",
+                        },
+                      })}
                       label={t("Employee Name*")}
                       fullWidth
                     />
                     {errors.employeeName && (
-                      <p className="error-message">{t("Employee Name is required")}</p>
+                      <p className="error-message">{errors.employeeName.message}</p>
                     )}
                   </MDBox>
 
@@ -89,23 +100,55 @@ function EmployeeForm() {
 
                   {/* Work Mobile */}
                   <MDBox mb={2}>
-                    <MDInput {...register("workMobile")} label={t("Work Mobile")} fullWidth />
+                    <MDInput
+                      {...register("workMobile", {
+                        required: "Mobile is required",
+                        pattern: {
+                          value: /^[0-9]+$/,
+                          message: "Please enter a valid phone number with only numbers.",
+                        },
+                      })}
+                      label={t("Work Mobile")}
+                      fullWidth
+                    />
+                    {errors.workMobile && (
+                      <p className="error-message">{errors.workMobile.message}</p>
+                    )}
                   </MDBox>
 
                   {/* Work Phone */}
                   <MDBox mb={2}>
-                    <MDInput {...register("workPhone")} label={t("Work Phone")} fullWidth />
+                    <MDInput
+                      {...register("workPhone", {
+                        required: "phone is required",
+                        pattern: {
+                          value: /^[0-9]+$/,
+                          message: "Please enter a valid phone number with only numbers.",
+                        },
+                      })}
+                      label={t("Work Phone")}
+                      fullWidth
+                    />
+                    {errors.workPhone && (
+                      <p className="error-message">{errors.workPhone.message}</p>
+                    )}
                   </MDBox>
 
                   {/* Work Email */}
                   <MDBox mb={2}>
                     <MDInput
-                      {...register("workEmail", { required: true, pattern: /^\S+@\S+$/i })}
+                      {...register("workEmail", {
+                        required: "Valid email is required",
+                        pattern: {
+                          value: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/i,
+                          message: "Please enter a valid email address.",
+                        },
+                      })}
                       label={t("Work Email*")}
                       fullWidth
                     />
                     {errors.workEmail && (
-                      <p className="error-message">{t("Valid email is required")}</p>
+                      <p className="error-message">{errors.workEmail.message}</p>
                     )}
                   </MDBox>
 
@@ -148,7 +191,8 @@ function EmployeeForm() {
                     <MDButton
                       variant="gradient"
                       color="error"
-                      type="reset"
+                      type="button"
+                      onClick={handleReset}
                       style={{ minWidth: "250px" }}
                     >
                       {t("Reset")}
