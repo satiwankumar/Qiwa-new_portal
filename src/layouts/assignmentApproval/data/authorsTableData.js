@@ -20,6 +20,7 @@ import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDAvatar from "components/MDAvatar";
 import MDBadge from "components/MDBadge";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
 // Images
 import team2 from "assets/images/team-2.jpg";
@@ -88,18 +89,15 @@ export default function data() {
         ),
         action: (
           <>
-            <MDTypography component={Link} to={""} variant="body2" color="secondary"></MDTypography>
             <MDBox>
               <IconButton
                 color="primary"
                 size="small"
                 onClick={() => {
-                  navigate("/edit-assignment/1");
+                  navigate("/assignment-approval-request");
                 }}
               >
-                <Tooltip title={"Edit Icon"} placement="top">
-                  <EditIcon />
-                </Tooltip>
+                <VisibilityIcon />
               </IconButton>
             </MDBox>
           </>
@@ -135,18 +133,15 @@ export default function data() {
         ),
         action: (
           <>
-            <MDTypography component={Link} to={""} variant="body2" color="secondary"></MDTypography>
             <MDBox>
               <IconButton
                 color="primary"
                 size="small"
                 onClick={() => {
-                  navigate("/edit-assignment/1");
+                  navigate("/assignment-approval-request");
                 }}
               >
-                <Tooltip title={"Edit Icon"} placement="top">
-                  <EditIcon />
-                </Tooltip>
+                <VisibilityIcon />
               </IconButton>
             </MDBox>
           </>

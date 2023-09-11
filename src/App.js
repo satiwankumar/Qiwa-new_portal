@@ -73,6 +73,7 @@ import TimeSheetApprovalRequest from "layouts/timeSheetApproval/ViewDetail";
 
 import { LanguageProvider } from "../src/context/languageContext";
 import AddAssignmentForm from "layouts/assignment/addAssignmentForm";
+import AssignmentApprovalRequest from "layouts/assignmentApproval/ViewDetail";
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
   const { t } = useTranslation();
@@ -221,6 +222,7 @@ export default function App() {
               <Route path="/time-sheet-approval-request" element={<TimeSheetApprovalRequest />} />
               <Route path="/add-assignment" element={<AddAssignmentForm />} />
               <Route path="/edit-assignment/:id" element={<AddAssignmentForm />} />
+              <Route path="/assignment-approval-request" element={<AssignmentApprovalRequest />} />
 
               <Route path="*" element={<Navigate to="/sign-in" />} />
             </Routes>
@@ -280,6 +282,7 @@ export default function App() {
             <Route path="/time-sheet-approval-request" element={<TimeSheetApprovalRequest />} />
             <Route path="/add-assignment" element={<AddAssignmentForm />} />
             <Route path="/edit-assignment/:id" element={<AddAssignmentForm />} />
+            <Route path="/assignment-approval-request" element={<AssignmentApprovalRequest />} />
 
             <Route path="*" element={<Navigate to="/sign-in" />} />
 
