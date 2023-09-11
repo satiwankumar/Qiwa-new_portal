@@ -13,12 +13,21 @@ import Select from "react-select";
 import { statuses } from "utils/common";
 import { Languages } from "utils/common";
 import { useTranslation } from "react-i18next";
+import CustomDatePicker from "customComponents/datePicker";
+import { useMaterialUIController } from "context";
 
 function AddProjectForm() {
   const { t } = useTranslation();
   const location = useLocation();
   const [mode, setMode] = useState("add");
   const [active, setActive] = useState(true);
+  const [selectedDate, setSelectedDate] = useState(null);
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
+  const [controller, dispatch] = useMaterialUIController();
+  const { direction } = controller;
 
   useEffect(() => {
     if (location.pathname.includes("edit-project")) {
@@ -92,22 +101,17 @@ function AddProjectForm() {
                     <p className="error-message">{errors.projectName.message}</p>
                   )}
                   <MDBox mb={2}>
-                    <InputLabel shrink={true} htmlFor="dateStarted">
+                    <InputLabel shrink={true} htmlFor="startDate">
                       {t("Start Date*")}
                     </InputLabel>
-                    <MDInput
-                      {...register("startDate", {
-                        required: t("Start Date field is required"),
-                        max: {
-                          value: new Date().toISOString().split("T")[0],
-                          message: t("Please select a date before today"),
-                        },
-                      })}
-                      type="date"
-                      fullWidth
+
+                    <CustomDatePicker
+                      selected={selectedDate}
+                      onChange={handleDateChange}
+                      direction={direction == "rtl" ? "ar-SA" : "en-US"}
                     />
                     {errors.startDate && (
-                      <p className="error-message">{errors.startDate.message}</p>
+                      <p className="error-message">{t("Start Date is required")}</p>
                     )}
                   </MDBox>
                   <MDBox mb={2}>

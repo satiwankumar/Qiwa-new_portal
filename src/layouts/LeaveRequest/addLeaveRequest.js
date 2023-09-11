@@ -14,13 +14,22 @@ import { useLocation } from "react-router-dom";
 import { statuses } from "utils/common";
 import { dummyLeaveTypes } from "utils/common";
 import { useTranslation } from "react-i18next";
+import CustomDatePicker from "customComponents/datePicker";
+import { useMaterialUIController } from "context";
 
 function AddLeaveRequest() {
   const location = useLocation();
   const { t } = useTranslation();
+  const [controller, dispatch] = useMaterialUIController();
+  const { direction } = controller;
   const [mode, setMode] = useState("add");
   const [active, setActive] = useState(true);
   const today = new Date().toISOString().split("T")[0];
+  const [selectedDate, setSelectedDate] = useState(null);
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
 
   useEffect(() => {
     if (location.pathname.includes("edit-leave-request")) {
@@ -82,33 +91,32 @@ function AddLeaveRequest() {
                     <InputLabel shrink={true} htmlFor="startDate">
                       {t("Start Date*")}
                     </InputLabel>
-                    <MDInput
-                      {...register("startDate", {
-                        required: "Start Date is required",
-                        max: {
-                          value: today,
-                          message: t("Start Date is required"),
-                        },
-                      })}
-                      type="date"
-                      fullWidth
+
+                    <CustomDatePicker
+                      selected={selectedDate}
+                      onChange={handleDateChange}
+                      direction={direction == "rtl" ? "ar-SA" : "en-US"}
                     />
                     {errors.startDate && (
-                      <p className="error-message">{errors.startDate.message}</p>
+                      <p className="error-message">{t("Start Date is required")}</p>
                     )}
+                    
                   </MDBox>
 
                   {/* End Date */}
                   <MDBox mb={2}>
-                    <InputLabel shrink={true} htmlFor="endDate">
+                  <InputLabel shrink={true} htmlFor="endDate">
                       {t("End Date*")}
                     </InputLabel>
-                    <MDInput
-                      {...register("endDate", { required: "End Date is required" })}
-                      type="date"
-                      fullWidth
+
+                    <CustomDatePicker
+                      selected={selectedDate}
+                      onChange={handleDateChange}
+                      direction={direction == "rtl" ? "ar-SA" : "en-US"}
                     />
-                    {errors.endDate && <p className="error-message">{errors.endDate.message}</p>}
+                    {errors.endDate && (
+                      <p className="error-message">{t("End Date is required")}</p>
+                    )}
                   </MDBox>
 
                   {/* Manager Name */}
