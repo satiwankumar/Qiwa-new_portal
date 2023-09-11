@@ -14,6 +14,8 @@ import { useLocation } from "react-router-dom";
 import { statuses } from "utils/common";
 import { dummyLeaveTypes } from "utils/common";
 import { useTranslation } from "react-i18next";
+import CustomDatePicker from "customComponents/datePicker";
+import { useMaterialUIController } from "context";
 
 function AddLeaveRequest() {
   const location = useLocation();
@@ -21,6 +23,9 @@ function AddLeaveRequest() {
   const [mode, setMode] = useState("add");
   const [active, setActive] = useState(true);
   const today = new Date().toISOString().split("T")[0];
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [controller, dispatch] = useMaterialUIController();
+  const { direction } = controller;
 
   useEffect(() => {
     if (location.pathname.includes("edit-leave-request")) {
@@ -38,6 +43,9 @@ function AddLeaveRequest() {
   const onSubmit = (data) => {
     console.log(data);
     // Here you can perform further actions like sending the data to an API
+  };
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
   };
 
   return (
@@ -82,7 +90,7 @@ function AddLeaveRequest() {
                     <InputLabel shrink={true} htmlFor="startDate">
                       {t("Start Date*")}
                     </InputLabel>
-                    <MDInput
+                    {/* <MDInput
                       {...register("startDate", {
                         required: "Start Date is required",
                         max: {
@@ -92,7 +100,13 @@ function AddLeaveRequest() {
                       })}
                       type="date"
                       fullWidth
+                    /> */}
+                    <CustomDatePicker
+                      selected={selectedDate}
+                      onChange={handleDateChange}
+                      direction={direction == "rtl" ? "ar-SA" : "en-US"}
                     />
+
                     {errors.startDate && (
                       <p className="error-message">{errors.startDate.message}</p>
                     )}
@@ -103,10 +117,15 @@ function AddLeaveRequest() {
                     <InputLabel shrink={true} htmlFor="endDate">
                       {t("End Date*")}
                     </InputLabel>
-                    <MDInput
+                    {/* <MDInput
                       {...register("endDate", { required: "End Date is required" })}
                       type="date"
                       fullWidth
+                    /> */}
+                    <CustomDatePicker
+                      selected={selectedDate}
+                      onChange={handleDateChange}
+                      direction={direction == "rtl" ? "ar-SA" : "en-US"}
                     />
                     {errors.endDate && <p className="error-message">{errors.endDate.message}</p>}
                   </MDBox>
