@@ -18,6 +18,10 @@ import { Currencies } from "utils/common";
 import { useTranslation } from "react-i18next";
 import "./organization.css";
 import "react-phone-number-input/style.css";
+
+import { ADD_ORGANIZATION } from "endpoints/constants";
+import api from "utils/api";
+
 const styles = (theme) => ({
   field: {
     margin: "10px 0",
@@ -42,28 +46,51 @@ function OrganizationForm() {
       setMode("add");
     }
   }, [location]);
+
+  useEffect(() => {}, []);
+
   const {
     register,
     handleSubmit,
     reset,
+
     formState: { errors },
   } = useForm();
   const [value, setValue] = useState();
   const handleOnChange = (value) => {
     setPhone(value);
   };
-  const onSubmit = (data) => {
-    console.log(data);
-    // Success("Organization Added Successfully");
-    Swal.fire({
-      icon: "success",
-      title: "success",
-      text: `${"Oragnization Added Successfully"}`,
-      showConfirmButton: false,
-      timer: 3000,
-    });
-    // Here you can perform further actions like sending the data to an API
+  const onSubmit = async (data) => {
+    try {
+      // Make the API request to add the organization
+      const response = await api.post(ADD_ORGANIZATION, body);
+
+      // Handle the success response
+      if (response.status === "success") {
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: "Organization Added Successfully",
+          showConfirmButton: false,
+          timer: 3000,
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Failed to add organization",
+        });
+      }
+    } catch (error) {
+      console.error("API request error:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "An error occurred while adding the organization",
+      });
+    }
   };
+
   const alertContent = (name) => (
     <MDTypography variant="body2" color="white">
       A simple {name} alert with{" "}
@@ -205,6 +232,7 @@ function OrganizationForm() {
                     <MDInput
                       {...register("email", {
                         required: t("Valid email is required"),
+
                         pattern: {
                           value: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/i,
                           message: "Please enter a valid email address.",
