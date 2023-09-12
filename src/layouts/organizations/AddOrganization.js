@@ -21,6 +21,7 @@ import "react-phone-number-input/style.css";
 
 import { ADD_ORGANIZATION } from "endpoints/constants";
 import api from "utils/api";
+import { statuses } from "utils/common";
 
 const styles = (theme) => ({
   field: {
@@ -34,11 +35,40 @@ const styles = (theme) => ({
 function OrganizationForm() {
   const location = useLocation();
   const { t } = useTranslation();
-
   const [mode, setMode] = useState("add");
   const [active, setActive] = useState(true);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+  const [value, setValue] = useState();
+  const [data, setdata] = useState({
+    orgNameAr: "",
+    orgNameEn: "",
+    addressStreet1: "",
+    addressStreet2: "",
+    city: "",
+    zip: "",
+    state: "",
+    country: "",
+    taxId: "",
+    companyId: "",
+    currency: "",
+    phone: "",
+    mobile: "",
+    email: "",
+    website: "",
+    parentCompany: "",
+    companyLogo: "",
+    createdBy: "",
+    description: "",
+    lastUpdateBy: "",
+  });
 
   const [phone, setPhone] = useState("");
+
   useEffect(() => {
     if (location.pathname.includes("edit-organization")) {
       setMode("edit");
@@ -47,18 +77,15 @@ function OrganizationForm() {
     }
   }, [location]);
 
-  useEffect(() => {}, []);
-
-  const {
-    register,
-    handleSubmit,
-    reset,
-
-    formState: { errors },
-  } = useForm();
-  const [value, setValue] = useState();
   const handleOnChange = (value) => {
     setPhone(value);
+  };
+  const handleChange = (e) => {
+    console.log(e.target.name, e.target.value);
+    setdata({ ...data, [e.target.name]: e.target.value });
+  };
+  const handleSelect = (e, name) => {
+    setdata({ ...data, [name]: e.value });
   };
   const onSubmit = async (data) => {
     try {
@@ -100,16 +127,11 @@ function OrganizationForm() {
       . Give it a click if you like.
     </MDTypography>
   );
-  const statuses = [
-    { value: "active", label: "Active" },
-    { value: "inactive", label: "Inactive" },
-    { value: "closed", label: "Closed" },
-    // Add more status options as needed
-  ];
 
   const handleReset = () => {
     reset();
   };
+  console.log(data);
 
   return (
     <DashboardLayout>
@@ -142,6 +164,8 @@ function OrganizationForm() {
                     <MDInput
                       {...register("taxId", { required: t("Tax ID is required") })}
                       label={t("Tax ID*")}
+                      name="taxId"
+                      onChange={(e) => handleChange(e)}
                       fullWidth
                     />
                     {errors.taxId && <p className="error-message">{errors.taxId.message}</p>}
@@ -150,7 +174,13 @@ function OrganizationForm() {
                   {/* Company ID */}
                   <MDBox mb={2}>
                     <MDBox mb={2}>
-                      <Select placeholder={t("Select Company")} options={companyNames} />
+                      <Select
+                        placeholder={t("Select Company")}
+                        onChange={(e) => {
+                          handleSelect(e, "company");
+                        }}
+                        options={companyNames}
+                      />
                     </MDBox>
                     {/* <MDInput
                       {...register("companyId", { required: true })}
@@ -178,37 +208,6 @@ function OrganizationForm() {
                       className="number"
                       international
                     />
-
-                    {/* <div
-                      style={{ display: "flex", alignItems: "center", borders: "4 solid black" }}
-                    >
-                      <Select
-                        sx={{
-                          width: 100,
-                          height: 40,
-                          marginRight: 15,
-                          border: "1px solid darkgrey",
-                          color: "#fff",
-                          "& .MuiSvgIcon-root": {
-                            color: "white",
-                          },
-                        }}
-                        placeholder={t("+92")}
-                        options={phoneNumbers}
-                      />
-                      <MDInput
-                        {...register("phone", {
-                          required: t("Phone is required"),
-                          pattern: {
-                            value: /^[0-9]+$/,
-                            message: t("Please enter a valid phone number with only numbers."),
-                          },
-                        })}
-                        label={t("Phone*")}
-                        fullWidth
-                      />
-                    </div>
-                    {errors.phone && <p className="error-message">{errors.phone.message}</p>} */}
                   </MDBox>
 
                   {/* Mobile */}
@@ -222,6 +221,8 @@ function OrganizationForm() {
                         },
                       })}
                       label="Mobile*"
+                      name="mobile"
+                      onChange={(e) => handleChange(e)}
                       fullWidth
                     />
                     {errors.mobile && <p className="error-message">{errors.mobile.message}</p>}
@@ -239,6 +240,8 @@ function OrganizationForm() {
                         },
                       })}
                       label={t("Email*")}
+                      name="email"
+                      onChange={(e) => handleChange(e)}
                       fullWidth
                     />
                     {errors.email && <p className="error-message">{errors.email.message}</p>}
@@ -249,6 +252,8 @@ function OrganizationForm() {
                     <MDInput
                       {...register("website", { required: true })}
                       label={t("Website*")}
+                      name="website"
+                      onChange={(e) => handleChange(e)}
                       fullWidth
                     />
                     {errors.website && <p className="error-message">{t("Website is required")}</p>}
@@ -262,7 +267,13 @@ function OrganizationForm() {
                       fullWidth
                     /> */}
                     <MDBox mb={2}>
-                      <Select placeholder={t("Select Parent Company*")} options={companyNames} />
+                      <Select
+                        placeholder={t("Select Parent Company*")}
+                        onChange={(e) => {
+                          handleSelect(e);
+                        }}
+                        options={companyNames}
+                      />
                     </MDBox>
                     {/* {errors.parentCompany && (
                       <p className="error-message">{"Parent Company is required"}</p>
@@ -295,7 +306,13 @@ function OrganizationForm() {
                   {mode === "edit" && (
                     <MDBox>
                       {/* <Switch checked={active} onChange={() => setActive(!active)} /> */}
-                      <Select placeholder={t("Select Status")} options={statuses} />
+                      <Select
+                        placeholder={t("Select Status")}
+                        onChange={(e) => {
+                          handleSelect(e);
+                        }}
+                        options={statuses}
+                      />
                     </MDBox>
                   )}
 
