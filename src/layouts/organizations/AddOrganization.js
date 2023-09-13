@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useLocation } from "react-router-dom";
-import { Card, Grid, Switch } from "@mui/material";
+import { Card, Grid, Switch, TextareaAutosize, Typography } from "@mui/material";
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDInput from "components/MDInput";
@@ -81,7 +81,6 @@ function OrganizationForm() {
     setPhone(value);
   };
   const handleChange = (e) => {
-    console.log(e.target.name, e.target.value);
     setdata({ ...data, [e.target.name]: e.target.value });
   };
   const handleSelect = (e, name) => {
@@ -90,7 +89,7 @@ function OrganizationForm() {
   const onSubmit = async (data) => {
     try {
       // Make the API request to add the organization
-      const response = await api.post(ADD_ORGANIZATION, body);
+      const response = await api.post(ADD_ORGANIZATION, data);
 
       // Handle the success response
       if (response.status === "success") {
@@ -110,6 +109,7 @@ function OrganizationForm() {
       }
     } catch (error) {
       console.error("API request error:", error);
+
       Swal.fire({
         icon: "error",
         title: "Error",
@@ -118,27 +118,31 @@ function OrganizationForm() {
     }
   };
 
-  const alertContent = (name) => (
+  const alertContent = (error) => (
     <MDTypography variant="body2" color="white">
-      A simple {name} alert with{" "}
+      Error
       <MDTypography component="a" href="#" variant="body2" fontWeight="medium" color="white">
-        an example link
+        {error}
       </MDTypography>
-      . Give it a click if you like.
     </MDTypography>
   );
 
   const handleReset = () => {
     reset();
   };
+
+  const handlePhoneInput = (value) => {
+    setdata({ ...data, phone: value });
+  };
+
   console.log(data);
 
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDAlert color="primary" dismissible>
+      {/* <MDAlert color="primary" dismissible>
         {alertContent("primary")}
-      </MDAlert>
+      </MDAlert> */}
       <MDBox pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
@@ -159,6 +163,19 @@ function OrganizationForm() {
               </MDBox>
               <MDBox px={2} pt={6} pb={3}>
                 <form onSubmit={handleSubmit(onSubmit)}>
+                  {/* Organization  Name */}
+                  <MDBox mb={2}>
+                    <MDInput
+                      {...register("orgNameEn", { required: t("Organization Name is required") })}
+                      label={t("Organization Name*")}
+                      name="orgNameEn"
+                      onChange={(e) => handleChange(e)}
+                      value={data.orgNameEn}
+                      fullWidth
+                    />
+                    {errors.orgNameEn && <p className="error-message">{errors.orgName.message}</p>}
+                  </MDBox>
+
                   {/* Tax ID */}
                   <MDBox mb={2}>
                     <MDInput
@@ -171,6 +188,85 @@ function OrganizationForm() {
                     {errors.taxId && <p className="error-message">{errors.taxId.message}</p>}
                   </MDBox>
 
+                  {/* Address Street 1 */}
+                  <MDBox mb={2}>
+                    <MDInput
+                      {...register("addressStreet1", {
+                        required: t("Address Street 1 is required"),
+                      })}
+                      label={t("Address Street 1*")}
+                      name="addressStreet1"
+                      onChange={(e) => handleChange(e)}
+                      fullWidth
+                    />
+                    {errors.addressStreet1 && (
+                      <p className="error-message">{errors.addressStreet1.message}</p>
+                    )}
+                  </MDBox>
+
+                  {/* Address Street 2 */}
+                  <MDBox mb={2}>
+                    <MDInput
+                      {...register("addressStreet2", {
+                        required: t("Address Street 2 is required"),
+                      })}
+                      label={t("Address Street 2*")}
+                      name="addressStreet2"
+                      onChange={(e) => handleChange(e)}
+                      fullWidth
+                    />
+                    {errors.addressStreet2 && (
+                      <p className="error-message">{errors.addressStreet2.message}</p>
+                    )}
+                  </MDBox>
+
+                  {/* City */}
+                  <MDBox mb={2}>
+                    <MDInput
+                      {...register("city", { required: t("City is required") })}
+                      label={t("City*")}
+                      name="city"
+                      onChange={(e) => handleChange(e)}
+                      fullWidth
+                    />
+                    {errors.city && <p className="error-message">{errors.city.message}</p>}
+                  </MDBox>
+
+                  {/* ZIP */}
+                  <MDBox mb={2}>
+                    <MDInput
+                      {...register("zip", { required: t("ZIP is required") })}
+                      label={t("ZIP*")}
+                      name="zip"
+                      onChange={(e) => handleChange(e)}
+                      fullWidth
+                    />
+                    {errors.zip && <p className="error-message">{errors.zip.message}</p>}
+                  </MDBox>
+
+                  {/* State */}
+                  <MDBox mb={2}>
+                    <MDInput
+                      {...register("state", { required: t("State is required") })}
+                      label={t("State*")}
+                      name="state"
+                      onChange={(e) => handleChange(e)}
+                      fullWidth
+                    />
+                    {errors.state && <p className="error-message">{errors.state.message}</p>}
+                  </MDBox>
+
+                  {/* Country */}
+                  <MDBox mb={2}>
+                    <MDInput
+                      {...register("country", { required: t("Country is required") })}
+                      label={t("Country*")}
+                      name="country"
+                      onChange={(e) => handleChange(e)}
+                      fullWidth
+                    />
+                    {errors.country && <p className="error-message">{errors.country.message}</p>}
+                  </MDBox>
                   {/* Company ID */}
                   <MDBox mb={2}>
                     <MDBox mb={2}>
@@ -194,7 +290,13 @@ function OrganizationForm() {
 
                   {/* Currency */}
                   <MDBox mb={2}>
-                    <Select placeholder={t("Select Currency*")} options={Currencies} />
+                    <Select
+                      placeholder={t("Select Currency*")}
+                      onChange={(e) => {
+                        handleSelect(e, "currency");
+                      }}
+                      options={Currencies}
+                    />
 
                     {/* {errors.currency && <p className="error-message">{"Currency is required"}</p>} */}
                   </MDBox>
@@ -204,7 +306,7 @@ function OrganizationForm() {
                     <PhoneInput
                       placeholder="Enter phone number"
                       value={value}
-                      onChange={setValue}
+                      onChange={handlePhoneInput}
                       className="number"
                       international
                     />
@@ -302,6 +404,34 @@ function OrganizationForm() {
                       <p className="error-message">{t("Company Favicon is required")}</p>
                     )}
                   </MDBox>
+                  <MDBox mb={2}>
+                    <label
+                      htmlFor="Description"
+                      style={{
+                        fontSize: "15px",
+                        color: "#495057",
+                      }}
+                    >
+                      {t("Description*")}
+                    </label>
+                    <TextareaAutosize
+                      {...register("description", { required: true })}
+                      rowsMin={4}
+                      placeholder={t("Enter your  Description here")}
+                      style={{
+                        width: "100%",
+                        border: "1px solid #ccc",
+                        borderRadius: "4px",
+                        paddingLeft: "2px",
+                        paddingBottom: "50px",
+
+                        fontSize: "18px",
+                      }}
+                    />
+                    {errors.description && (
+                      <p className="error-message">{t("Description is required")}</p>
+                    )}
+                  </MDBox>
 
                   {mode === "edit" && (
                     <MDBox>
@@ -309,7 +439,7 @@ function OrganizationForm() {
                       <Select
                         placeholder={t("Select Status")}
                         onChange={(e) => {
-                          handleSelect(e);
+                          handleSelect(e, "status");
                         }}
                         options={statuses}
                       />
