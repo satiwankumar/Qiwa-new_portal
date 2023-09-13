@@ -211,5 +211,17 @@
   "Search here": "Search here",
   "Time": "Time",
   "Date Picker": "Date Picker",
-  "YYYY/MM/DD": "YYYY/MM/DD"
+  "YYYY/MM/DD": "YYYY/MM/DD",
+
+  "Add Assignment":"Add Assignment",
+  "Select Employee Name": "Select Employee Name",
+  "Employee Role*":"Employee Role*",
+  "Employee Role":"Employee Role",
+  "Select Employee Role":"Select Employee Role",
+  "Employee is required":"Employee is required",
+  "Employee Role is required":"Employee Role is required",
+  "Privilege Name is required":"Privilege Name is required",
+  "Assignment":"Assignment",
+  "Assignment Approval":"Assignment Approval",
+  "Assignment Approval Request":"Assignment Approval Request"
 }

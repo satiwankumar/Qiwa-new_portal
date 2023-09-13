@@ -12,13 +12,21 @@ import { useLocation } from "react-router-dom";
 import Select from "react-select";
 import { dummyProjectTask, dummyTimeUnit } from "utils/common";
 import { useTranslation } from "react-i18next";
+import { useMaterialUIController } from "context";
+import CustomDatePicker from "customComponents/datePicker";
 
 function AddTimeSheetForm() {
   const location = useLocation();
   const [mode, setMode] = useState("add");
   const [active, setActive] = useState(true);
   const { t } = useTranslation();
+  const [selectedDate, setSelectedDate] = useState(null);
 
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
+  const [controller, dispatch] = useMaterialUIController();
+  const { direction } = controller;
   useEffect(() => {
     if (location.pathname.includes("edit-time-sheet")) {
       setMode("edit");
@@ -117,20 +125,17 @@ function AddTimeSheetForm() {
 
                   {/* Start Date */}
                   <MDBox mb={2}>
-                    <InputLabel shrink={true}>{t("Date Started*")}</InputLabel>
-                    <MDInput
-                      {...register("dateStarted", {
-                        required: t("Date Started field is required"),
-                        max: {
-                          value: new Date().toISOString().split("T")[0],
-                          message: t("Please select a date before today"),
-                        },
-                      })}
-                      type="date"
-                      fullWidth
+                    <InputLabel shrink={true} htmlFor="startDate">
+                      {t("Date Started*")}
+                    </InputLabel>
+
+                    <CustomDatePicker
+                      selected={selectedDate}
+                      onChange={handleDateChange}
+                      direction={direction == "rtl" ? "ar-SA" : "en-US"}
                     />
-                    {errors.dateStarted && (
-                      <p className="error-message">{errors.dateStarted.message}</p>
+                    {errors.DateStarted && (
+                      <p className="error-message">{t("Date Started field is required")}</p>
                     )}
                   </MDBox>
 

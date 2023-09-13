@@ -224,8 +224,11 @@
   "Add Right Assignment": "إضافة التنازل الصحيح",
   "Edit Right Assignment": "تحرير الواجب الصحيح",
   "Privilege Name": "اسم الامتياز",
+  "Privilege Name*": "اسم الامتياز",
   "Read": "يقرأ",
+  "Read*": "يقرأ",
   "Write": "يكتب",
+  "Write*": "يكتب",
   "Select All":"اختر الكل",
   "Select All Read":"حدد الكل للقراءة",
   "Select All Write":"حدد الكل الكتابة",
@@ -235,5 +238,17 @@
   "Search here": "ابحث هنا",
   "Time": "الوقت",
   "Date Picker": "منتقي التاريخ",
-  "YYYY/MM/DD": "سنة/شهر/يوم"
+  "YYYY/MM/DD": "سنة/شهر/يوم",
+  "Add Assignment":"إضافة مهمة",
+  "Select Employee Name": "حدد اسم الموظف",
+  "Employee Role*":"دور الموظف",
+  "Employee Role":"دور الموظف",
+  "Select Employee Role":"حدد دور الموظف",
+  "Employee is required":"مطلوب موظف",
+  "Employee Role is required":"دور الموظف مطلوب",
+  "Privilege Name is required":"اسم الامتياز مطلوب",
+  "Assignment":"تكليف",
+  "Assignment Approval":"الموافقة على المهمة",
+  "Assignment Approval Request":"طلب الموافقة على المهمة"
+
 }

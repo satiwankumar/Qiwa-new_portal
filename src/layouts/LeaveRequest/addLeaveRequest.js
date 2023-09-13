@@ -20,12 +20,12 @@ import { useMaterialUIController } from "context";
 function AddLeaveRequest() {
   const location = useLocation();
   const { t } = useTranslation();
+  const [controller, dispatch] = useMaterialUIController();
+  const { direction } = controller;
   const [mode, setMode] = useState("add");
   const [active, setActive] = useState(true);
   const today = new Date().toISOString().split("T")[0];
   const [selectedDate, setSelectedDate] = useState(null);
-  const [controller, dispatch] = useMaterialUIController();
-  const { direction } = controller;
 
   useEffect(() => {
     if (location.pathname.includes("edit-leave-request")) {
@@ -101,6 +101,7 @@ function AddLeaveRequest() {
                       type="date"
                       fullWidth
                     /> */}
+
                     <CustomDatePicker
                       selected={selectedDate}
                       onChange={handleDateChange}
@@ -108,13 +109,14 @@ function AddLeaveRequest() {
                     />
 
                     {errors.startDate && (
-                      <p className="error-message">{errors.startDate.message}</p>
+                      <p className="error-message">{t("Start Date is required")}</p>
                     )}
+                    
                   </MDBox>
 
                   {/* End Date */}
                   <MDBox mb={2}>
-                    <InputLabel shrink={true} htmlFor="endDate">
+                  <InputLabel shrink={true} htmlFor="endDate">
                       {t("End Date*")}
                     </InputLabel>
                     {/* <MDInput
@@ -122,12 +124,15 @@ function AddLeaveRequest() {
                       type="date"
                       fullWidth
                     /> */}
+
                     <CustomDatePicker
                       selected={selectedDate}
                       onChange={handleDateChange}
                       direction={direction == "rtl" ? "ar-SA" : "en-US"}
                     />
-                    {errors.endDate && <p className="error-message">{errors.endDate.message}</p>}
+                    {errors.endDate && (
+                      <p className="error-message">{t("End Date is required")}</p>
+                    )}
                   </MDBox>
 
                   {/* Manager Name */}
