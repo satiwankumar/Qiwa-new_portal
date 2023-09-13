@@ -88,8 +88,38 @@ function OrganizationForm() {
   };
   const onSubmit = async (data) => {
     try {
+      let body = {
+        header: {
+          transactionId: "3223213",
+          requestDateTime: "3434234234",
+        },
+        body: {
+          organization: {
+            orgNameAr: "Takamol Holding",
+            orgNameEn: "Takamol Holding",
+            addressStreet1: "Street 1",
+            addressStreet2: "Street 2",
+            city: "Karachi",
+            zip: "0071",
+            state: "Sindh",
+            country: "Pakistan",
+            taxId: "322323",
+            companyId: "21",
+            currency: "PKR",
+            phone: "03332886787",
+            mobile: "03332886787",
+            email: "test@gmail.com",
+            website: "www.google.com",
+            parentCompany: "1",
+            companyLogo: "abc.png",
+            createdBy: "1",
+            description: "description",
+            lastUpdateBy: "1",
+          },
+        },
+      };
       // Make the API request to add the organization
-      const response = await api.post(ADD_ORGANIZATION, data);
+      const response = await api.post(ADD_ORGANIZATION, body);
 
       // Handle the success response
       if (response.status === "success") {
