@@ -12,6 +12,13 @@ export const companyNames = [
   { value: "amazon", label: "Amazon.com, Inc." },
   // Add more company names as needed
 ];
+export const organization = [
+  { value: 1, label: "Apple Inc." },
+  { value: 2, label: "Google LLC" },
+  { value: 3, label: "Microsoft Corporation" },
+  { value: 4, label: "Amazon.com, Inc." },
+  // Add more company names as needed
+];
 export const dummyEmployeeNames = [
   { value: "john_doe", label: "John Doe" },
   { value: "jane_smith", label: "Jane Smith" },

@@ -15,11 +15,18 @@ import { statuses } from "utils/common";
 import { dummyEmployeeNames } from "utils/common";
 import { companyNames } from "utils/common";
 import { useTranslation } from "react-i18next";
+import Swal from "sweetalert2";
+import { organization } from "utils/common";
+import api from "utils/api";
+import { ADD_DEPARTMENT } from "endpoints/constants";
 
 function DepartmentForm() {
   const location = useLocation();
   const { t } = useTranslation();
-
+  const [selectedOrganizer, setSelectedOrganizer] = useState(null);
+  const handleOrganizerChange = (selectedOption) => {
+    setSelectedOrganizer(selectedOption);
+  };
   const [mode, setMode] = useState("add");
   const [active, setActive] = useState(true);
 
@@ -37,9 +44,33 @@ function DepartmentForm() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
-    // Here you can perform further actions like sending the data to an API
+  const onSubmit = async (data) => {
+    try {
+      const response = await api.post(ADD_DEPARTMENT, data);
+
+      if (response.status === "success") {
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: "Organization Added Successfully",
+          showConfirmButton: false,
+          timer: 3000,
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Failed to add organization",
+        });
+      }
+    } catch (error) {
+      console.error("API request error:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "An error occurred while adding the Department",
+      });
+    }
   };
   const onFocus = ({ focused, isDisabled }) => {
     const msg = `You are currently focused on option ${focused.label}${
@@ -95,26 +126,47 @@ function DepartmentForm() {
                       <p className="error-message">{errors.departmentName.message}</p>
                     )}
                   </MDBox>
+                  <MDBox mb={2}>
+                    <MDInput
+                      {...register("description", {
+                        required: "description Name is required",
+                        maxLength: {
+                          value: 20,
+                          message: "Maximum length is 20 characters",
+                        },
+                      })}
+                      label={t("Description")}
+                      fullWidth
+                    />
+                    {errors.description && (
+                      <p className="error-message">{errors.description.message}</p>
+                    )}
+                  </MDBox>
 
                   {/* Manager */}
-                  <MDBox mb={2}>
-                    {/* <MDInput
+                  {/* <MDBox mb={2}> */}
+                  {/* <MDInput
                       {...register("manager", { required: true })}
                       label="Manager*"
                       fullWidth
                     /> */}
-                    <MDBox mb={2}>
+                  {/* <MDBox mb={2}>
                       <Select placeholder={t("Select Manager")} options={dummyEmployeeNames} />
-                    </MDBox>
-                    {/* {errors.manager && <p className="error-message">{"Manager is required"}</p>} */}
-                  </MDBox>
+                    </MDBox> */}
+                  {/* {errors.manager && <p className="error-message">{"Manager is required"}</p>} */}
+                  {/* </MDBox> */}
 
-                  <MDBox mb={2}>
+                  {/* <MDBox mb={2}>
                     <Select placeholder={t("Parent Department")} options={companyNames} />
-                  </MDBox>
+                  </MDBox> */}
 
                   <MDBox mb={2}>
-                    <Select placeholder={t("Select Company")} options={companyNames} />
+                    <Select
+                      placeholder={t("Select Organizer")}
+                      options={organization}
+                      onChange={handleOrganizerChange}
+                      value={selectedOrganizer}
+                    />
                   </MDBox>
                   {mode === "edit" && (
                     <MDBox>
