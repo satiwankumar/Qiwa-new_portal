@@ -24,6 +24,8 @@ import TimeSheet from "layouts/timeSheet";
 import TimeSheetApproval from "layouts/timeSheetApproval";
 import ProfileInfoCard from "examples/Cards/InfoCards/ProfileInfoCard";
 import RightAssignment from "layouts/rightAssignment";
+import Assignment from "layouts/assignment";
+import AssignmentApproval from "layouts/assignmentApproval";
 
 const SidebarRoutes = () => {
   const { t } = useTranslation();
@@ -116,7 +118,6 @@ const SidebarRoutes = () => {
       route: "/leave-requests-approval",
       component: <LeaveRequestApproval />,
     },
-
     {
       type: "collapse",
       name: t("Projects"),
@@ -164,6 +165,22 @@ const SidebarRoutes = () => {
       icon: <Icon fontSize="small">assignment_turned_ind</Icon>,
       route: "/right-assignment",
       component: <RightAssignment />,
+    },
+    {
+      type: "collapse",
+      name: t("Assignment"),
+      key: "assignment",
+      icon: <Icon fontSize="small">assignment</Icon>,
+      route: "/assignment",
+      component: <Assignment />,
+    },
+    {
+      type: "collapse",
+      name: t("Assignment Approval"),
+      key: "assignment-approval",
+      icon: <Icon fontSize="small">assignment</Icon>,
+      route: "/assignment-approval",
+      component: <AssignmentApproval />,
     },
   ];
 
