@@ -1,16 +1,17 @@
 import axios from "axios";
 import store from "../store";
 // import { LOGOUT } from "../endpoints/types";
+const apiToken =
+  "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5NDYyNDM1NywiZXhwIjoxNjk0NzEwNzU3fQ.1QkX0GS07wPSHIoxeF7itYcYaxTp0IsoiVQnD5qO-xM";
 
 const api = axios.create({
   // baseURL: 'http://dev74.onlinetestingserver.com:5000/api',
-  baseURL: "http://localhost:8080/api/v1/",
+  baseURL: "http://localhost:8081/api/v1/",
 
   headers: {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-    
+    "Access-Control-Allow-Methods": "GET, PUT, POST, DELETE, PATCH, OPTIONS",
   },
 });
 /**

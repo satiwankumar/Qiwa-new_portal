@@ -20,9 +20,24 @@ import { organization } from "utils/common";
 import api from "utils/api";
 import { ADD_DEPARTMENT } from "endpoints/constants";
 
+const initialData = {
+  department: {
+    deptNameAr: "Takamol Holding",
+    deptNameEn: "Takamol Holding",
+    description: "description",
+    organization: {
+      id: 2,
+    },
+    createdBy: "1",
+    lastUpdateBy: "1",
+  },
+};
+
+
 function DepartmentForm() {
   const location = useLocation();
   const { t } = useTranslation();
+  const [data, setData] = useState(initialData);
   const [selectedOrganizer, setSelectedOrganizer] = useState(null);
   const handleOrganizerChange = (selectedOption) => {
     setSelectedOrganizer(selectedOption);
@@ -44,25 +59,43 @@ function DepartmentForm() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async (data) => {
+  const onSubmit = async () => {
     try {
-      const response = await api.post(ADD_DEPARTMENT, data);
-
-      if (response.status === "success") {
+      const requestData = {
+        header: {
+          transactionId: "3223213",
+          requestDateTime: "3434234234",
+        },
+        body: {
+          department: {
+            deptNameAr: "Takamol Holding",
+            deptNameEn: "Takamol Holding",
+            description: "description",
+            organization: {
+              id: 2,
+            },
+            createdBy: "1",
+            lastUpdateBy: "1",
+          },
+        },
+      };
+      console.log(requestData);
+      const response = await api.post("createDepartment", requestData);
+      // if (response.data.status === "success") {
         Swal.fire({
           icon: "success",
           title: "Success",
-          text: "Organization Added Successfully",
+          text: "Department Added Successfully",
           showConfirmButton: false,
           timer: 3000,
         });
-      } else {
-        Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: "Failed to add organization",
-        });
-      }
+      // } else {
+      //   Swal.fire({
+      //     icon: "error",
+      //     title: "Error",
+      //     text: "Failed to add department",
+      //   });
+      // }
     } catch (error) {
       console.error("API request error:", error);
       Swal.fire({
@@ -72,6 +105,35 @@ function DepartmentForm() {
       });
     }
   };
+
+  // const onSubmit = async (data) => {
+  //   try {
+  //     const response = await api.post(ADD_DEPARTMENT, data);
+
+  //     if (response.status === "success") {
+  //       Swal.fire({
+  //         icon: "success",
+  //         title: "Success",
+  //         text: "Organization Added Successfully",
+  //         showConfirmButton: false,
+  //         timer: 3000,
+  //       });
+  //     } else {
+  //       Swal.fire({
+  //         icon: "error",
+  //         title: "Error",
+  //         text: "Failed to add organization",
+  //       });
+  //     }
+  //   } catch (error) {
+  //     console.error("API request error:", error);
+  //     Swal.fire({
+  //       icon: "error",
+  //       title: "Error",
+  //       text: "An error occurred while adding the Department",
+  //     });
+  //   }
+  // };
   const onFocus = ({ focused, isDisabled }) => {
     const msg = `You are currently focused on option ${focused.label}${
       isDisabled ? ", disabled" : ""
@@ -111,7 +173,7 @@ function DepartmentForm() {
                 <form onSubmit={handleSubmit(onSubmit)}>
                   {/* Department Name */}
                   <MDBox mb={2}>
-                    <MDInput
+                    {/* <MDInput
                       {...register("departmentName", {
                         required: "Department Name is required",
                         maxLength: {
@@ -124,10 +186,10 @@ function DepartmentForm() {
                     />
                     {errors.departmentName && (
                       <p className="error-message">{errors.departmentName.message}</p>
-                    )}
+                    )} */}
                   </MDBox>
                   <MDBox mb={2}>
-                    <MDInput
+                    {/* <MDInput
                       {...register("description", {
                         required: "description Name is required",
                         maxLength: {
@@ -140,7 +202,7 @@ function DepartmentForm() {
                     />
                     {errors.description && (
                       <p className="error-message">{errors.description.message}</p>
-                    )}
+                    )} */}
                   </MDBox>
 
                   {/* Manager */}
