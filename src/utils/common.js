@@ -117,3 +117,11 @@ export const E2A = (s, lang) => {
 export const capitalizeFirstLetter = (inputString) => {
   return inputString.charAt(0).toUpperCase() + inputString.slice(1);
 };
+
+export const apiData = {
+  createdBy: 1,
+  lastUpdateBy: 1,
+  transactionId: 3223213,
+  requestDateTime: 3434234234,
+}
+
