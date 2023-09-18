@@ -41,7 +41,7 @@ function Organizations() {
   const { t } = useTranslation();
 
   const { columns: pColumns, rows: pRows } = projectsTableData();
-
+  console.log("rows", rows);
   return (
     <DashboardLayout>
       <DashboardNavbar />

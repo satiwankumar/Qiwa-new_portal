@@ -74,10 +74,13 @@ import TimeSheetApprovalRequest from "layouts/timeSheetApproval/ViewDetail";
 import { LanguageProvider } from "../src/context/languageContext";
 import AddAssignmentForm from "layouts/assignment/addAssignmentForm";
 import AssignmentApprovalRequest from "layouts/assignmentApproval/ViewDetail";
+import { fetchCompanies } from "redux/slices/companySlice";
+import { useDispatch } from "react-redux";
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
   const { t } = useTranslation();
   const routes = SidebarRoutes();
+  const actionDispatch = useDispatch();
   const {
     miniSidenav,
     direction,
@@ -92,6 +95,9 @@ export default function App() {
   const [rtlCache, setRtlCache] = useState(null);
   const { pathname } = useLocation();
 
+  useEffect(() => {
+    actionDispatch(fetchCompanies());
+  }, []);
   // Cache for the rtl
   useMemo(() => {
     const cacheRtl = createCache({

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Card, Grid, Switch, TextareaAutosize, Typography } from "@mui/material";
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
@@ -22,6 +22,7 @@ import "react-phone-number-input/style.css";
 import { ADD_ORGANIZATION } from "endpoints/constants";
 import api from "utils/api";
 import { statuses } from "utils/common";
+import { organization } from "utils/common";
 
 const styles = (theme) => ({
   field: {
@@ -37,6 +38,8 @@ function OrganizationForm() {
   const { t } = useTranslation();
   const [mode, setMode] = useState("add");
   const [active, setActive] = useState(true);
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -44,8 +47,8 @@ function OrganizationForm() {
     formState: { errors },
   } = useForm();
   const [value, setValue] = useState();
-  const [data, setdata] = useState({
-    orgNameAr: "",
+  const [data, setData] = useState({
+    orgNameAr: "dsdfds",
     orgNameEn: "",
     addressStreet1: "",
     addressStreet2: "",
@@ -54,37 +57,61 @@ function OrganizationForm() {
     state: "",
     country: "",
     taxId: "",
-    companyId: "",
+    companyId: "1",
     currency: "",
     phone: "",
     mobile: "",
     email: "",
     website: "",
     parentCompany: "",
-    companyLogo: "",
-    createdBy: "",
+    companyLogo: "abc.png",
+    createdBy: "1",
     description: "",
-    lastUpdateBy: "",
   });
 
-  const [phone, setPhone] = useState("");
+  const fillDataWithOrganization = (organization) => {
+    if (organization) {
+      setData({
+        orgNameAr: organization.orgNameAr,
+        orgNameEn: organization.orgNameEn,
+        addressStreet1: organization.addressStreet1,
+        addressStreet2: organization.addressStreet2,
+        city: organization.city,
+        zip: organization.zip,
+        state: organization.state,
+        country: organization.country,
+        taxId: organization.taxId,
+        companyId: organization.companyId,
+        currency: organization.currency,
+        phone: organization.phone,
+        mobile: organization.mobile,
+        email: organization.email,
+        website: organization.website,
+        parentCompany: organization.parentCompany,
+        companyLogo: organization.companyLogo,
+        createdBy: organization.createdBy,
+        description: organization.description,
+      });
+    }
+  };
 
   useEffect(() => {
     if (location.pathname.includes("edit-organization")) {
       setMode("edit");
+      console.log("location?.state", location.state);
+      if (location.state.organization) {
+        fillDataWithOrganization(location.state?.organization);
+      }
     } else if (location.pathname.includes("add-organization")) {
       setMode("add");
     }
   }, [location]);
 
-  const handleOnChange = (value) => {
-    setPhone(value);
-  };
   const handleChange = (e) => {
-    setdata({ ...data, [e.target.name]: e.target.value });
+    setData({ ...data, [e.target.name]: e.target.value });
   };
   const handleSelect = (e, name) => {
-    setdata({ ...data, [name]: e.value });
+    setData({ ...data, [name]: e.value });
   };
   const onSubmit = async (data) => {
     try {
@@ -94,35 +121,14 @@ function OrganizationForm() {
           requestDateTime: "3434234234",
         },
         body: {
-          organization: {
-            orgNameAr: "Takamol Holding",
-            orgNameEn: "Takamol Holding",
-            addressStreet1: "Street 1",
-            addressStreet2: "Street 2",
-            city: "Karachi",
-            zip: "0071",
-            state: "Sindh",
-            country: "Pakistan",
-            taxId: "322323",
-            companyId: "21",
-            currency: "PKR",
-            phone: "03332886787",
-            mobile: "03332886787",
-            email: "test@gmail.com",
-            website: "www.google.com",
-            parentCompany: "1",
-            companyLogo: "abc.png",
-            createdBy: "1",
-            description: "description",
-            lastUpdateBy: "1",
-          },
+          organization: data,
         },
       };
       // Make the API request to add the organization
       const response = await api.post(ADD_ORGANIZATION, body);
 
       // Handle the success response
-      if (response.status === "success") {
+      if (response.status == 200) {
         Swal.fire({
           icon: "success",
           title: "Success",
@@ -130,6 +136,7 @@ function OrganizationForm() {
           showConfirmButton: false,
           timer: 3000,
         });
+        navigate(`/organizations`);
       } else {
         Swal.fire({
           icon: "error",
@@ -162,7 +169,8 @@ function OrganizationForm() {
   };
 
   const handlePhoneInput = (value) => {
-    setdata({ ...data, phone: value });
+    console.log("Phonevalue", value);
+    setData({ ...data, phone: value });
   };
 
   console.log(data);
@@ -213,6 +221,7 @@ function OrganizationForm() {
                       label={t("Tax ID*")}
                       name="taxId"
                       onChange={(e) => handleChange(e)}
+                      value={data.taxId}
                       fullWidth
                     />
                     {errors.taxId && <p className="error-message">{errors.taxId.message}</p>}
@@ -226,6 +235,7 @@ function OrganizationForm() {
                       })}
                       label={t("Address Street 1*")}
                       name="addressStreet1"
+                      value={data.addressStreet1}
                       onChange={(e) => handleChange(e)}
                       fullWidth
                     />
@@ -242,6 +252,7 @@ function OrganizationForm() {
                       })}
                       label={t("Address Street 2*")}
                       name="addressStreet2"
+                      value={data.addressStreet2}
                       onChange={(e) => handleChange(e)}
                       fullWidth
                     />
@@ -256,6 +267,7 @@ function OrganizationForm() {
                       {...register("city", { required: t("City is required") })}
                       label={t("City*")}
                       name="city"
+                      value={data.city}
                       onChange={(e) => handleChange(e)}
                       fullWidth
                     />
@@ -268,6 +280,7 @@ function OrganizationForm() {
                       {...register("zip", { required: t("ZIP is required") })}
                       label={t("ZIP*")}
                       name="zip"
+                      value={data.zip}
                       onChange={(e) => handleChange(e)}
                       fullWidth
                     />
@@ -280,6 +293,7 @@ function OrganizationForm() {
                       {...register("state", { required: t("State is required") })}
                       label={t("State*")}
                       name="state"
+                      value={data.state}
                       onChange={(e) => handleChange(e)}
                       fullWidth
                     />
@@ -292,6 +306,7 @@ function OrganizationForm() {
                       {...register("country", { required: t("Country is required") })}
                       label={t("Country*")}
                       name="country"
+                      value={data.country}
                       onChange={(e) => handleChange(e)}
                       fullWidth
                     />
@@ -302,6 +317,7 @@ function OrganizationForm() {
                     <MDBox mb={2}>
                       <Select
                         placeholder={t("Select Company")}
+                        value={data.company}
                         onChange={(e) => {
                           handleSelect(e, "company");
                         }}
@@ -322,6 +338,7 @@ function OrganizationForm() {
                   <MDBox mb={2}>
                     <Select
                       placeholder={t("Select Currency*")}
+                      value={data.currency}
                       onChange={(e) => {
                         handleSelect(e, "currency");
                       }}
@@ -335,7 +352,7 @@ function OrganizationForm() {
                   <MDBox mb={2}>
                     <PhoneInput
                       placeholder="Enter phone number"
-                      value={value}
+                      value={data?.phone}
                       onChange={handlePhoneInput}
                       className="number"
                       international
@@ -354,6 +371,7 @@ function OrganizationForm() {
                       })}
                       label="Mobile*"
                       name="mobile"
+                      value={data.mobile}
                       onChange={(e) => handleChange(e)}
                       fullWidth
                     />
@@ -373,6 +391,7 @@ function OrganizationForm() {
                       })}
                       label={t("Email*")}
                       name="email"
+                      value={data.email}
                       onChange={(e) => handleChange(e)}
                       fullWidth
                     />
@@ -385,6 +404,7 @@ function OrganizationForm() {
                       {...register("website", { required: true })}
                       label={t("Website*")}
                       name="website"
+                      value={data.website}
                       onChange={(e) => handleChange(e)}
                       fullWidth
                     />
@@ -402,8 +422,9 @@ function OrganizationForm() {
                       <Select
                         placeholder={t("Select Parent Company*")}
                         onChange={(e) => {
-                          handleSelect(e);
+                          handleSelect(e, "parentCompany");
                         }}
+                        value={data.parentCompany}
                         options={companyNames}
                       />
                     </MDBox>
@@ -426,7 +447,7 @@ function OrganizationForm() {
                     <br />
                     <input
                       type="file"
-                      {...register("companyFavicon", { required: true })}
+                      // {...register("companyLogo", { required: true })}
                       id="companyFavicon"
                       accept="image/*" // Accept image files
                     />
@@ -447,6 +468,9 @@ function OrganizationForm() {
                     <TextareaAutosize
                       {...register("description", { required: true })}
                       rowsMin={4}
+                      name="description"
+                      value={data.description}
+                      onChange={(e) => handleChange(e)}
                       placeholder={t("Enter your  Description here")}
                       style={{
                         width: "100%",
@@ -468,6 +492,7 @@ function OrganizationForm() {
                       {/* <Switch checked={active} onChange={() => setActive(!active)} /> */}
                       <Select
                         placeholder={t("Select Status")}
+                        value={data?.status}
                         onChange={(e) => {
                           handleSelect(e, "status");
                         }}

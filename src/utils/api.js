@@ -1,5 +1,5 @@
 import axios from "axios";
-import store from "../store";
+import store from "../redux/store";
 // import { LOGOUT } from "../endpoints/types";
 
 const api = axios.create({
