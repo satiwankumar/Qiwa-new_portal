@@ -19,6 +19,7 @@ import Swal from "sweetalert2";
 import { organization } from "utils/common";
 import api from "utils/api";
 import { ADD_DEPARTMENT } from "endpoints/constants";
+import { apiData } from "utils/common";
 
 function DepartmentForm() {
   const location = useLocation();
@@ -46,23 +47,34 @@ function DepartmentForm() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await api.post(ADD_DEPARTMENT, data);
-
-      if (response.status === "success") {
-        Swal.fire({
-          icon: "success",
-          title: "Success",
-          text: "Organization Added Successfully",
-          showConfirmButton: false,
-          timer: 3000,
-        });
-      } else {
-        Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: "Failed to add organization",
-        });
-      }
+      const formData = {
+        header: {
+          transactionId: apiData.transactionId,
+          requestDateTime: apiData.requestDateTime,
+        },
+        body: {
+          department: {
+            deptNameAr: data.departmentName,
+            deptNameEn: data.departmentName,
+            description: data.description,
+            organization: {
+              id: selectedOrganizer ? selectedOrganizer.value : null,
+            },
+            createdBy: apiData.createdBy,
+            lastUpdateBy: apiData.lastUpdateBy,
+          },
+        },
+      };
+      const response = await api.post(ADD_DEPARTMENT, formData);
+      Swal.fire({
+        icon: "success",
+        title: "Success",
+        text: "Department Added Successfully",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+      reset();
+      setSelectedOrganizer(null);
     } catch (error) {
       console.error("API request error:", error);
       Swal.fire({
@@ -72,6 +84,7 @@ function DepartmentForm() {
       });
     }
   };
+
   const onFocus = ({ focused, isDisabled }) => {
     const msg = `You are currently focused on option ${focused.label}${
       isDisabled ? ", disabled" : ""
