@@ -10,7 +10,7 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 import MDTypography from "components/MDTypography";
 import Select from "react-select";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { statuses } from "utils/common";
 import { dummyEmployeeNames } from "utils/common";
 import { companyNames } from "utils/common";
@@ -20,6 +20,7 @@ import { organization } from "utils/common";
 import api from "utils/api";
 import { ADD_DEPARTMENT } from "endpoints/constants";
 import { apiData } from "utils/common";
+import { fetchOrganizations } from "utils/api";
 
 function DepartmentForm() {
   const location = useLocation();
@@ -28,10 +29,20 @@ function DepartmentForm() {
   const handleOrganizerChange = (selectedOption) => {
     setSelectedOrganizer(selectedOption);
   };
+  const [organizationOptions, setOrganizationOptions] = useState([]);
+  const navigate = useNavigate();
   const [mode, setMode] = useState("add");
   const [active, setActive] = useState(true);
 
   useEffect(() => {
+    fetchOrganizations()
+      .then((options) => {
+        setOrganizationOptions(options);
+      })
+      .catch((error) => {
+        console.error("Error fetching organizations:", error);
+      });
+
     if (location.pathname.includes("edit-department")) {
       setMode("edit");
     } else if (location.pathname.includes("add-department")) {
@@ -58,7 +69,7 @@ function DepartmentForm() {
             deptNameEn: data.departmentName,
             description: data.description,
             organization: {
-              id: selectedOrganizer ? selectedOrganizer.value : null,
+              id_org: selectedOrganizer ? selectedOrganizer.value : null,
             },
             createdBy: apiData.createdBy,
             lastUpdateBy: apiData.lastUpdateBy,
@@ -75,6 +86,7 @@ function DepartmentForm() {
       });
       reset();
       setSelectedOrganizer(null);
+      navigate(`/departments`);
     } catch (error) {
       console.error("API request error:", error);
       Swal.fire({
@@ -144,7 +156,7 @@ function DepartmentForm() {
                       {...register("description", {
                         required: "description Name is required",
                         maxLength: {
-                          value: 20,
+                          value: 100,
                           message: "Maximum length is 20 characters",
                         },
                       })}
@@ -176,7 +188,7 @@ function DepartmentForm() {
                   <MDBox mb={2}>
                     <Select
                       placeholder={t("Select Organizer")}
-                      options={organization}
+                      options={organizationOptions} // Use the state variable for options
                       onChange={handleOrganizerChange}
                       value={selectedOrganizer}
                     />

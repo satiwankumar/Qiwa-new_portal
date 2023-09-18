@@ -30,68 +30,50 @@ import team4 from "assets/images/team-4.jpg";
 import { IconButton, Tooltip } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
+import { fetchDepartments } from "utils/api";
+import { useState } from "react";
 
 export default function data() {
+
   const navigate = useNavigate();
   const { t } = useTranslation();
-
-  return {
+  const [data, setData] = useState({
     columns: [
       {
-        Header: t("Department Name"), // Translate "Department Name"
-        accessor: "departmentName",
+        Header: t("Department Name"), 
+        accessor: "deptNameEn",
         align: "left",
       },
       {
-        Header: t("Manager"), // Translate "Manager"
-        accessor: "manager",
+        Header: t("Description"), 
+        accessor: "description",
         align: "left",
       },
+    
       {
-        Header: t("Parent Department"), // Translate "Parent Department"
-        accessor: "parentDepartment",
-        align: "left",
-      },
-      {
-        Header: t("Company"), // Translate "Company"
-        accessor: "company",
-        align: "left",
-      },
-      {
-        Header: t("Actions"), // Translate "Actions"
+        Header: t("Actions"), 
         accessor: "action",
         align: "left",
       },
     ],
-
     rows: [
-      {
-        departmentName: "Sales",
-        manager: "John Doe",
-        parentDepartment: "Business Development",
-        company: "ABC Corp",
-
-        action: (
-          <>
-            <MDTypography component={Link} to={""} variant="body2" color="secondary"></MDTypography>
-            <MDBox>
-              <IconButton
-                color="primary"
-                size="small"
-                onClick={() => {
-                  navigate("/edit-department/1");
-                }}
-              >
-                <Tooltip title={"Edit Icon"} placement="top">
-                  <EditIcon />
-                </Tooltip>
-              </IconButton>
-            </MDBox>
-          </>
-        ),
-      },
-
-      // Add more rows here...
+      
     ],
-  };
+  });
+
+  useEffect(() => {
+    fetchDepartments()
+      .then((departmentList) => {
+        setData({
+          ...data,
+          rows: departmentList, 
+        });
+      })
+      .catch((error) => {
+        console.error("Error fetching departments:", error);
+      });
+  }, []); 
+
+  return data;
 }
